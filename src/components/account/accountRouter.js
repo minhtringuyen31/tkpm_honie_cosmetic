@@ -4,6 +4,23 @@ const multer = require('multer');
 const path = require('path');
 const accountController = require('./accountController');
 
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, './public/img/avatar')
+    },
+    filename: (req, file, cb) => {
+        console.log("file: " + file)
+        cb(null, Date.now() + path.extname(file.originalname))
+    }
+})
 
+const upload = multer({ storage: storage })
+
+router.get('/myProfile', function (req, res, next) {
+    //throw new Error('Unknown error!');
+    res.render('account/editProfile', { layout: false });
+});
+
+router.post('/editProfile', accountController.editProfile);
 
 module.exports = router;
