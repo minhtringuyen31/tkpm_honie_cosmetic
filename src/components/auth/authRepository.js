@@ -43,3 +43,19 @@ exports.addNewUser = async (newUser) => {
         return false;
     }
 }
+
+
+exports.updatePassword = async (email, password) => {
+    console.log("check regis: " + email);
+    const poolPromise = db.promise();
+    try {
+        await poolPromise.query(
+            "UPDATE USERS SET USERS.USER_PASSWORD = ? WHERE USERS.USER_EMAIL like ?", [password, email]
+        );
+        return true;
+    }
+    catch (err) {
+        console.log(err);
+        return false;
+    }
+}
