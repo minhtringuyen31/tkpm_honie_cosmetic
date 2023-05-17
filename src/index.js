@@ -75,6 +75,8 @@ app.use('/account', accountRouter);
 app.use('/cart', cartRouter);
 app.use('/order', orderRouter);
 
+app.use('/dashboard', indexRouter);
+
 
 //passport
 
