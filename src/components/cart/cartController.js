@@ -22,3 +22,22 @@ exports.cartDetail = async (req, res) => {
     console.log(total);
     res.render('cart/cart', { detail: products, total: total });
 }
+
+
+exports.addToCart = async (req, res) => {
+    const idProduct = req.params.idProduct;
+    console.log("userEmail: " + req.user.loginEmail);
+    console.log("idProduct: " + req.params.idProduct);
+    await cartService.addToCart(req.user.loginEmail, idProduct);
+    res.redirect('/product');
+}
+
+exports.removeFromCart = async (req, res) => {
+    if (!req.user) {
+        return;
+    }
+    const idProduct = req.params.idProduct;
+    console.log("remove ID: " + idProduct);
+    await cartService.removeFromCart(req.user.loginEmail, idProduct);
+    res.redirect('/cart/cart-detail');
+}
