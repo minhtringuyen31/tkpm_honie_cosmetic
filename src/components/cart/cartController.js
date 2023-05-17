@@ -69,3 +69,31 @@ exports.showCheckout = async (req, res) => {
     }
 }
 
+
+exports.addOrder = async (req, res) => {
+
+    console.log(req.body);
+    const today = new Date();
+    const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
+    const products = await cartService.cartDetails(req.user.loginEmail);
+    const total = products.reduce((accumulator, object) => {
+        return accumulator + parseFloat(object.total);
+    }, 0);
+
+    const newestOrder = {
+        USER_EMAIL: req.body.emailInput,
+        ORDER_DATE: date,
+        PAYMENT_METHOD: req.body.methodInput,
+        ADDRESS_SHIPPING: req.body.addressInput,
+        TOTAL: total
+    }
+
+
+    await cartService.addOrder(newestOrder, products); //add products to `order` table and `orderproduct` table -> remove all current product from `cart` table
+    if (req.body.methodInput == 'momo') {
+        res.render('cart/paymentWithMomo', { total: total });
+    } else {
+        res.redirect('/order');
+    }
+}
