@@ -91,3 +91,21 @@ exports.removeProductInCart = async (userEmail, idProduct) => {
         return false;
     }
 }
+
+
+exports.addNewOrder = async (newOrder) => {
+    try {
+        const poolPromise = connection.promise();
+        await poolPromise.query('INSERT INTO LIST_ORDER (USER_EMAIL, ORDER_DATE, PAYMENT_METHOD, ADDRESS_SHIPPING, TOTAL) VALUES (?,?,?,?,?)', [newOrder.USER_EMAIL, newOrder.ORDER_DATE, newOrder.PAYMENT_METHOD, newOrder.ADDRESS_SHIPPING, newOrder.TOTAL], function (err) {
+            if (err) {
+                return false;
+            }
+        });
+        return true;
+    }
+    catch (e) {
+        console.log(e);
+        return false;
+    }
+
+}

@@ -9,4 +9,8 @@ router.get('/add-to-cart/:idProduct', cartController.addToCart);
 router.get('/remove/:idProduct', cartController.removeFromCart);
 
 
+router.get('/checkout', cartController.showCheckout);
+router.post('/checkout', cartController.addOrder);
+
+
 module.exports = router;

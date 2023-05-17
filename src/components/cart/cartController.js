@@ -41,3 +41,31 @@ exports.removeFromCart = async (req, res) => {
     await cartService.removeFromCart(req.user.loginEmail, idProduct);
     res.redirect('/cart/cart-detail');
 }
+
+exports.showCheckout = async (req, res) => {
+    // if (req.params.)
+    if (!req.user) {
+        res.redirect('/auth/login');
+    }
+    else {
+
+        const userEmail = req.user.loginEmail;
+        console.log("cartDetail " + userEmail);
+        const products = await cartService.cartDetails(userEmail);
+        console.log(products);
+
+        const total = products.reduce((accumulator, object) => {
+            return accumulator + parseFloat(object.total);
+        }, 0);
+        console.log(total);
+        const orderInfor = {
+            orderName: req.user.loginName,
+            orderAddress: req.user.loginAddress,
+            orderPhone: req.user.loginPhone,
+            orderEmail: req.user.loginEmail,
+            totalPrice: total
+        }
+        res.render('cart/checkout', { orderInfor: orderInfor, product: products });
+    }
+}
+
