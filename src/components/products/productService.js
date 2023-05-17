@@ -22,3 +22,23 @@ exports.count = async (page) => {
     const result = await productRepository.count();
     return result;
 }
+
+exports.filterByPrice = async (option) => {
+    const result = await productRepository.filterByPrice(option);
+    return result;
+}
+
+exports.filterByBrand = async (option) => {
+    const result = await productRepository.filterByBrand(option);
+    return result;
+}
+
+exports.filterByCategory = async (option) => {
+    const result = await productRepository.filterByCategory(option);
+    return result;
+}
+
+exports.search = async (keyword) => {
+    const result = await productRepository.search(keyword);
+    return result;
+}

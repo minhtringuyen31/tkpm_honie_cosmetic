@@ -46,3 +46,27 @@ exports.getProductByPage = async (req, res) => {
     };
     res.json({ listProducts, pageObject });
 }
+
+exports.filterByPrice = async (req, res) => {
+    const option = req.params.option;
+    const result = await productService.filterByPrice(option);
+    res.render('products/productFilter', { result: result });
+}
+
+exports.filterByBrand = async (req, res) => {
+    const option = req.params.option;
+    const result = await productService.filterByBrand(option);
+    res.render('products/productFilter', { result: result });
+}
+
+exports.filterByCategory = async (req, res) => {
+    const option = req.params.option;
+    const result = await productService.filterByCategory(option);
+    res.render('products/productFilter', { result: result });
+}
+
+exports.search = async (req, res) => {
+    const keyword = req.body.keyword;
+    const result = await productService.search(keyword);
+    res.render('products/productFilter', { result: result });
+}
