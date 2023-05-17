@@ -16,11 +16,18 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage })
 
-router.get('/myProfile', function (req, res, next) {
+router.get('/editProfile', function (req, res, next) {
     //throw new Error('Unknown error!');
     res.render('account/editProfile', { layout: false });
 });
 
 router.post('/editProfile', accountController.editProfile);
+
+router.get('/changePass', function (req, res, next) {
+    //throw new Error('Unknown error!');
+    res.render('account/changePass', { layout: false });
+});
+
+router.post('/changePass', accountController.editPassword);
 
 module.exports = router;

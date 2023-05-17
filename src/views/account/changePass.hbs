@@ -1,0 +1,51 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Change Password</title>
+
+    <link rel="stylesheet" type="text/css" href="/css/profiles.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+</head>
+
+<body>
+    <div class="container-xl px-4 mt-4">
+         <nav class="nav nav-borders">
+            <a class="nav-link active ms-0" href="#"><i class="fa fa-home"></i></a>
+        </nav>
+       
+        <hr class="mt-0 mb-4">
+        <div class="row box">
+            <div class="col-xl-8">
+                <div class="card mb-4 mb-xl-0">
+                    <div class="card-header">Change Password</div>
+                    <div class="card-body">
+                        <form method="POST" action="/account/changePass">
+                            <div class="mb-3">
+                                <label class="small mb-1" for="inputPassword">New Password</label>
+                                <input class="form-control" id="inputPassword" type="password"
+                                    placeholder="Enter your new password" value={{user.changePass}}>
+                            </div>
+                         
+                            <div class="mb-3">
+                                <label class="small mb-1" for="inputConfirmPass">Confirm New Password</label>
+                                <input class="form-control" id="inputConfirmPassword" type="password"
+                                    placeholder="Confirm your password" value={{user.changeConfirmPass}}>
+                            </div>
+                            <button class="cancel">Cancel</button>
+                            <button>Save changes</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="/js/profiles.js"></script>
+
+</html>
