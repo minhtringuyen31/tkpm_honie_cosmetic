@@ -20,7 +20,7 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, async function verify
 
 passport.serializeUser(function (user, cb) {
     process.nextTick(function () {
-        cb(null, { loginEmail: user.USER_EMAIL, loginName: user.USER_NAME, loginPhone: user.USER_PHONE, loginBirthday: user.USER_BIRTHDAY, loginAddress: user.USER_ADDRESS });
+        cb(null, { loginEmail: user.USER_EMAIL, loginName: user.USER_NAME, loginPhone: user.USER_PHONE, loginBirthday: user.USER_BIRTHDAY, loginAddress: user.USER_ADDRESS, loginRole: user.USER_ROLE });
     });
 });
 
