@@ -16,6 +16,7 @@ const accountRouter = require('./components/account/accountRouter');
 const cartRouter = require('./components/cart/cartRouter');
 const orderRouter = require('./components/order/orderRouter');
 const userRouter = require('./components/user/userRouter')
+const storeRouter = require('./components/store/storeRouter');
 
 
 
@@ -78,6 +79,10 @@ app.use('/order', orderRouter);
 
 app.use('/dashboard', indexRouter);
 app.use('/user', userRouter)
+
+
+app.use('/store', storeRouter);
+
 
 
 //passport

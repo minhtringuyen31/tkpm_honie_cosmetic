@@ -25,3 +25,15 @@ exports.editProfile = async (req, res) => {
     }
 }
 
+exports.editPassword = async (req, res) => {
+    const user = await accountService.changePassword(req.body.changePassword, res.locals.user.editPassEmail)
+    if (user) {
+        res.render('account/changePass')
+        res.locals.use.changePass = user[0].USER_PASSWORD;
+        return user[0];
+    }
+    else {
+        res.render('/account/editProfile');
+        return null;
+    }
+}

@@ -19,3 +19,22 @@ exports.editProfile = async (nameEdit, emailEdit, addressEdit, phoneEdit, birthd
     }
 }
 
+exports.changePassword = async (passChange, emailChange) => {
+    console.log("change pass");
+    try {
+        const poolPromise = connection.promise();
+        await poolPromise.query('UPDATE USERS SET USERS.USER_PASSWORD = ? WHERE USERS.USER_EMAIL = ?', [passChange, emailChange]);
+        console.log("success");
+        const [user, fields] = await poolPromise.query(
+            "SELECT * from USERS WHERE USERS.USER_EMAIL = ? LIMIT 1", [emailChange]);
+        console.log('111111');
+        console.log(user);
+        return user;
+
+
+    }
+    catch (err) {
+        console.log(err);
+        return false;
+    }
+}
