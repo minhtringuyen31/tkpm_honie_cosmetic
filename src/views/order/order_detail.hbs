@@ -1,0 +1,121 @@
+<section class="breadcrumb-option order_management">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb__text">
+                    <h4>Order</h4>
+                    <div class="breadcrumb__links">
+                        <a href="/index">Home</a>
+                        <a href="/product">Shop</a>
+                        <span>Shopping Cart</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="shopping-cart spad">
+    <div class="container vertical-scrollable text-left scrollBox">
+        {{!-- <div class="row">
+            <div class="col-sm-10 mx-auto">
+                <div class="container row mb-5 scroll-item" id="1">
+                    <div class="col-sm-4 me-5 ">
+                        <h3>Brand</h3>
+                        <h5 class="partition-header">Name: </h5><span>Nuoc tay trang</span>
+                        <h5>Address:<span> hcm</span>
+                            <h5>Phone: <span> 0987654321</span>
+                                <h5 class="partition-header">Email: <span> ltt@gmail.com</span>
+                    </div>
+                    <div class="col-sm-4 me-5">
+                        <h3>Shop</h3>
+                        <h5 class="partition-header">Shop name: <span> Hadalabo</span>
+                            <h5>Address: <span> dong nai</span>
+                                <h5>Phone: <span> 123456890</span>
+                                    <h5>Email:<span> shop@gmail.com</span>
+                    </div>
+                    <div class="col-sm-4 me-5">
+                        <div class="row">
+                            <div class="col-9">
+                                <h3>Order</h3>
+                            </div>
+                            <div class="col-3">
+                                <button class="remove-button" value={{idorder}} onclick="hideOrder(this.value)"><img
+                                        src="/users/img/remove_button.png" alt="remove"></button>
+                            </div>
+                        </div>
+                        <h5>Price:<span> 100000</span>
+                            <h5>Delivery free:<span>1000</span>
+                                <div><span><br></span></div>
+                                <button class="accept-button" value="1"
+                                    onclick="acceptOrder(this.value)">Accept</button>
+                    </div>
+                </div> --}}
+                <div class="card row order_management mx-auto p-3">
+                    <h5 class="card-title">Receiver information</h5>
+                    <p class="card-text">Thanh Trung</p>
+
+                    <p class="card-text ">(+84) 987 654 321</p>
+                    <p class="card-text ">227 Nguyen Van Cu Street, Ward 11, District 5, Ho Chi Minh City</p>
+                    <h5 class="card-title">Unilever International</h5>
+                    <div class="row">
+                        <img class="col-2 card-img-top" src="/img/product/PE01-2.png" width="50" height="75"
+                            alt="Card image cap">
+                        <div class="col-10 card-body">
+                            <h5 class="card-text">Lancome Perfume</h5>
+                            <p class="card-text text-right px-2">x2</p>
+                            <p class="card-text text-right px-2">đ500.000</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <img class="col-2 card-img-top" src="/img/product/LI01.png" width="50" height="75"
+                            alt="Card image cap">
+                        <div class="col-10 card-body">
+                            <h5 class="card-text">Lipstick</h5>
+                            <p class="card-text text-right px-2">x1</p>
+                            <p class="card-text text-right px-2">đ300.000</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <img class="col-2 card-img-top" src="/img/product/product-2.jpg" width="50" height="75"
+                            alt="Card image cap">
+                        <div class="col-10 card-body">
+                            <h5 class="card-text">Cleaner</h5>
+                            <p class="card-text text-right px-2">x1</p>
+                            <p class="card-text text-right px-2">đ400.000</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="card-body row">
+                        <p class="col-4 text-left px-2">Total</p>
+                        <p class="col-8 text-right px-2">đ1.000.000</p>
+                    </div>
+                    <hr>
+                    <div class="card-body">
+                        <div class="row">
+                            <p class="col-4  text-left px-2">Payment method</p>
+                            <p class="col-8 text-right px-2">ZaloPay</p>
+                        </div>
+                        <div class="row">
+                            <p class="col-4  text-left px-2">Order ID</p>
+                            <p class="col-8 text-right px-2">212KGFRESF5642</p>
+                        </div>
+                        <div class="row">
+                            <p class="col-4  text-left px-2">Order time</p>
+                            <p class="col-8 text-right px-2">25-04-2023 22:39</p>
+                        </div>
+                        <div class="row">
+                            <p class="col-4  text-left px-2"> Transaction time</p>
+                            <p class="col-8 text-right px-2">25-04-2023 22:59</p>
+                        </div>
+                    
+                    </div>
+                 
+                    <button class="review_btn float-right ml-auto">Review</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<script src="/js/order.js"></script>
