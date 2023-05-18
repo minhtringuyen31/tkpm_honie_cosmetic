@@ -25,6 +25,8 @@ router.get('/profiles', function (req, res, next) {
   res.render('auth/profiles', { layout: false });
 });
 
+
+
 router.get('/forgotPassword', function (req, res) {
   res.render('auth/forgotPassword', { layout: false });
 });

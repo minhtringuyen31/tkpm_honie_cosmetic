@@ -4,7 +4,18 @@ const router = express.Router();
 /* GET home page. */
 router.get('/', function (req, res, next) {
     //throw new Error('Unknown error!');
-    res.render('home/index');
+    console.log(req.user)
+    if (req.user != undefined) {
+        if (req.user.loginRole == 1) {
+            console.log("admin")
+            res.render('home/dashboard', { layout: 'layoutAdmin.hbs' })
+        } else {
+            console.log("customer")
+            res.render('home/index');
+        }
+    } else {
+        res.render('home/index');
+    }
 });
 
 //  GET order page
