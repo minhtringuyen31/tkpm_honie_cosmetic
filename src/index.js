@@ -15,6 +15,7 @@ const passport = require('./components/auth/passport');
 const accountRouter = require('./components/account/accountRouter');
 const cartRouter = require('./components/cart/cartRouter');
 const orderRouter = require('./components/order/orderRouter');
+const userRouter = require('./components/user/userRouter')
 
 
 
@@ -76,6 +77,7 @@ app.use('/cart', cartRouter);
 app.use('/order', orderRouter);
 
 app.use('/dashboard', indexRouter);
+app.use('/user', userRouter)
 
 
 //passport

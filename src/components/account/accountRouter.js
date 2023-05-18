@@ -23,4 +23,5 @@ router.get('/myProfile', function (req, res, next) {
 
 router.post('/editProfile', accountController.editProfile);
 
+
 module.exports = router;

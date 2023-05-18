@@ -14,7 +14,7 @@ router.get('/', function (req, res, next) {
             res.render('home/index');
         }
     } else {
-        next()
+        res.render('home/index');
     }
 });
 
