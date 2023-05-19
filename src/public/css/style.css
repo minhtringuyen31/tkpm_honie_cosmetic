@@ -320,8 +320,8 @@ ol {
 -----------------------*/
 
 .logo {
-	width: 150px;
-	height: 100px;
+	width: 115px;
+	height: 70px;
 }
 
 .header {
@@ -2064,7 +2064,7 @@ ol {
 
 .breadcrumb-option {
 	background: #f3f2ee;
-	
+
 }
 
 /* .breadcrumb-option.order_management{
@@ -2660,15 +2660,17 @@ ol {
 .checkout__order {
 	background: #f3f2ee;
 	padding: 30px;
+	border-radius: 5%;
 }
 
 .checkout__order .order__title {
 	color: #111111;
-	font-weight: 700;
+	font-weight: 500;
+	font-style: bold;
 	text-transform: uppercase;
 	border-bottom: 1px solid #d7d7d7;
 	padding-bottom: 25px;
-	margin-bottom: 30px;
+	margin-bottom: 25px;
 }
 
 .checkout__order p {
@@ -2698,7 +2700,7 @@ ol {
 }
 
 .checkout__total__products li {
-	font-size: 16px;
+	font-size: 15px;
 	color: #444444;
 	list-style: none;
 	line-height: 26px;
@@ -3970,132 +3972,141 @@ ol {
 	}
 }
 
-.green-navbar-background{
-	background-color: #3a8278;
-	
-}
-.nav-pills.active{
-	color:#000;
-	background-color: #10b44c;
-}
+.checkout_input_price_viewonly {
+	background-color: #f3f2ee;
+	border: none;
+	text-align: right;
+	color: #e53637;
+	width: 50px;
+	height: fit-content;
+	font-weight: 700;
+	float: right;
 
-.white-text{
-	
-}
+	.green-navbar-background {
+		background-color: #3a8278;
 
-.scrollBox
-{
-    overflow-y: auto;
-    height: 80%;
-}
+	}
+
+	.nav-pills.active {
+		color: #000;
+		background-color: #10b44c;
+	}
+
+	.white-text {}
+
+	.scrollBox {
+		overflow-y: auto;
+		height: 80%;
+	}
 
 
-.order_management {
-	
-	color:white ;
-	padding-left:0px;
-	padding-right: 0px;
+	.order_management {
 
-}
+		color: white;
+		padding-left: 0px;
+		padding-right: 0px;
 
-.order_management.active {
-	background-color: #10b44c;
-	font-weight: bold;
-  }
+	}
 
-.card.order_management{
-	width:40rem;
-	padding: 10dp;
-	
-	
-}
+	.order_management.active {
+		background-color: #10b44c;
+		font-weight: bold;
+	}
 
-.review_btn{
-	width: 100px;
-	height: 40px;
-	background-color: #FFB4B4;
-	border:none;
-}
+	.card.order_management {
+		width: 40rem;
+		padding: 10dp;
 
-.card-title{
-	padding: 10dp;
-	font-weight: bold;
-	font-size: large;
-}
 
-.shopping-cart{
-	padding-bottom: 30px;
-	padding-left: 0;
-	padding-right: 0;
-}
+	}
 
-.review_area{
-	width: 470px;
-	height:650px;
-}
+	.review_btn {
+		width: 100px;
+		height: 40px;
+		background-color: #FFB4B4;
+		border: none;
+	}
 
-.card_review{
-	margin: 10px;
-	width:150px;
-	height:600px;
-	border:#227C70;
-	border-radius: 8px;
-	padding-top: 100px;
-	padding-bottom: 0px;
-	
-}
+	.card-title {
+		padding: 10dp;
+		font-weight: bold;
+		font-size: large;
+	}
 
-.card-container {
-    display: flex;
-    justify-content: space-between;
-  }
+	.shopping-cart {
+		padding-bottom: 30px;
+		padding-left: 0;
+		padding-right: 0;
+	}
 
-.send-btn{
-	width: 180px;
-	height: 40px;
-	background-color:#227C70;
-	border:none;
-	color:white;
-	border-radius: 8px;
-}
+	.review_area {
+		width: 470px;
+		height: 650px;
+	}
 
-.star_btn{
-	width: 40px;
-	height: 40px;
-}
+	.card_review {
+		margin: 10px;
+		width: 150px;
+		height: 600px;
+		border: #227C70;
+		border-radius: 8px;
+		padding-top: 100px;
+		padding-bottom: 0px;
 
-.review_input{
-	width: 360px;
-	height: 170px;
-	border-radius: 8px;
-	
-}
+	}
 
-.rating {
-    display: inline-block;
-	direction: rtl;
-  }
+	.card-container {
+		display: flex;
+		justify-content: space-between;
+	}
 
-  .rating input {
-    display: none;
-  }
+	.send-btn {
+		width: 180px;
+		height: 40px;
+		background-color: #227C70;
+		border: none;
+		color: white;
+		border-radius: 8px;
+	}
 
-  .rating label {
-    display: inline-block;
-    width: 25px;
-    height: 25px;
-    margin: 0;
-    padding: 0;
-    background-image: url('../img/empty_star.png');
-    background-size: cover;
-    cursor: pointer;
-  }
+	.star_btn {
+		width: 40px;
+		height: 40px;
+	}
 
-  .rating input:checked ~ label,
-  .rating input:checked ~ label ~ label {
-    background-image: url('../img/ticked_star.png');
-  }
+	.review_input {
+		width: 360px;
+		height: 170px;
+		border-radius: 8px;
 
-.card-body.small_card{
-	padding:0pm;
+	}
+
+	.rating {
+		display: inline-block;
+		direction: rtl;
+	}
+
+	.rating input {
+		display: none;
+	}
+
+	.rating label {
+		display: inline-block;
+		width: 25px;
+		height: 25px;
+		margin: 0;
+		padding: 0;
+		background-image: url('../img/empty_star.png');
+		background-size: cover;
+		cursor: pointer;
+	}
+
+	.rating input:checked~label,
+	.rating input:checked~label~label {
+		background-image: url('../img/ticked_star.png');
+	}
+
+	.card-body.small_card {
+		padding: 0pm;
+	}
 }

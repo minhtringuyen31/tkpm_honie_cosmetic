@@ -13,7 +13,7 @@ exports.getDetail = async (req, res) => {
 }
 
 exports.getAll = async (req, res) => {
-    res.render('products/productList');
+    res.render('customer/products/productList');
 }
 
 exports.getProductByPage = async (req, res) => {
@@ -50,23 +50,23 @@ exports.getProductByPage = async (req, res) => {
 exports.filterByPrice = async (req, res) => {
     const option = req.params.option;
     const result = await productService.filterByPrice(option);
-    res.render('products/productFilter', { result: result });
+    res.render('customer/products/productFilter', { result: result });
 }
 
 exports.filterByBrand = async (req, res) => {
     const option = req.params.option;
     const result = await productService.filterByBrand(option);
-    res.render('products/productFilter', { result: result });
+    res.render('customer/products/productFilter', { result: result });
 }
 
 exports.filterByCategory = async (req, res) => {
     const option = req.params.option;
     const result = await productService.filterByCategory(option);
-    res.render('products/productFilter', { result: result });
+    res.render('customer/products/productFilter', { result: result });
 }
 
 exports.search = async (req, res) => {
     const keyword = req.body.keyword;
     const result = await productService.search(keyword);
-    res.render('products/productFilter', { result: result });
+    res.render('customer/products/productFilter', { result: result });
 }

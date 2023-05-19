@@ -5,7 +5,7 @@ const path = require('path');
 
 router.get('/introStore', function (req, res, next) {
     //throw new Error('Unknown error!');
-    res.render('store/introStore');
+    res.render('customer/store/introStore');
 });
 
 module.exports = router;

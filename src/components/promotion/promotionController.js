@@ -49,7 +49,7 @@ exports.getPromotionByID=async(req,res)=>{
     const id = req.params.id;
     const promotion = await promotionService.getPromotionByID(id);
     if (promotion){
-        console.log("hgggggh"+promotion)
+        // console.log("hgggggh"+promotion)
         res.status(200).json(promotion);
     }
     else{
