@@ -2064,8 +2064,12 @@ ol {
 
 .breadcrumb-option {
 	background: #f3f2ee;
-	padding: 40px 0;
+
 }
+
+/* .breadcrumb-option.order_management{
+	background: #f3f2ee;	
+} */
 
 .breadcrumb__text h4 {
 	color: #111111;
@@ -3978,4 +3982,131 @@ ol {
 	font-weight: 700;
 	float: right;
 
+	.green-navbar-background {
+		background-color: #3a8278;
+
+	}
+
+	.nav-pills.active {
+		color: #000;
+		background-color: #10b44c;
+	}
+
+	.white-text {}
+
+	.scrollBox {
+		overflow-y: auto;
+		height: 80%;
+	}
+
+
+	.order_management {
+
+		color: white;
+		padding-left: 0px;
+		padding-right: 0px;
+
+	}
+
+	.order_management.active {
+		background-color: #10b44c;
+		font-weight: bold;
+	}
+
+	.card.order_management {
+		width: 40rem;
+		padding: 10dp;
+
+
+	}
+
+	.review_btn {
+		width: 100px;
+		height: 40px;
+		background-color: #FFB4B4;
+		border: none;
+	}
+
+	.card-title {
+		padding: 10dp;
+		font-weight: bold;
+		font-size: large;
+	}
+
+	.shopping-cart {
+		padding-bottom: 30px;
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	.review_area {
+		width: 470px;
+		height: 650px;
+	}
+
+	.card_review {
+		margin: 10px;
+		width: 150px;
+		height: 600px;
+		border: #227C70;
+		border-radius: 8px;
+		padding-top: 100px;
+		padding-bottom: 0px;
+
+	}
+
+	.card-container {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.send-btn {
+		width: 180px;
+		height: 40px;
+		background-color: #227C70;
+		border: none;
+		color: white;
+		border-radius: 8px;
+	}
+
+	.star_btn {
+		width: 40px;
+		height: 40px;
+	}
+
+	.review_input {
+		width: 360px;
+		height: 170px;
+		border-radius: 8px;
+
+	}
+
+	.rating {
+		display: inline-block;
+		direction: rtl;
+	}
+
+	.rating input {
+		display: none;
+	}
+
+	.rating label {
+		display: inline-block;
+		width: 25px;
+		height: 25px;
+		margin: 0;
+		padding: 0;
+		background-image: url('../img/empty_star.png');
+		background-size: cover;
+		cursor: pointer;
+	}
+
+	.rating input:checked~label,
+	.rating input:checked~label~label {
+		background-image: url('../img/ticked_star.png');
+	}
+
+	.card-body.small_card {
+		padding: 0pm;
+	}
 }

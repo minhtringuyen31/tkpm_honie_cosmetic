@@ -20,10 +20,10 @@ exports.create = async (req, res) => {
 }
 
 /////
-getOrderList(user_email){
-    // orderlist = query llay toan bo oder cua nguoi do
-    //  
-}
+// getOrderList(user_email){
+//     // orderlist = query llay toan bo oder cua nguoi do
+//     //  
+// }
 
 
 
@@ -66,3 +66,27 @@ exports.updateOrderStatus = async (req, res) => {
 exports.test = async (req, res) => {
     res.render('admin/order/orderDetail', { layout: "layoutAdmin" })
 }
+exports.showOrders = async (req, res) => {
+    //const orders = await orderService.getAllOrders(req.user.loginEmail);
+    //console.log(orders);
+    //res.render('order/order', { order: orders });
+    // res.render('order/order');
+    res.render('order/order')
+}
+
+exports.showOrderDetail = async (req, res) => {
+    //const orders = await orderService.getAllOrders(req.user.loginEmail);
+    //console.log(orders);
+    //res.render('order/order', { order: orders });
+    // res.render('order/order');
+    res.render('order/order_detail')
+}
+
+exports.showOrderReview = async (req, res) => {
+    //const orders = await orderService.getAllOrders(req.user.loginEmail);
+    //console.log(orders);
+    //res.render('order/order', { order: orders });
+    // res.render('order/order');
+    res.render('order/order_review')
+}
+

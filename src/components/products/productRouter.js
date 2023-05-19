@@ -12,3 +12,4 @@ router.get('/filterByCategory/:option', productController.filterByCategory);
 router.post('/search', productController.search);
 
 module.exports = router;
+//
