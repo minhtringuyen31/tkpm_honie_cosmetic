@@ -7,6 +7,7 @@ const session = require('express-session');
 const hbs = require('hbs');
 require('dotenv').config();
 
+
 //set router
 const indexRouter = require('./components/home');
 const productRouter = require('./components/products/productRouter');
@@ -16,7 +17,7 @@ const accountRouter = require('./components/account/accountRouter');
 const cartRouter = require('./components/cart/cartRouter');
 const orderRouter = require('./components/order/orderRouter');
 const storeRouter = require('./components/store/storeRouter');
-
+const promotionRouter=require('./components/promotion/promotionRouter');
 
 
 const app = express();
@@ -46,13 +47,21 @@ hbs.registerHelper('block', function (name) {
 });
 
 
+// app.use(session({
+//   secret: 'very secret keyboard cat',
+//   resave: false,
+//   saveUninitialized: false,
+// }))
+// app.use(passport.authenticate('session'));
+
 app.use(session({
   secret: 'very secret keyboard cat',
   resave: false,
   saveUninitialized: false,
 }))
 
-app.use(passport.authenticate('session'));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -77,9 +86,9 @@ app.use('/cart', cartRouter);
 app.use('/order', orderRouter);
 
 app.use('/dashboard', indexRouter);
-
-
+app.use('/promotion',promotionRouter);
 app.use('/store',storeRouter);
+
 
 
 
