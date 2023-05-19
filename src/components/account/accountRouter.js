@@ -23,11 +23,6 @@ router.get('/editProfile', function (req, res, next) {
 
 router.post('/editProfile', accountController.editProfile);
 
-router.get('/changePass', function (req, res, next) {
-    //throw new Error('Unknown error!');
-    res.render('account/changePass', { layout: false });
-});
-
 router.post('/changePass', accountController.editPassword);
 
 module.exports = router;

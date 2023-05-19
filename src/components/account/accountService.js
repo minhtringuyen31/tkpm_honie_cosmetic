@@ -1,3 +1,4 @@
+const accountRepository = require('./AccountRepository');
 const connection = require('../connect_DB');
 
 exports.editProfile = async (nameEdit, emailEdit, addressEdit, phoneEdit, birthdayEdit) => {
@@ -18,11 +19,11 @@ exports.editProfile = async (nameEdit, emailEdit, addressEdit, phoneEdit, birthd
     }
 }
 
-exports.changePassword= async(passChange,emailChange)=>{
+exports.changePassword = async (passChange, emailChange) => {
     console.log("change pass");
-    try{
+    try {
         const poolPromise = connection.promise();
-        await poolPromise.query('UPDATE USERS SET USERS.USER_PASSWORD = ? WHERE USERS.USER_EMAIL = ?', [passChange,emailChange]);
+        await poolPromise.query('UPDATE USERS SET USERS.USER_PASSWORD = ? WHERE USERS.USER_EMAIL = ?', [passChange, emailChange]);
         console.log("success");
         const [user, fields] = await poolPromise.query(
             "SELECT * from USERS WHERE USERS.USER_EMAIL = ? LIMIT 1", [emailChange]);
@@ -32,7 +33,7 @@ exports.changePassword= async(passChange,emailChange)=>{
 
 
     }
-    catch(err){
+    catch (err) {
         console.log(err);
         return false;
     }
