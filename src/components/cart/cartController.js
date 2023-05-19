@@ -3,10 +3,10 @@ const cartService = require('./cartService');
 
 exports.showCart = (req, res) => {
     if (!req.user) {
-        res.redirect('/auth/sign');
+        res.redirect('customer/auth/sign');
     }
     else {
-        res.render('cart/cart');
+        res.render('customer/cart/cart');
     }
 }
 
@@ -20,7 +20,7 @@ exports.cartDetail = async (req, res) => {
         return accumulator + parseFloat(object.total);
     }, 0);
     console.log(total);
-    res.render('cart/cart', { detail: products, total: total });
+    res.render('customer/cart/cart', { detail: products, total: total });
 }
 
 
@@ -45,7 +45,7 @@ exports.removeFromCart = async (req, res) => {
 exports.showCheckout = async (req, res) => {
     // if (req.params.)
     if (!req.user) {
-        res.redirect('/auth/login');
+        res.redirect('/auth/sign');
     }
     else {
 
@@ -65,7 +65,7 @@ exports.showCheckout = async (req, res) => {
             orderEmail: req.user.loginEmail,
             totalPrice: total
         }
-        res.render('cart/checkout', { orderInfor: orderInfor, product: products });
+        res.render('customer/cart/checkout', { orderInfor: orderInfor, product: products });
     }
 }
 
@@ -92,7 +92,7 @@ exports.addOrder = async (req, res) => {
 
     await cartService.addOrder(newestOrder, products); //add products to `order` table and `orderproduct` table -> remove all current product from `cart` table
     if (req.body.methodInput == 'momo') {
-        res.render('cart/paymentWithMomo', { total: total });
+        res.render('customer/cart/paymentWithMomo', { total: total });
     } else {
         res.redirect('/order');
     }

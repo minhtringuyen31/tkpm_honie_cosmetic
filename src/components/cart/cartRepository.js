@@ -18,6 +18,19 @@ exports.getCartDetail = async (userEmail) => {
 }
 
 
+exports.getProductInCart = async (user_email) => {
+    try {
+        const poolPromise = connection.promise();
+        const query = `SELECT pc.product_id, pc.quantity, p.PRODUCT_PRICE*pc.QUANTITY AS "price" FROM product_cart as pc on product as p on pc.product_id = p.product_id WHERE pc.user_email = ?`
+        const [res] = await poolPromise.query(query, [user_email])
+        return res
+    } catch (e) {
+        console.log(e)
+        return [];
+    }
+}
+
+
 exports.checkExistProduct = async (userEmail, idProduct) => {
     try {
         const poolPromise = connection.promise();

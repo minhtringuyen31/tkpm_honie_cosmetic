@@ -12,7 +12,7 @@ exports.editProfile = async (req, res) => {
 
 
     if (user) {
-        res.render('account/editProfile');
+        res.render('customer/account/editProfile');
         res.locals.user.loginName = user[0].USER_NAME;
         res.locals.user.loginAddress = user[0].USER_ADDRESS;
         res.locals.user.loginPhone = user[0].USER_PHONE;
@@ -20,7 +20,7 @@ exports.editProfile = async (req, res) => {
         return user[0];
     }
     else {
-        res.render('/index');
+        res.render('customer/home/index');
         return null;
     }
 }
@@ -33,7 +33,7 @@ exports.editPassword = async (req, res) => {
         return user[0];
     }
     else {
-        res.render('/account/editProfile');
+        res.render('customer/account/editProfile');
         return null;
     }
 }

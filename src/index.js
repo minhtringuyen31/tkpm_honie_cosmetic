@@ -17,14 +17,25 @@ const cartRouter = require('./components/cart/cartRouter');
 const orderRouter = require('./components/order/orderRouter');
 const userRouter = require('./components/user/userRouter')
 const storeRouter = require('./components/store/storeRouter');
+const promotionRouter = require('./components/promotion/promotionRouter')
 
 
 
 const app = express();
 
 // view engine setup   
+hbs.registerHelper('isEqual', function (value1, value2, options) {
+  if (value1 === value2) {
+    return 1;
+  } else {
+    return 0;
+  }
+});
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+
+
+
 
 
 var blocks = {};
@@ -79,7 +90,7 @@ app.use('/order', orderRouter);
 
 app.use('/dashboard', indexRouter);
 app.use('/user', userRouter)
-
+app.use('/promotion', promotionRouter)
 
 app.use('/store', storeRouter);
 

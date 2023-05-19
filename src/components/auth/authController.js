@@ -8,12 +8,12 @@ exports.signup = async (req, res, next) => {
     console.log(req.body);
     const { userName, userEmail, userPassword } = req.body;
     if (authService.checkSignUpFormat(req.body) === false) {
-        res.render('auth/sign', { layout: false });
+        res.render('customer/auth/sign', { layout: false });
         return;
     }
     const check = await authService.isExistedAccount(userEmail);
     if (check == true) {
-        res.render('auth/sign', { layout: false });
+        res.render('customer/auth/sign', { layout: false });
         console.log("User existed");
         return;
     } else {
@@ -76,7 +76,7 @@ exports.forgotPassword = async (req, res) => {
             console.log("Sent: " + info.response);
             console.log(`localhost:3000/auth/forgotPassword/${email}?token=${hashedEmail}`);
         })
-        res.redirect('/auth/forgotPassword?status=success');
+        res.redirect('customer/auth/forgotPassword?status=success');
     }
 }
 
@@ -86,7 +86,7 @@ exports.showResetPasswordForm = (req, res) => {
         res.redirect('/auth/forgotPassword');
     } else {
         console.log("email: req.params.email, token: req.query.token " + req.params.email + req.query.token);
-        res.render('auth/resetPassword', { email: req.params.email, token: req.query.token });
+        res.render('customerauth/resetPassword', { email: req.params.email, token: req.query.token });
     }
 }
 
@@ -95,7 +95,7 @@ exports.resetPassword = async (req, res) => {
     const { email, token, password } = req.body;
     console.log(email, token, password);
     if (!email || !token || !password) {
-        res.redirect('/auth/forgotPassword');
+        res.redirect('customer/auth/forgotPassword');
     } else {
         console.log("vo day");
         const checkEmail = await bcrypt.compare(email, token);
@@ -107,13 +107,13 @@ exports.resetPassword = async (req, res) => {
             const check = await authRep.updatePassword(email, hashPassword);
             console.log("register: " + check);
             if (check) {
-                res.redirect('/auth/sign');
+                res.redirect('customer/auth/sign');
             }
             else {
-                res.redirect('/auth/forgotPassword');
+                res.redirect('customer/auth/forgotPassword');
             }
         } else {
-            res.redirect('/auth/forgotPassword');
+            res.redirect('customer/auth/forgotPassword');
         }
     }
 }

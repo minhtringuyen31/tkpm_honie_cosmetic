@@ -5,7 +5,7 @@ const { authenticate } = require('./passport');
 const passport = require('./passport');
 
 router.get('/sign', function (req, res, next) {
-  res.render('auth/sign', { layout: false });
+  res.render('customer/auth/sign', { layout: false });
 });
 
 router.get('/logout', authController.logout);
@@ -17,7 +17,6 @@ router.post('/signin', passport.authenticate('local', {
 
 router.post('/signup', authController.signup);
 
-router.post('/signup', authController.signup);
 
 router.get('/verify-email/:email', authController.verifyEmail);
 
