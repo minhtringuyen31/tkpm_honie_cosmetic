@@ -86,7 +86,7 @@ exports.showResetPasswordForm = (req, res) => {
         res.redirect('/auth/forgotPassword');
     } else {
         console.log("email: req.params.email, token: req.query.token " + req.params.email + req.query.token);
-        res.render('customerauth/resetPassword', { email: req.params.email, token: req.query.token });
+        res.render('customer/auth/resetPassword', { email: req.params.email, token: req.query.token });
     }
 }
 
