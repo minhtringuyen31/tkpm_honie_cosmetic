@@ -149,6 +149,13 @@
                            Invalid currency value
                         </div>
 
+                        <div class="col-lg-12" style="display: none;">
+                            <div class="mb-3">
+                                <label for="product-number" class="h5">Number in stock*</label>
+                                <input type="text" class="form-control" id="product-number" placeholder="the number of products in the stock" name="product_number" value="0" required>
+                            </div>
+                        </div>
+
                         <div class="col-lg-12">
                             <div class="mb-0">
                                 <label for="product-image" class="h5">Attachments</label>
@@ -236,6 +243,13 @@
                             <div class="mb-3">
                                 <label for="edit-product-price" class="h5">Price*</label>
                                 <input type="text" class="form-control" id="edit-product-price" placeholder="price" name="product_price" value="" required>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label for="edit-product-number" class="h5">Number in stock*</label>
+                                <input type="text" class="form-control" id="edit-product-number" placeholder="the number of products in the stock" name="product_number" value="" required>
                             </div>
                         </div>
                         
@@ -515,7 +529,7 @@
             if(result != 0)
             {
                alert("Create new product successfully")
-
+               loadProductPage(1)
             }
             else
             {
@@ -571,6 +585,7 @@
                if(result != 0)
                {
                   alert("Create new product successfully")
+                  loadProductPage(1)
                }
                else
                {
@@ -586,6 +601,7 @@
                if(result != 0)
                {
                   alert("Create new product successfully")
+                  loadProductPage(1)
                }
                else
                {
@@ -654,6 +670,7 @@
          //$("edit-product-brand").val()
          document.getElementById("edit-product-description").textContent = result.PRODUCT_DESCRIPTION
          document.getElementById("edit-product-price").setAttribute("value", result.PRODUCT_PRICE)
+         document.getElementById("edit-product-number").setAttribute("value", result.NUMBER_OF)
       });
 
    }
@@ -674,6 +691,7 @@
          if(result != 0 )
          {
             alert("Remove " + productId + " feature successfully!")
+            loadProductPage(1)
          }
          else
          {
