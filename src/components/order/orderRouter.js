@@ -5,6 +5,8 @@ const orderController = require('./orderController');
 //API for customer
 // router.get('/', orderController.getAllUserOrder);
 router.get('/', orderController.getAllOrder);
+router.get('/:statusId', orderController.getOrderByStatus);
+
 router.post('/', orderController.create)
 router.get('/:orderId', orderController.getOrderByStatus)
 // router.get('/allOrder', orderController.getAll);
@@ -12,6 +14,9 @@ router.get('/:orderId', orderController.getOrderByStatus)
 router.get('/detail/:orderId', orderController.getOrderDetail);
 router.get('/review/:productId', orderController.showOrderReview);
 router.post('/review', orderController.review)
+router.get('/order_detail/:orderId', orderController.showOrderDetail);
+router.get('/review/:orderId', orderController.showOrderReview);
+router.post('/review/:orderId', orderController.reviewProduct);
 
 
 //API for admin

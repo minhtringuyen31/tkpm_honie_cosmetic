@@ -1,3 +1,4 @@
+<form method="post">
 <section class="breadcrumb-option order_management">
     <div class="container">
         <div class="row">
@@ -14,82 +15,33 @@
         </div>
     </div>
 </section>
-<div class="card-container row">
-    <section class="col-6 shopping-cart spad review_area ml-5">
-        <div class="container vertical-scrollable text-left scrollBox">
-            <div class="card row order_management p-3">
-                <h5 class="card-title">Receiver information</h5>
-                <p class="card-text">Thanh Trung</p>
-                <p class="card-text ">(+84) 987 654 321</p>
-                <p class="card-text ">227 Nguyen Van Cu Street, Ward 11, District 5, Ho Chi Minh City</p>
-                <h5 class="card-title">Unilever International</h5>
+<div class="row">
+    <section class="col-6 shopping-cart spad ml-5">
+        <div class="container vertical-scrollable text-left ">
+            <div class="card row order_management mx-auto p-2 m-5 ">
                 <div class="row">
-                    <img class="col-2 card-img-top" src="/img/product/PE01-2.png" width="50" height="75"
+                    <img class="col-2 card-img-top" src="/img/product/{{product.PRODUCT_IMAGE}}" width="50" height="75"
                         alt="Card image cap">
-                    <div class="col-10 card-body">
-                        <h5 class="card-text">Lancome Perfume</h5>
-                        <p class="card-text text-right px-2">x2</p>
-                        <p class="card-text text-right px-2">đ500.000</p>
+                    <div class="col-10 card-body p-2">
+                        <h5 class="card-text">{{product.PRODUCT_NAME}}</h5>
+                        <p class="card-text text-right px-2">Brand: {{product.PRODUCT_BRAND}}</p>
+                        <p class="card-text text-right px-2">đ.{{product.price}}</p>
                     </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <img class="col-2 card-img-top" src="/img/product/LI01.png" width="50" height="75"
-                        alt="Card image cap">
-                    <div class="col-10 card-body">
-                        <h5 class="card-text">Lipstick</h5>
-                        <p class="card-text text-right px-2">x1</p>
-                        <p class="card-text text-right px-2">đ300.000</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <img class="col-2 card-img-top" src="/img/product/product-2.jpg" width="50" height="75"
-                        alt="Card image cap">
-                    <div class="col-10 card-body">
-                        <h5 class="card-text">Cleaner</h5>
-                        <p class="card-text text-right px-2">x1</p>
-                        <p class="card-text text-right px-2">đ400.000</p>
-                    </div>
-                </div>
-                <hr>
-                <div class="card-body row">
-                    <p class="col-4 text-left px-2">Total</p>
-                    <p class="col-8 text-right px-2">đ1.000.000</p>
-                </div>
-                <hr>
-                <div class="card-body">
-                    <div class="row">
-                        <p class="col-4  text-left px-2">Payment method</p>
-                        <p class="col-8 text-right px-2">ZaloPay</p>
-                    </div>
-                    <div class="row">
-                        <p class="col-4  text-left px-2">Order ID</p>
-                        <p class="col-8 text-right px-2">212KGFRESF5642</p>
-                    </div>
-                    <div class="row">
-                        <p class="col-4  text-left px-2">Order time</p>
-                        <p class="col-8 text-right px-2">25-04-2023 22:39</p>
-                    </div>
-                    <div class="row">
-                        <p class="col-4  text-left px-2"> Transaction time</p>
-                        <p class="col-8 text-right px-2">25-04-2023 22:59</p>
-                    </div>
-
                 </div>
             </div>
         </div>
-
-
-
-
     </section>
-    <section class="col-4 shopping-cart review_area mr-5 card_review">
-        <div class="container text-left scrollBox ">
-            <div class="card order_management p-3 card_review">
-                <h3 class="mb-3"><bold>Review</bold></h3>
-                <input type="text" class="review_input" placeholder="write your review...">
-                <div class="card-body small_card row">
-                    <h5 class="col-3 card-title">Rating</h5>
+    
+    <section class="col-4 shopping-cart spad mr-5 ml-5">
+        <div class="container text-left  ">
+            <div class="card order_management p-3 card_review p-0 form-group">
+                <h3 class="mb-3">
+                    <bold>Review</bold>
+                </h3>
+                <textarea name="comment" id="comment" class="form-control review_input" id="exampleFormControlTextarea1" rows="6"
+                    placeholder="write your review..."></textarea>
+                <div class="small_card row m-3">
+                    <h5 name="rating" id="rating" class="col-3 card-title ">Rating</h5>
                     <div class="rating">
                         <input type="radio" id="star1" name="rating" value="5">
                         <label for="star1"></label>
@@ -106,16 +58,11 @@
                         <input type="radio" id="star5" name="rating" value="1">
                         <label for="star5"></label>
                     </div>
-                    
                 </div>
-                <button class=" send-btn float-center ml-auto">Send feedback</button>
-                
+                <button type="submit" class=" send-btn float-center ml-3" value={{product.id}} >Send feedback</button>
             </div>
         </div>
-
     </section>
-
 </div>
-
-
+</form>
 <script src="/js/order.js"></script>
