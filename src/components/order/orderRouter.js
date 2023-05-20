@@ -3,12 +3,14 @@ const router = express.Router();
 const orderController = require('./orderController');
 
 //API for customer
-// router.get('/', orderController.getAllUserOrder);
-router.get('/', orderController.showOrders);
+router.get('/:statusId', orderController.getOrderByStatus);
+router.get('/', orderController.getAllUserOrder);
+
 router.post('/', orderController.create)
 // router.get('/allOrder', orderController.getAll);
-router.get('/detail', orderController.showOrderDetail);
-router.get('/review', orderController.showOrderReview);
+router.get('/order_detail/:orderId', orderController.showOrderDetail);
+router.get('/review/:orderId', orderController.showOrderReview);
+router.post('/review/:orderId', orderController.reviewProduct);
 
 
 //API for admin

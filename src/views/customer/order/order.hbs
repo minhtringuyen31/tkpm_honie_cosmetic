@@ -21,75 +21,67 @@
     <div class="container green-navbar-background">
 
         <nav class="nav flex-column flex-sm-row white-text">
-            <a onclick="changeTabColor(event, this)" class=" order_management flex-sm-fill text-sm-center nav-link active"
-                href="/order">
+            <a id="-1" onclick="changeTabColor(event, this,this.id)"
+                class=" order_management flex-sm-fill text-sm-center nav-link " href="/">
                 <bold>ALL</bold>
             </a>
-            <a onclick="changeTabColor(event, this)" class="order_management flex-sm-fill text-sm-center nav-link "
-                href="/order">
+            <a id="1" value="1" onclick="changeTabColor(event, this,this.id)"
+                class="order_management flex-sm-fill text-sm-center nav-link " href="/order/1">
                 <bold>PENDING PROCESSING</bold>
             </a>
-            <a onclick="changeTabColor(event, this)" class="order_management flex-sm-fill text-sm-center nav-link"
-                href="order/delivering#">DELIVERING</a>
-            <a onclick="changeTabColor(event, this)" class="order_management flex-sm-fill text-sm-center nav-link"
-                href="order/completed">COMPLETED</a>
+            <a id="2" onclick="changeTabColor(event, this,this.id)"
+                class="order_management flex-sm-fill text-sm-center nav-link" href="order/2">DELIVERING</a>
+            <a id="3" onclick="changeTabColor(event, this,this.id)"
+                class="order_management flex-sm-fill text-sm-center nav-link" href="order/3">COMPLETED</a>
+            <a id="0" onclick="changeTabColor(event, this,this.id)"
+                class="order_management flex-sm-fill text-sm-center nav-link" href="order/0">CANCEL</a>
         </nav>
     </div>
 </section>
 
-<div class="container vertical-scrollable text-left scrollBox">
-    {{!-- <div class="row">
-        <div class="col-sm-10 mx-auto">
-            <div class="container row mb-5 scroll-item" id="1">
-                <div class="col-sm-4 me-5 ">
-                    <h3>Brand</h3>
-                    <h5 class="partition-header">Name: </h5><span>Nuoc tay trang</span>
-                    <h5>Address:<span> hcm</span>
-                        <h5>Phone: <span> 0987654321</span>
-                            <h5 class="partition-header">Email: <span> ltt@gmail.com</span>
+{{#each orders}}
+<div class="container text-left mb-5 p-0">
+    <div class="order-card card row  order_management mx-auto p-3" id={{id}}>
+
+        <div class=" card-body">
+            <div class="row">
+                <img class="col-2 card-img-top" src="/img/order_img.jpg" width="50" height="75" alt="Card image cap">
+                <div class="col-10 ">
+                    <h5 class="card-title">Order ID: {{id}}</h5>
                 </div>
-                <div class="col-sm-4 me-5">
-                    <h3>Shop</h3>
-                    <h5 class="partition-header">Shop name: <span> Hadalabo</span>
-                        <h5>Address: <span> dong nai</span>
-                            <h5>Phone: <span> 123456890</span>
-                                <h5>Email:<span> shop@gmail.com</span>
-                </div>
-                <div class="col-sm-4 me-5">
-                    <div class="row">
-                        <div class="col-9">
-                            <h3>Order</h3>
-                        </div>
-                        <div class="col-3">
-                            <button class="remove-button" value={{idorder}} onclick="hideOrder(this.value)"><img
-                                    src="/users/img/remove_button.png" alt="remove"></button>
-                        </div>
-                    </div>
-                    <h5>Price:<span> 100000</span>
-                        <h5>Delivery free:<span>1000</span>
-                            <div><span><br></span></div>
-                            <button class="accept-button" value="1" onclick="acceptOrder(this.value)">Accept</button>
-                </div>
-            </div> --}}
-            <div class="card row  order_management mx-auto p-3" value="1">
-                <h5 class="card-title">Unilever International</h5>
-                <div class="row">
-                    <img class="col-2 card-img-top" src="img/product/PE01-2.png" width="50" height="75"
-                        alt="Card image cap">
-                    <div class="col-10 card-body">
-                        <h5 class="card-text">Lancome Perfume</h5>
-                        <p class="card-text text-right px-2">x2</p>
-                        <p class="card-text text-right px-2">đ500.000</p>
-                    </div>
-                </div>
-                <hr>
-                <p class=" text-right px-2">đ1.000.000</p>
-                <hr>
-                <button class="review_btn float-right ml-auto">Review</button>
             </div>
+            <hr>
+            <div class="row p-0">
+                <p class="col-4  text-left ">Total</p>
+                <p class="col-8 text-right ">đ{{total}}</p>
+            </div>
+            <div class="row ">
+                <p class="col-4  text-left ">Promotion</p>
+                {{#if promotion_id}}
+                <p class="col-8 text-right ">{{promotion_id}}</p>
+                {{else}}
+                <p class="col-8 text-right ">None</p>
+                {{/if}}
+            </div>
+            <div class="row ">
+                <p class="col-4  text-left ">Payment method</p>
+                <p class="col-8 text-right ">{{payment_method_name}}</p>
+            </div>
+
+            <div class="row ">
+                <p class="col-4  text-left ">Order date</p>
+                <p class="col-8 text-right ">{{order_date}}</p>
+            </div>
+            <div class="row ">
+                <p class="col-4  text-left ">Delivery address</p>
+                <p class="col-8 text-right ">{{shipping_address}}</p>
+            </div>
+            <hr>
+            <button value={{id}} onclick="viewDetailClick(this.value)" class="review_btn float-right ml-auto p-0">View
+                detail</button>
         </div>
     </div>
-
 </div>
+{{/each}}
 
 <script src="/js/order.js"></script>

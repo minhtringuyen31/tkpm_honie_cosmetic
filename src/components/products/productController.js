@@ -4,12 +4,30 @@ const connection = require('../connect_DB');
 const { ITEM_PER_PAGE, TOTAL_PAGING_LINK } = require('../../constant');
 
 exports.getDetail = async (req, res) => {
-    const productID = req.params['id'];
-    console.log("alo");
-    console.log(productID);
-    const result = await productService.getAProduct(productID);
-    const related = await productService.getRelatedProduct(productID);
-    res.render('products/productDetail', { result: result, related: related });
+    // const productID = req.params['id'];
+    // console.log("alo");
+    // console.log(productID);
+    // const result = await productService.getAProduct(productID);
+    // const related = await productService.getRelatedProduct(productID);
+    // res.render('products/productDetail', { result: result, related: related });
+    const reviews=[
+        {
+            USER_EMAIL:"ltt@gmail.com",
+            PRODUCT_RATING: 4,
+            PRODUCT_REVIEW:"Good. Recommend to buy"
+        },
+        {
+            USER_EMAIL:"ngtt@gmail.com",
+            PRODUCT_RATING: 5,
+            PRODUCT_REVIEW:"nice...i love it som much. Thanks shop"
+        },
+        {
+            USER_EMAIL:"ltt@gmail.com",
+            PRODUCT_RATING: 2,
+            PRODUCT_REVIEW:"worst product that i have used. "
+        }
+    ]
+    res.render('customer/products/productDetail',{reviews});
 }
 
 exports.getAll = async (req, res) => {
