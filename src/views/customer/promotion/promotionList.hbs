@@ -3,7 +3,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Introduction Store</title>
+    <title>List Promotion</title>
 
     <link rel="stylesheet" type="text/css" href="/css/profiles.css" />
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
@@ -11,3 +11,157 @@
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
 </head>
+
+{{!-- // banner slide  --}}
+<div class="box margin">
+  <div class="slider ">
+  <div class="slides">
+    <input type="radio" name="radio-btn" id="radio1">
+    <input type="radio" name="radio-btn" id="radio2">
+    <input type="radio" name="radio-btn" id="radio3">
+    <input type="radio" name="radio-btn" id="radio4">
+    <input type="radio" name="radio-btn" id="radio5">
+
+  
+    <div class="slide first">
+      <img src="/img/banner/item_1.png" alt="">
+    </div>
+     <div class="slide">
+      <img src="/img/banner/item_2.png" alt="">
+    </div>
+     <div class="slide">
+      <img src="/img/banner/item_3.png" alt="">
+    </div>
+     <div class="slide ">
+      <img src="/img/banner/item_4.png" alt="">
+    </div>
+     <div class="slide">
+      <img src="/img/banner/item_5.png" alt="">
+    </div>
+    
+
+     <div class="navigation-auto">
+      <div class="auto-btn1"></div>
+      <div class="auto-btn2"></div>
+      <div class="auto-btn3"></div>
+      <div class="auto-btn4"></div>
+      <div class="auto-btn5"></div>
+     
+     </div>
+  </div>
+
+  {{!-- manual navigation  --}}
+  <div class="navigation-manual">
+    <label for ="radio1" class="manual-btn"></label>
+    <label for ="radio2" class="manual-btn"></label>
+    <label for ="radio3" class="manual-btn"></label>
+    <label for ="radio4" class="manual-btn"></label>
+    <label for ="radio5" class="manual-btn"></label>
+ 
+  </div>
+</div>
+</div>
+
+{{!-- 
+/// list promotion  --}}
+
+  <div id="promotion-container" class=" promotion "> </div>
+
+  <div id ="myModal" class="modal box bg_black">
+    <div class="box">
+       
+       <div id="seeDetail" class="modaldetail my-3 "> </div>
+    </div>
+    
+  </div>
+ 
+
+
+<script>
+    fetch(`/promotion/getall`)
+  .then(response => response.json())
+  .then(data => {
+    // Extract the promotions from the response data
+    const promotions = data;
+
+    // Select the container element
+    const container = document.getElementById('promotion-container');
+
+    // Generate HTML for each promotion and append it to the container
+    promotions.forEach(promotion => {
+      const promotionElement = document.createElement('div');
+      promotionElement.innerHTML = `
+       <div class="margin-item flex card_promotion justify-content-around">
+      <div class="box">
+      <img class="img_item  " src="${promotion.image}" alt="${promotion.name}"></div>
+      <div class="mx-4 box">
+        <div>
+        <div class="font-weight-bolder text_highlight h6" >${promotion.name}</div>
+        <div>Start day: ${promotion.start_date}</div>
+        <div>End day: ${promotion.end_date}</div>
+        <div class="des_promotion">Description: ${promotion.description}</div>
+      </div>
+      </div>
+      <div class="my-3 box">
+        <div>
+        <button onclick="openModal('${promotion.id}')" class="btn btn-danger btn-width ">See Detail</button>
+        <button href="#" class="btn btn-danger btn-width my-3 ">Add </button>
+      </div>
+      </div>
+      
+    </div>
+      `;
+      
+      container.appendChild(promotionElement);
+    });
+  })
+  .catch(error => {
+    console.error('Error fetching promotions:', error);
+  });
+
+
+  function openModal(promotionId) {
+     fetch(`/promotion/getpromotion/${promotionId}`)
+   .then(response => {
+   
+    return response.json();
+  })
+  .then(data => {
+
+    // Retrieve the promotion details based on the provided ID
+    const promotiondetail = data;
+
+    // Select the modal and modal content elements
+    const modal = document.getElementById('myModal');
+
+    const modalContent = document.getElementById('seeDetail');
+
+    // Populate the modal content with the promotion details
+    modalContent.innerHTML = `
+    <a href="/promotion" class="close">&times;</a>
+       <hr class="my-4">
+    <div class=" modalcontent ">DETAIL PROMOTION</div>
+      <div class="box m-3">
+         <img class="img_detail" src="${promotiondetail.image}" alt="${promotiondetail.name}">
+        </div>
+          <hr class="my-4">
+        <div class="m-3" >
+           <div class="font-weight-bolder text_highlight h4">${promotiondetail.name}</div>
+      <div>Start day: ${promotiondetail.start_date}</div>
+      <div>End day: ${promotiondetail.end_date}</div>
+      <div>Description: ${promotiondetail.description}</div>
+       <button href="#" class="btn btn-danger btn-width my-3 ">Add </button>
+        </div>
+        
+     
+     
+    `;
+
+    // Show the modal
+    modal.style.display = 'block'; 
+     })
+      .catch(error => {
+        console.error('Error fetching promotion details:', error);
+      });
+  }
+</script>

@@ -16,7 +16,7 @@ router.post('/review/:orderId', orderController.reviewProduct);
 //API for admin
 router.get('/all', orderController.getAllOrder);
 router.get('/detail/:orderId', orderController.getOrderDetail);
-router.post('/update', orderController.updateOrderStatus)
+router.post('/update/:id', orderController.updateOrderStatus)
 
 // router.get('/test', orderController.test)
 

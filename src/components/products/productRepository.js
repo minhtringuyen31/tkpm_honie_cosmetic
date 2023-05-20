@@ -1,6 +1,7 @@
 const db = require('../connect_DB');
 
 const { ITEM_PER_PAGE } = require('../../constant');
+const async = require('hbs/lib/async');
 
 exports.getAProduct = async (productID) => {
     console.log("here");
@@ -195,3 +196,52 @@ exports.search = async (keyword) => {
         return [];
     }
 }       
+
+exports.createProductBasically = async (productId, productName, productPrice, productCategory, productBrand, productDescription) =>
+{
+    try
+    {
+        const poolPromise = db.promise();
+        let query = "INSERT INTO product (PRODUCT_ID, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_CATEGORY, PRODUCT_BRAND, PRODUCT_DESCRIPTION) " +
+        "VALUES(?,?,?,?,?,?)"
+        const changedRows = await poolPromise.query(query, [productId, productName, productPrice, productCategory, productBrand, productDescription]);
+        return changedRows;
+    }
+    catch(err)
+    {
+        console.log(err)
+        return 0;
+    }
+}
+
+exports.editProduct = async (productId, newProductName, newProductPrice, newProductCategory, newProductBrand, newProductDescription) =>
+{
+    try
+    {
+        const query = "UPDATE product SET product.PRODUCT_NAME = ?, product.PRODUCT_PRICE = ?, product.PRODUCT_CATEGORY = ?, product.PRODUCT_BRAND = ?, product.PRODUCT_DESCRIPTION = ? WHERE product.PRODUCT_ID = ?"
+        const poolPromise = db.promise()
+        const changedRows = await poolPromise.query(query,[newProductName, newProductPrice, newProductCategory, newProductBrand, newProductDescription, productId]);
+        return changedRows
+    }
+    catch(err)
+    {
+        console.log(err)
+        return 0;
+    }
+}
+
+exports.removeProduct = async (productId) =>
+{
+    try
+    {
+        const query = "DELETE FROM product WHERE product.PRODUCT_ID = ?"
+        const poolPromise = db.promise()
+        const changedRows = await poolPromise.query(query, [productId]);
+        return changedRows
+    }
+    catch(err)
+    {
+        console.log(err)
+        return 0;
+    }
+}

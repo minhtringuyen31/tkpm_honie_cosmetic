@@ -8,7 +8,7 @@ router.get('/', function (req, res, next) {
     if (req.user != undefined) {
         if (req.user.loginRole == 1) {
             console.log("admin")
-            res.render('admin/dashboard/dashboard', { layout: 'layoutAdmin.hbs' })
+            res.render('admin/dashboard/dashboard.hbs', { layout: 'layoutAdmin.hbs' })
         } else {
             console.log("customer")
             res.render('customer/home/index');
