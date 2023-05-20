@@ -1,9 +1,11 @@
+const async = require('hbs/lib/async');
 const orderService = require('./orderService');
+const productService = require('../products/productService')
 
 exports.getAllUserOrder = async (req, res) => {
     const orders = await orderService.getAllUserOrder(req.user.loginEmail);
     console.log(orders);
-    res.render('order/order', { order: orders });
+    res.render('customer/order/order', { order: orders });
     // res.render('order/order');
 }
 
@@ -19,22 +21,55 @@ exports.create = async (req, res) => {
     }
 }
 
-/////
-// getOrderList(user_email){
-//     // orderlist = query llay toan bo oder cua nguoi do
-//     //  
-// }
+exports.getOrderByStatus = async (req, res) => {
+    const status = req.params
+    const result = await orderService.getOrderByStatus(status)
+    if (result) {
+        res.status(200).json(result)
+    }
+    else {
+        res.status(500).json(error);
+    }
+}
+
+
+exports.showOrderReview = async (req, res) => {
+    const productId = req.params.productId
+    const result = await productService.getAProduct(productId)
+    if (result) {
+        res.redirect('/order/all', { product: result })
+    } else {
+        res.status(500).json(error);
+    }
+}
+
+exports.review = async (req, res) => {
+    const user_email = req.user.loginEmail
+    const product_id = req.body.productId
+    const comment = req.body.comment
+    const rating = req.body.rating
+    const result = await orderService.review(user_email, product_id, comment, rating)
+    if (result) {
+        res.status(200).json(result)
+    } else {
+        res.status(500).json(error);
+    }
+}
 
 
 
 
 exports.getAllOrder = async (req, res) => {
-    if (req.user.loginRole == 1) {
-        const result = await orderService.getAllOrder()
-        console.log(result)
-        res.render('admin/order/orderList', { layout: "layoutAdmin", result })
+    if (req.user != undefined) {
+        if (req.user.loginRole == 1) {
+            const result = await orderService.getAllOrder()
+            console.log(result)
+            res.render('admin/order/orderList', { layout: "layoutAdmin", result })
+        } else {
+            res.redirect('/index')
+        }
     } else {
-        res.redirect('/index')
+        res.redirect('/auth/sign')
     }
 }
 

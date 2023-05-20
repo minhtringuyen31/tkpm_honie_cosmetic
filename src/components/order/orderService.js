@@ -1,6 +1,7 @@
 const orderRepository = require('./orderRepository');
 const cartRepository = require('../cart/cartRepository')
-const productService = require('../products/productService')
+const productService = require('../products/productService');
+const async = require('hbs/lib/async');
 
 exports.getAllUserOrder = async (_userEmail) => {
     const orders = await orderRepository.getOrdersByEmail(_userEmail);
@@ -12,6 +13,14 @@ exports.getAllUserOrder = async (_userEmail) => {
 
 exports.createOrder = async (user_email, shipping_address, total_price, payment_method) => {
     return await orderRepository.createOrder(user_email, shipping_address, total_price, payment_method)
+}
+
+exports.getOrderByStatus = async (status) => {
+    return await orderRepository.getOrderByStatus(status)
+}
+
+exports.review = async (user_email, product_id, comment, rating) => {
+    return await orderRepository.reviewProduct(user_email, product_id, comment, rating)
 }
 
 exports.getNewestOrder = async (user_email) => {

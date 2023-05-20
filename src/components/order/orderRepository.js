@@ -1,3 +1,4 @@
+const async = require('hbs/lib/async');
 const connection = require('../connect_DB');
 
 
@@ -22,6 +23,34 @@ exports.createOrder = async (user_email, shipping_address, total_price, payment_
         const value = [user_email, shipping_address, total_price, payment_method]
         const [res] = await poolPromise.query(query, value);
 
+        return res;
+    }
+    catch (e) {
+        console.log(e);
+        return null;
+    }
+}
+
+exports.getOrderByStatus = async (status) => {
+    try {
+        const poolPromise = connection.promise();
+        const query = `SELECT * FROM orders WHERE status = ?`
+        const [res] = await poolPromise.query(query, [value]);
+
+        return res;
+    }
+    catch (e) {
+        console.log(e);
+        return null;
+    }
+}
+
+exports.reviewProduct = async (user_email, product_id, comment, rating) => {
+    try {
+        const poolPromise = connection.promise();
+        const query = `INSERT INTO rating (user_email, product_id, rating, comment) VALUES (?,?,?,?)`
+        const value = [user_email, product_id, rating, comment]
+        const [res] = await poolPromise.query(query, [value]);
         return res;
     }
     catch (e) {

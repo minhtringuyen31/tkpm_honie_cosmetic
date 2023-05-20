@@ -16,24 +16,20 @@ exports.getDetail = async (req, res) => {
 exports.getAll = async (req, res) => {
     console.log("req.user (product: getAll) : ");
     console.log(req.user);
-    if(req.user != undefined)
-    {
-        if(req.user.loginRole == 0) //customer
+    if (req.user != undefined) {
+        if (req.user.loginRole == 0) //customer
         {
             res.render('customer/products/productList');
         }
-        else if(req.user.loginRole == 1)
-        {
-            res.render('admin/products/productList_Admin', {layout: 'layoutAdmin.hbs'});
+        else if (req.user.loginRole == 1) {
+            res.render('admin/products/productList_Admin', { layout: 'layoutAdmin.hbs' });
         }
-        else
-        {
+        else {
             next();
         }
     }
-    else
-    {
-        res.redirect('auth/sign');
+    else {
+        res.render('customer/products/productList');
     }
 }
 
@@ -93,16 +89,13 @@ exports.search = async (req, res) => {
 }
 
 
-exports.createNewProduct = async (req, res, next) =>
-{
+exports.createNewProduct = async (req, res, next) => {
     console.log("create product")
     // console.log(req)
-    if(req.user == undefined)
-    {
+    if (req.user == undefined) {
         next();
     }
-    if(req.user.loginRole != 1)
-    {
+    if (req.user.loginRole != 1) {
         next();
     }
 
@@ -112,29 +105,24 @@ exports.createNewProduct = async (req, res, next) =>
     res.json(result)
 }
 
-exports.background_filterByCategory = async (req, res, next) =>
-{
-    if(req.user == undefined)
-    {
+exports.background_filterByCategory = async (req, res, next) => {
+    if (req.user == undefined) {
         next();
     }
     var option = req.params.option;
     console.log("bg_filterByCatrgory");
-    console.log(option +"\n\n");
+    console.log(option + "\n\n");
 
     var result = await productService.filterByCategory(option);
 
     res.json(result);
 }
 
-exports.background_getDetail = async (req, res, next) =>
-{
-    if(req.user == undefined)
-    {
+exports.background_getDetail = async (req, res, next) => {
+    if (req.user == undefined) {
         next();
     }
-    if(req.user.loginRole != 1)
-    {
+    if (req.user.loginRole != 1) {
         next();
     }
 
@@ -145,29 +133,23 @@ exports.background_getDetail = async (req, res, next) =>
     res.json(result)
 }
 
-exports.bg_editProduct = async (req, res, next) =>
-{
-    if(req.user == undefined)
-    {
+exports.bg_editProduct = async (req, res, next) => {
+    if (req.user == undefined) {
         next();
     }
-    if(req.user.loginRole != 1)
-    {
+    if (req.user.loginRole != 1) {
         next();
     }
     console.log(req.body)
     const result = await productService.editProduct(req.body)
     res.json(result)
-} 
+}
 
-exports.bg_removeProduct = async (req, res, next) =>
-{
-    if(req.user == undefined)
-    {
+exports.bg_removeProduct = async (req, res, next) => {
+    if (req.user == undefined) {
         next();
     }
-    if(req.user.loginRole != 1)
-    {
+    if (req.user.loginRole != 1) {
         next();
     }
     const productId = req.params.id

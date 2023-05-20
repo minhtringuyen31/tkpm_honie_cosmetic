@@ -4,20 +4,20 @@ const orderController = require('./orderController');
 
 //API for customer
 // router.get('/', orderController.getAllUserOrder);
-router.get('/', orderController.showOrders);
+router.get('/', orderController.getAllOrder);
 router.post('/', orderController.create)
+router.get('/:orderId', orderController.getOrderByStatus)
 // router.get('/allOrder', orderController.getAll);
-router.get('/detail', orderController.showOrderDetail);
-router.get('/review', orderController.showOrderReview);
+
+router.get('/detail/:orderId', orderController.getOrderDetail);
+router.get('/review/:productId', orderController.showOrderReview);
+router.post('/review', orderController.review)
 
 
 //API for admin
-router.get('/all', orderController.getAllOrder);
-router.get('/detail/:orderId', orderController.getOrderDetail);
+router.get('/admin/all', orderController.getAllOrder);
+router.get('/admin/detail/:orderId', orderController.getOrderDetail);
 router.post('/update/:id', orderController.updateOrderStatus)
-
-// router.get('/test', orderController.test)
-
-
+router.get('/test', orderController.test)
 
 module.exports = router;
