@@ -32,12 +32,14 @@ exports.getAllUserOrder = async (req, res) => {
 exports.create = async (req, res) => {
     console.log(req.body)
     const { user_name, shipping_address, user_phone, user_email, total_price, payment_method } = req.body
-    if (req.body) {
-        await orderService.createOrder(user_email, shipping_address, total_price, payment_method)
-        const newestOrder = await orderService.getNewestOrder(user_email)
+    // if (req.body) {
+    //     await orderService.createOrder(user_email, shipping_address, total_price, payment_method)
+    //     const newestOrder = await orderService.getNewestOrder(user_email)
 
-        await orderService.addProductOrder(newestOrder)
-    }
+    //     await orderService.addProductOrder(newestOrder)
+
+    // }
+    res.json({})
 }
 
 exports.getAllOrder = async (req, res) => {

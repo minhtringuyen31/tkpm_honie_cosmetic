@@ -57,7 +57,7 @@
                             <div class="col-10 checkout__input">
                                 <p>Promotion</p>
                                 {{#if selected_promotion}}
-                                <input type="text" placeholder="Select promotion for your bill" value="{{selected_promotion.description}}" disabled="true">
+                                <input type="text" placeholder="Select promotion for your bill" value="{{selected_promotion.name}}" name="promotion_name">
                                 {{else}}
                                 <input type="text" placeholder="Select promotion for your bill" value="" disabled="true">
                                 {{/if}}
@@ -70,19 +70,24 @@
                                     <i class="fa fa-ticket" style="color: black;"></i>    
                                     </a>
                                 </button> --}}
-                                <button class="btn-lg" style="border: none; background: #fff5f3; margin-top: -8px">
-                                    <a href="#" class="btn-lg" style="width: max-parent; background: #fff5f3">
+                                
+                                    <a href="/promotion" class="btn-lg" style="width: max-parent; background: #fff5f3;"  >
                                     <i class="fa fa-ticket" style="color: black;"></i>    
                                     </a>
-                                </button>
                             </div>
                         </div>
                         
-
-                        <div class="checkout__input">
-                            <p>Order notes</p>
-                            <input type="text" placeholder="Notes about your order, e.g. special notes for delivery.">
+                        {{#if selected_promotion}}    
+                        <div class="checkout__input" style="display: none;">
+                            <p>Promotion ID</p>
+                            <input type="text" name="promotion_id" value="{{selected_promotion.id}}">
                         </div>
+                        {{else}}
+                        <div class="checkout__input" style="display: none;">
+                            <p>Promotion ID</p>
+                            <input type="text" name="promotion_id" value="">
+                        </div>
+                        {{/if}}
                     </div>
                     <div class="col-lg-5 col-md-6">
                         <div class="checkout__order">
@@ -106,12 +111,12 @@
                                         </div>
                                         <div class="col-4">
                                             {{#if selected_promotion}}
-                                            <span>$ <input type="text" id="discount-price" name="total_price"
+                                            <span>-$ <input type="text" id="discount-price" name="discount_price"
                                                     value="{{selected_promotion.discount}}"
                                                     class="checkout_input_price_viewonly" />
                                             </span>
                                             {{else}}
-                                            <span>$ <input type="text" id="discount-price" name="total_price"
+                                            <span>$ <input type="text" id="discount-price" name="discount_price"
                                                     value="0"
                                                     class="checkout_input_price_viewonly" />
                                             </span>
@@ -157,104 +162,6 @@
     </div>
 </section>
 
-{{!-- 
-<div class="modal fade bd-example-modal-lg" role="dialog" aria-modal="true" id="select-promotion-modal">
-        <div id="dialog" class="modal-dialog  modal-dialog-centered modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header d-block text-center pb-3 border-bttom">
-                    <h3 class="modal-title" id="exampleModalCenterTitle">Select Promotions</h3>
-                </div>
-                <div class="modal-body">
-                  <div>
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div class="mb-6 row">
-                                <label for="edit-product-category" class="h5 col-5 mr-2">Category*</label>
-                                <select class="selectpicker form-control col-7" data-style="py-0" id="edit-product-category" name="product_category" required>
-                                    <option selected>Eyeshadow</option>
-                                    <option >Block Lipstick</option>
-                                    <option >Mascara</option>
-                                    <option >Perfume</option>
-                                    <option >Powder</option>
-                                    <option >Primer</option>
-                                    <option >Serum</option>
-                                    <option >Skincare</option>
-                    
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="mb-3">
-                                <label for="edit-product-name" class="h5">Product Name*</label>
-                                <input type="text" class="form-control" id="edit-product-name" name="product_name" placeholder="Enter product Name" value="" required>
-                                <a href="#" class="task-edit text-body"><i class="ri-edit-box-line"></i></a>
-                            </div>
-                            <div id="empty-edit-product-name" class="error ml-3" style="display: none;">
-                              Please provide name of the product
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="mb-3">
-                                <label for="edit-product-id" class="h5">Product ID </label>
-                                <input type="text" class="form-control" id="edit-product-id" value="" placeholder="auto-generated by Category" name="product_id" disabled="true">
-                            </div>                        
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="mb-3">
-                                <label for="edit-product-brand" class="h5">Brand*</label>
-                                <select class="selectpicker form-control" data-style="py-0" id="edit-product-brand" name="product_brand" required>
-                                    <option selected>Lancome Paris</option>
-                                    <option>Avon</option>
-                                    <option>MAC</option>
-                                    <option>Clinique</option>
-                                    <option>ILIA</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="mb-3">
-                                <label for="edit-product-description" class="h5">Description</label>
-                                <textarea class="form-control" id="edit-product-description" rows="3" name="product_description"></textarea>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="mb-3">
-                                <label for="edit-product-price" class="h5">Price*</label>
-                                <input type="text" class="form-control" id="edit-product-price" placeholder="price" name="product_price" value="" required>
-                            </div>
-                        </div>
-                        
-                        <div id="empty-edit-product-price" class="error ml-3" style="display: none;">
-                           Please provide price of the product
-                        </div>
-
-                        <div class="error ml-3" id="invalid-edit-product-price" style="display: none;">
-                           Invalid currency value
-                        </div>
-
-                        <div class="col-lg-12">
-                            <div class="mb-0">
-                                <label for="edit-product-image" class="h5">Attachments</label>
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="edit-product-image" name="product_image">
-                                    <label class="custom-file-label" for="edit-product-image">Upload image</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="d-flex flex-wrap align-items-ceter justify-content-center mt-4">
-                                <div id="edit-button" class="btn btn-primary mr-3">Edit</div>
-                                {{!-- <input class="btn btn-primary mr-3" type="submit" id="submit-button" value="Save"> --}}
-                                <div class="btn btn-primary" data-dismiss="modal">Cancel</div>
-                            </div>
-                        </div>
-                    </div>
-                  </form>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-
 
 {{#extend "scripts"}}
 
@@ -271,7 +178,7 @@
         discount_value = Math.round(total_price/100*discount_value);
         total_price = total_price - discount_value;
         $("#discount-price").val(discount_value)
-        $("total-price").val(total_price);
+        $("#total-price").val(total_price);
     }
 
     calculateRealDiscountValue()

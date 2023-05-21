@@ -114,7 +114,7 @@ app.use('/dashboard', indexRouter);
 app.use('/promotion',promotionRouter);
 app.use('/store',storeRouter);
 app.use('/user', userRouter)
-app.use('/promotion', promotionRouter)
+// app.use('/promotion', promotionRouter)
 
 app.use('/store', storeRouter);
 

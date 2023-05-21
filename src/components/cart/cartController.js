@@ -1,4 +1,5 @@
 const cartService = require('./cartService');
+const promotionService = require('../promotion/promotionService')
 
 
 exports.showCart = (req, res) => {
@@ -11,6 +12,10 @@ exports.showCart = (req, res) => {
 }
 
 exports.cartDetail = async (req, res) => {
+    if (!req.user) {
+        res.redirect('/auth/sign');
+        return
+    }
     const userEmail = req.user.loginEmail;
     console.log("cartDetail " + userEmail);
     const products = await cartService.cartDetails(userEmail);
@@ -48,7 +53,7 @@ exports.showCheckout = async (req, res) => {
         res.redirect('/auth/sign');
     }
     else {
-
+        const promotion_id_to_apply = req.query.promotion_id
         const userEmail = req.user.loginEmail;
         console.log("cartDetail " + userEmail);
         const products = await cartService.cartDetails(userEmail);
@@ -65,14 +70,23 @@ exports.showCheckout = async (req, res) => {
             orderEmail: req.user.loginEmail,
             totalPrice: total
         }
-        res.render('customer/cart/checkout', { orderInfor: orderInfor, product: products });
+
+        if(promotion_id_to_apply != undefined)
+        {
+            const selected_promotion = await promotionService.getPromotionByID(promotion_id_to_apply)
+            res.render('customer/cart/checkout', { orderInfor: orderInfor, product: products, selected_promotion: selected_promotion });
+        }
+        else
+        {
+            res.render('customer/cart/checkout', { orderInfor: orderInfor, product: products }); 
+        }
     }
 }
 
 
 exports.addOrder = async (req, res) => {
 
-    console.log(req.body);
+    console.log("add-order:"+ req.body);
     const today = new Date();
     const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
