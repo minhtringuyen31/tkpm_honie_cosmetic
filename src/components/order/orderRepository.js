@@ -6,9 +6,9 @@ const connection = require('../connect_DB');
 exports.getOrdersByEmail = async (userEmail) => {
     try {
         const poolPromise = connection.promise();
-        const query = `SELECT * FROM orders WHERE orders.user_email = ?`
+        const query = `SELECT orders.*, promotion.name AS promotion_name, payment_method.name AS payment_method_name FROM orders JOIN promotion ON orders.promotion_id = promotion.id JOIN payment_method ON orders.payment_method_id = payment_method.id  WHERE orders.user_email = ?`
         const [res] = await poolPromise.query(query, [userEmail]);
-        return res[0];
+        return res;
     }
     catch (e) {
         console.log(e);
@@ -31,11 +31,12 @@ exports.createOrder = async (user_email, shipping_address, total_price, payment_
     }
 }
 
-exports.getOrderByStatus = async (status) => {
+exports.getOrderByStatus = async (user_email, status) => {
     try {
         const poolPromise = connection.promise();
-        const query = `SELECT * FROM orders WHERE status = ?`
-        const [res] = await poolPromise.query(query, [value]);
+        const value = [user_email, status]
+        const query = `SELECT orders.*, promotion.name AS promotion_name, payment_method.name AS payment_method_name FROM orders JOIN promotion ON orders.promotion_id = promotion.id JOIN payment_method ON orders.payment_method_id = payment_method.id  WHERE orders.user_email = ? AND orders.status = ?`
+        const [res] = await poolPromise.query(query, value);
 
         return res;
     }
@@ -45,7 +46,7 @@ exports.getOrderByStatus = async (status) => {
     }
 }
 
-exports.reviewProduct = async (user_email, product_id, comment, rating) => {
+exports.createReview = async (user_email, product_id, comment, rating) => {
     try {
         const poolPromise = connection.promise();
         const query = `INSERT INTO rating (user_email, product_id, rating, comment) VALUES (?,?,?,?)`
@@ -102,7 +103,7 @@ exports.getAllOrder = async () => {
 exports.getOneOrder = async (orderId) => {
     try {
         const poolPromise = connection.promise();
-        const query = `SELECT * FROM orders WHERE orders.id = ?`
+        const query = `SELECT orders.*, promotion.name AS promotion_nane, payment_method.name AS payment_method_name  FROM orders JOIN promotion ON orders.promotion_id = promotion.id JOIN payment_method ON orders.payment_method_id = payment_method.id WHERE orders.id = ?`
         const [res] = await poolPromise.query(query, [orderId]);
         return res[0];
     }
@@ -115,7 +116,8 @@ exports.getOneOrder = async (orderId) => {
 exports.getAllProductOrder = async (orderId) => {
     try {
         const poolPromise = connection.promise();
-        const query = `SELECT * FROM product_order JOIN product ON product_order.product_id = product.product_id WHERE product_order.id = ?`
+        const query = `
+        SELECT product_order.*, product.PRODUCT_NAME, product.PRODUCT_IMAGE FROM product_order JOIN product ON product_order.product_id = product.product_id WHERE product_order.order_id = ?`
         const [res] = await poolPromise.query(query, [orderId]);
         return res;
     }

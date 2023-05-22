@@ -1,68 +1,69 @@
 <form method="post">
-<section class="breadcrumb-option order_management">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="breadcrumb__text">
-                    <h4>Order</h4>
-                    <div class="breadcrumb__links">
-                        <a href="/index">Home</a>
-                        <a href="/product">Shop</a>
-                        <span>Shopping Cart</span>
+    <section class="breadcrumb-option order_management">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__text">
+                        <h4>Order</h4>
+                        <div class="breadcrumb__links">
+                            <a href="/index">Home</a>
+                            <a href="/product">Shop</a>
+                            <span>Shopping Cart</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
+    <div class="row">
+        <section class="col-6 shopping-cart spad ml-5">
+            <div class="container vertical-scrollable text-left ">
+                <div class="card row order_management mx-auto p-2 m-5 ">
+                    <div class="row">
+                        <img class="col-2 card-img-top" src="/img/product/{{product.PRODUCT_IMAGE}}" width="50"
+                            height="75" alt="Card image cap">
+                        <div class="col-10 card-body p-2">
+                            <h5 class="card-text">{{product.PRODUCT_NAME}}</h5>
+                            <p class="card-text text-right px-2">Brand: {{product.PRODUCT_BRAND}}</p>
+                            <p class="card-text text-right px-2">đ.{{product.PRODUCT_PRICE}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="col-4 shopping-cart spad mr-5 ml-5">
+            <div class="container text-left  ">
+                <div class="card order_management p-3 card_review p-0 form-group">
+                    <h3 class="mb-3">
+                        <bold>Review</bold>
+                    </h3>
+                    <textarea name="comment" id="comment" class="form-control review_input"
+                        id="exampleFormControlTextarea1" rows="6" placeholder="write your review..."></textarea>
+                    <div class="small_card row m-3">
+                        <h5 name="rating" id="rating" class="col-3 card-title ">Rating</h5>
+                        <div class="rating">
+                            <input type="radio" id="star1" name="rating" value="5">
+                            <label for="star1"></label>
+
+                            <input type="radio" id="star2" name="rating" value="4">
+                            <label for="star2"></label>
+
+                            <input type="radio" id="star3" name="rating" value="3">
+                            <label for="star3"></label>
+
+                            <input type="radio" id="star4" name="rating" value="2">
+                            <label for="star4"></label>
+
+                            <input type="radio" id="star5" name="rating" value="1">
+                            <label for="star5"></label>
+                        </div>
+                    </div>
+                    <button type="submit" class=" send-btn float-center ml-3" value={{product.PRODUCT_ID}}>Send
+                        feedback</button>
+                </div>
+            </div>
+        </section>
     </div>
-</section>
-<div class="row">
-    <section class="col-6 shopping-cart spad ml-5">
-        <div class="container vertical-scrollable text-left ">
-            <div class="card row order_management mx-auto p-2 m-5 ">
-                <div class="row">
-                    <img class="col-2 card-img-top" src="/img/product/{{product.PRODUCT_IMAGE}}" width="50" height="75"
-                        alt="Card image cap">
-                    <div class="col-10 card-body p-2">
-                        <h5 class="card-text">{{product.PRODUCT_NAME}}</h5>
-                        <p class="card-text text-right px-2">Brand: {{product.PRODUCT_BRAND}}</p>
-                        <p class="card-text text-right px-2">đ.{{product.price}}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section class="col-4 shopping-cart spad mr-5 ml-5">
-        <div class="container text-left  ">
-            <div class="card order_management p-3 card_review p-0 form-group">
-                <h3 class="mb-3">
-                    <bold>Review</bold>
-                </h3>
-                <textarea name="comment" id="comment" class="form-control review_input" id="exampleFormControlTextarea1" rows="6"
-                    placeholder="write your review..."></textarea>
-                <div class="small_card row m-3">
-                    <h5 name="rating" id="rating" class="col-3 card-title ">Rating</h5>
-                    <div class="rating">
-                        <input type="radio" id="star1" name="rating" value="5">
-                        <label for="star1"></label>
-
-                        <input type="radio" id="star2" name="rating" value="4">
-                        <label for="star2"></label>
-
-                        <input type="radio" id="star3" name="rating" value="3">
-                        <label for="star3"></label>
-
-                        <input type="radio" id="star4" name="rating" value="2">
-                        <label for="star4"></label>
-
-                        <input type="radio" id="star5" name="rating" value="1">
-                        <label for="star5"></label>
-                    </div>
-                </div>
-                <button type="submit" class=" send-btn float-center ml-3" value={{product.id}} >Send feedback</button>
-            </div>
-        </div>
-    </section>
-</div>
 </form>
 <script src="/js/order.js"></script>

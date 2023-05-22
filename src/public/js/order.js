@@ -1,23 +1,23 @@
-function changeTabColor(event, tab,statusId) {
-    event.preventDefault();
-    
-    // Xóa lớp active từ tất cả các tab
-    const tabs = document.getElementsByClassName('order_management');
-    for (let i = 0; i < tabs.length; i++) {
-      tabs[i].classList.remove('active');
-    }
+function changeTabColor(event, tab, statusId) {
+  event.preventDefault();
 
-    tab.classList.add('active');
-    console.log("STATUS:"+statusId)
-    if(statusId==-1){
-        window.location.href = `http://localhost:3000/order/`;
-    }
-    else{
+  // Xóa lớp active từ tất cả các tab
+  const tabs = document.getElementsByClassName('order_management');
+  for (let i = 0; i < tabs.length; i++) {
+    tabs[i].classList.remove('active');
+  }
 
-        window.location.href = `http://localhost:3000/order/${statusId}`;
-    }
-    
-  
+  tab.classList.add('active');
+  console.log("STATUS:" + statusId)
+  if (statusId == -1) {
+    window.location.href = `http://localhost:3000/order/`;
+  }
+  else {
+
+    window.location.href = `http://localhost:3000/order/${statusId}`;
+  }
+
+
 
 }
 // Lưu trạng thái của tab vào query parameter khi trang được tải
@@ -29,19 +29,19 @@ function changeTabColor(event, tab,statusId) {
 //     }
 // });
 
-function viewDetailClick(productId){
+function viewDetailClick(productId) {
   var currentURL = window.location.href;
   window.location.href = `http://localhost:3000/order/order_detail/${productId}`;
   console.log(currentURL);
 }
 
-function reviewClick(productId){
-    var currentURL = window.location.href;
-    window.location.href = `http://localhost:3000/order/review/${productId}`;
-    console.log(window.location.href);
+function reviewClick(productId) {
+  var currentURL = window.location.href;
+  window.location.href = `http://localhost:3000/order/review/${productId}`;
+  console.log(window.location.href);
 }
 
-document.getElementById("reviewForm").addEventListener("submit", function(event) {
+document.getElementById("reviewForm").addEventListener("submit", function (event) {
   event.preventDefault(); // Ngăn chặn hành vi mặc định của form
 
   const ratingInputs = document.getElementsByName("rating");
@@ -56,7 +56,7 @@ document.getElementById("reviewForm").addEventListener("submit", function(event)
   }
 })
 
-window.addEventListener("DOMContentLoaded", function() {
+window.addEventListener("DOMContentLoaded", function () {
   const tabs = document.getElementsByClassName("order_management");
 
   // Xác định tab đang được chọn mặc định là tab All
@@ -64,5 +64,5 @@ window.addEventListener("DOMContentLoaded", function() {
   defaultTab.classList.add("active");
 
   // Thêm sự kiện click cho từng tab
-  
+
 });

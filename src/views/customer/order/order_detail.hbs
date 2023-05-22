@@ -18,9 +18,9 @@
     <div class="container vertical-scrollable text-left scrollBox">
         <div class="card row order_management mx-auto p-3">
             <h5 class="card-title">Receiver information</h5>
-            <p class="card-text">{{order.receiver_name}}</p>
+            <p class="card-text">{{order.user_name}}</p>
 
-            <p class="card-text ">{{order.phone_number}}</p>
+            <p class="card-text ">{{order.user_phone}}</p>
             <p class="card-text ">{{order.shipping_address}}</p>
             <h5 class="card-title">Order ID: {{order.id}}</h5>
             {{#each products}}
@@ -31,7 +31,7 @@
                     <h5 class="card-text">{{PRODUCT_NAME}}</h5>
                     <p class="card-text text-right px-2">x{{quantity}}</p>
                     <p class="card-text text-right px-2">đ{{price}}</p>
-                    <button value={{id}} onclick="reviewClick(this.value)"
+                    <button value={{product_id}} onclick="reviewClick(this.value)"
                         class="review_btn float-right ml-auto">Review</button>
                 </div>
             </div>

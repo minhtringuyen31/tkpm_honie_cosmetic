@@ -5,6 +5,7 @@ const async = require('hbs/lib/async');
 
 exports.getAllUserOrder = async (_userEmail) => {
     const orders = await orderRepository.getOrdersByEmail(_userEmail);
+    console.log("User order service: " + orders)
     if (orders === null) {
         return [];
     }
@@ -15,12 +16,12 @@ exports.createOrder = async (user_email, shipping_address, total_price, payment_
     return await orderRepository.createOrder(user_email, shipping_address, total_price, payment_method)
 }
 
-exports.getOrderByStatus = async (status) => {
-    return await orderRepository.getOrderByStatus(status)
+exports.getOrderByStatus = async (user_email, status) => {
+    return await orderRepository.getOrderByStatus(user_email, status)
 }
 
-exports.review = async (user_email, product_id, comment, rating) => {
-    return await orderRepository.reviewProduct(user_email, product_id, comment, rating)
+exports.createReview = async (user_email, product_id, comment, rating) => {
+    return await orderRepository.createReview(user_email, product_id, comment, rating)
 }
 
 exports.getNewestOrder = async (user_email) => {

@@ -15,7 +15,7 @@ router.post('/search', productController.search);
 //background API/////////////////////////////////////
 router.get('/bg_filterByCategory/:option', productController.background_filterByCategory);
 router.get('/bg_detail/:id', productController.background_getDetail)
-router.post('/bg_edit',productController.bg_editProduct)
+router.post('/bg_edit', productController.bg_editProduct)
 router.get('/bg_remove/:id', productController.bg_removeProduct)
 
 module.exports = router;
