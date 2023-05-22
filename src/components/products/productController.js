@@ -107,12 +107,16 @@ exports.filterByCategory = async (req, res) => {
 
 exports.search = async (req, res) => {
     const keyword = req.query.keyword;
+    console.log("search keyword: " + keyword)
     let result = []
     if (keyword){
+        
         result = await productService.search(keyword);
+        console.log("get a product")
     }
     else{
         result = await productService.getAllProduct();
+        console.log("get all");
     }
     // const result=[
     //     {
