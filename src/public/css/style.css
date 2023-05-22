@@ -1477,7 +1477,7 @@ ol {
 }
 
 #product-pagination a {
-	display: inline-block;
+	/* display: inline-block;
 	font-size: 16px;
 	font-weight: 700;
 	color: #111111;
@@ -1486,7 +1486,7 @@ ol {
 	border: 1px solid transparent;
 	border-radius: 50%;
 	line-height: 30px;
-	text-align: center;
+	text-align: center; */
 }
 
 #product-pagination a.active {

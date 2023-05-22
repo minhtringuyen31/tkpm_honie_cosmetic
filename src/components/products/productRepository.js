@@ -3,6 +3,19 @@ const db = require('../connect_DB');
 const { ITEM_PER_PAGE } = require('../../constant');
 const async = require('hbs/lib/async');
 
+exports.getAllProduct = async () => {
+    try {       
+        const poolPromise = db.promise();
+        const result = await poolPromise.query('SELECT * FROM PRODUCT');
+        // console.log(result[0]);
+        return result[0];
+    }
+    catch (e) {
+        console.log(e);
+        return [];
+    }
+}
+
 exports.getAProduct = async (productID) => {
     console.log("here");
     try {
@@ -187,7 +200,7 @@ exports.filterByCategory = async (option) => {
 exports.search = async (keyword) => {
     try {
         const poolPromise = db.promise();
-        const result = await poolPromise.query("SELECT * FROM PRODUCT WHERE PRODUCT.PRODUCT_NAME LIKE ? OR PRODUCT.PRODUCT_BRAND LIKE ? OR PRODUCT.PRODUCT_CATEGORY LIKE ?", [keyword, keyword, keyword]);
+        const result = await poolPromise.query("SELECT * FROM PRODUCT WHERE PRODUCT.PRODUCT_NAME LIKE ? ", [keyword]);
         console.log(result[0]);
         return result[0];
     }

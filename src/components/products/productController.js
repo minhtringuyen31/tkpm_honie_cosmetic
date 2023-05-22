@@ -34,25 +34,26 @@ exports.getDetail = async (req, res) => {
 exports.getAll = async (req, res) => {
     console.log("req.user (product: getAll) : ");
     console.log(req.user);
-    if(req.user != undefined)
-    {
-        if(req.user.loginRole == 0) //customer
-        {
-            res.render('customer/products/productList');
-        }
-        else if(req.user.loginRole == 1)
-        {
-            res.render('admin/products/productList_Admin', {layout: 'layoutAdmin.hbs'});
-        }
-        else
-        {
-            next();
-        }
-    }
-    else
-    {
-        res.redirect('auth/sign');
-    }
+    res.render('customer/products/productList');
+    // if(req.user != undefined)
+    // {
+    //     if(req.user.loginRole == 0) //customer
+    //     {
+    //         res.render('customer/products/productList');
+    //     }
+    //     else if(req.user.loginRole == 1)
+    //     {
+    //         res.render('admin/products/productList_Admin', {layout: 'layoutAdmin.hbs'});
+    //     }
+    //     else
+    //     {
+    //         next();
+    //     }
+    // }
+    // else
+    // {
+    //     res.redirect('auth/sign');
+    // }
 }
 
 exports.getProductByPage = async (req, res) => {
@@ -105,8 +106,40 @@ exports.filterByCategory = async (req, res) => {
 }
 
 exports.search = async (req, res) => {
-    const keyword = req.body.keyword;
-    const result = await productService.search(keyword);
+    const keyword = req.query.keyword;
+    let result = []
+    if (keyword){
+        result = await productService.search(keyword);
+    }
+    else{
+        result = await productService.getAllProduct();
+    }
+    // const result=[
+    //     {
+    //         PRODUCT_IMAGE: "PE01-2.png",
+    //         PRODUCT_ID: 12,
+    //         PRODUCT_NAME: "Perfume",
+    //         PRODUCT_PRICE:100000
+    //     },
+    //     {
+    //         PRODUCT_IMAGE: "PE01-2.png",
+    //         PRODUCT_ID: 22,
+    //         PRODUCT_NAME: "Lipstick",
+    //         PRODUCT_PRICE:100000
+    //     },
+    //     {
+    //         PRODUCT_IMAGE: "PE01-2.png",
+    //         PRODUCT_ID: 32,
+    //         PRODUCT_NAME: "Cleaner",
+    //         PRODUCT_PRICE:100000
+    //     },
+    //     {
+    //         PRODUCT_IMAGE: "PE01-2.png",
+    //         PRODUCT_ID: 12,
+    //         PRODUCT_NAME: "Sun block",
+    //         PRODUCT_PRICE:100000
+    //     }
+    // ]
     res.render('customer/products/productFilter', { result: result });
 }
 
