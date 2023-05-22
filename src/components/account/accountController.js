@@ -17,7 +17,7 @@ exports.editProfile = async (req, res) => {
 
 
     if (user) {
-        res.render('customer/account/editProfile');
+        res.render(`customer/account/editProfile`);
         res.locals.user.loginName = user[0].USER_NAME;
         res.locals.user.loginAddress = user[0].USER_ADDRESS;
         res.locals.user.loginPhone = user[0].USER_PHONE;
@@ -25,20 +25,28 @@ exports.editProfile = async (req, res) => {
         return user[0];
     }
     else {
-        res.render('customer/home/index');
+        res.render(`customer/home/index`);
         return null;
     }
 }
 
 exports.editPassword = async (req, res) => {
-    const user = await accountService.changePassword(req.body.changePassword, res.locals.user.editPassEmail)
+    const {changePass,changeConfirmPass}=req.body;
+    if (changePass!==changeConfirmPass){
+      console.log("password and confirm password not equal");
+      return false;
+    }
+    const email= req.user.loginEmail;
+    const salt = await bcrypt.genSalt(10);
+    const password=   await bcrypt.hash(changePass,salt);
+    const user = await accountService.changePassword(password,email);
     if (user) {
-        res.render('account/changePass')
+        res.render(`customer/account/changePass`)
         res.locals.use.changePass = user[0].USER_PASSWORD;
         return user[0];
     }
     else {
-        res.render('customer/account/editProfile');
+        res.render(`customer/account/editProfile`);
         return null;
     }
 }
