@@ -28,8 +28,12 @@ exports.logout = (req, res) => {
         if (err) {
             return next(err);
         }
-        res.redirect('/index');
+        else
+        {
+            res.redirect('/index');
+        }
     });
+
 };
 
 

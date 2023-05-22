@@ -1,11 +1,18 @@
 const db = require('../connect_DB');
 
 exports.getUserAccountByEmail = async (userEmail) => {
+    try{
     const poolPromise = db.promise();
+  
     const [user, fields] = await poolPromise.query(
         "SELECT * FROM USERS WHERE USERS.USER_EMAIL = ? LIMIT 1", [userEmail]);
-
+        
     return user;
+    }
+    catch(err){
+        console.log(err);
+        return false;
+    }
 }
 
 

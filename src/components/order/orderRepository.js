@@ -1,3 +1,4 @@
+const async = require('hbs/lib/async');
 const connection = require('../connect_DB');
 
 
@@ -15,18 +16,25 @@ exports.getOrdersByEmail = async (userEmail) => {
     }
 }
 
-exports.createOrder = async (user_email, shipping_address, total_price, payment_method) => {
+exports.createOrder = async (user_email, user_name, user_phone,  shipping_address, total_price, promotion_id, payment_method_id) => {
     try {
         const poolPromise = connection.promise();
-        const query = `INSERT INTO orders (user_email, shipping_address, total, payment_method_id) VALUES (?,?,?,?)`
-        const value = [user_email, shipping_address, total_price, payment_method]
-        const [res] = await poolPromise.query(query, value);
+        // const query = `INSERT INTO orders (user_email, shipping_address, total, payment_method_id) VALUES (?,?,?,?)`
+        // const value = [user_email, shipping_address, total_price, payment_method]
 
-        return res;
+        //CREATE PROCEDURE create_new_order (IN input_user_email VARCHAR(45), IN input_user_name VARCHAR(45), IN input_user_phone VARCHAR(45), 
+        //IN input_shipping_address VARCHAR(90),
+        //IN input_total_price DOUBLE, IN input_promotion_id INT, IN input_payment_method_id INT)
+        const query = 'CALL create_new_order(?,?,?,?,?,?,?)'
+        const params = [user_email, user_name, user_phone, shipping_address, total_price, promotion_id, payment_method_id]
+        const result = await poolPromise.query(query, params);
+        // const [res] = await poolPromise.query(query, value);
+        console.log(result[0][0][0]);
+        return result[0][0][0].RESULT;
     }
     catch (e) {
         console.log(e);
-        return null;
+        return false;
     }
 }
 
@@ -96,16 +104,32 @@ exports.getAllProductOrder = async (orderId) => {
     }
 }
 
-exports.updateOrderStatus = async (orderId, status) => {
+// exports.updateOrderStatus = async (orderId, status) => {
+//     try {
+//         const poolPromise = connection.promise();
+//         const query = `UPDATE orders SET status = ? WHERE id = ?`
+//         const value = [status, orderId]
+//         const [res] = await poolPromise.query(query, [orderId]);
+//         console.log(res);
+//         //res.[0];
+//         return res;
+//     }
+//     catch (e) {
+//         console.log(e);
+//         return null;
+//     }
+// }
+
+exports.changeStatus = async(id, status)=> {
+    
     try {
         const poolPromise = connection.promise();
-        const query = `UPDATE orders SET status = ? WHERE id = ?`
-        const value = [status, orderId]
-        const [res] = await poolPromise.query(query, [orderId]);
-        return res;
+        const query = `UPDATE orders SET status=? WHERE id=?`;
+        const values = [status, id];
+      const [result] =  await poolPromise.query(query, values);
+      return result;
+    } catch (error) {
+      console.error(error);
+      return false;
     }
-    catch (e) {
-        console.log(e);
-        return null;
-    }
-}
+  }

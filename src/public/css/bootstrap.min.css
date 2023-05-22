@@ -81,8 +81,27 @@
     position: absolute;
 
 }
+.text{
+    color: black;
+
+    font-style: normal;
+    font-weight: 600;
+    font-size: 10px;
+    margin-top: 10px;
+    font-family: 'Montserrat', sans-serif;
+
+}
+.location{
+    height: 500px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+
+}
 .modalcontent{
-    font-family: 'Inter';
+    font-family: 'Montserrat', sans-serif;
 font-style: normal;
 font-weight: 700;
 font-size: 30px;
@@ -96,8 +115,26 @@ text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
  
 
 }
-.modaldetail{
 
+.hover-note {
+    position: relative;
+  }
+  
+  .hover-note:hover::before {
+    content: "Click to view location of store";
+    position: absolute;
+    top: -20px; /* Adjust the distance above the link */
+    left: 0;
+    font-family: 'Montserrat', sans-serif;
+
+   
+    padding: 4px;
+    border: 0.5px solid black;
+    border-radius: 4px;
+    font-size: 10px;
+  }
+.modaldetail{
+	font-family: 'Montserrat', sans-serif;
     background-color: white;
     border-radius: 10px;
     box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.2);
@@ -115,15 +152,17 @@ text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     overflow: hidden;
     white-space: nowrap; 
     text-overflow: ellipsis;
+    font-family: 'Montserrat', sans-serif;
 }
 .btn-width{
     width: 100px;
 
 }
  .margin{
-    margin-top: 180px;
-    /* margin-left: 50px;
-    margin-right: 50px; */
+    margin-top: 150px;
+    margin-left: 50px;
+    margin-right: 50px;
+    
  }
  .text_highlight{
     color:var(--red)
@@ -144,6 +183,7 @@ text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     padding: 10px;
     margin: 40px;
     color: #062c33;
+    font-family: 'Montserrat', sans-serif;
     width: 600px;
    
 
@@ -172,23 +212,23 @@ height: 252px;
 height: 37px;
  }
  .text_store{
-    font-family: 'Inter';
+    font-family: 'Montserrat', sans-serif;
 font-style: normal;
 font-weight: 700;
 font-size: 15px;
 padding-top: 10px;
 margin-left: 10px;
-line-height: 18px;
+line-height: 25px;
 text-align: center;
  }
  .text_store_detail{
-    font-family: 'Inter';
+	font-family: 'Montserrat', sans-serif;
 font-style: normal;
 font-weight: 500;
 font-size: 15px;
-line-height: 18px;
+line-height: 30px;
 margin-left: 10px;
-margin-bottom:40px ;
+margin-bottom:30px ;
 
 width: 580px;
 
@@ -199,7 +239,7 @@ width: 371px;
 height: 60px;
 
 
-font-family: 'Inter';
+font-family: 'Montserrat', sans-serif;
 font-style: normal;
 font-weight: 700;
 font-size: 20px;

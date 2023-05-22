@@ -1,3 +1,4 @@
+const async = require('hbs/lib/async');
 const orderService = require('./orderService');
 const productService = require('../products/productService');
 
@@ -31,7 +32,6 @@ exports.getAllUserOrder = async (req, res) => {
 
 exports.create = async (req, res) => {
     console.log(req.body)
-    const { user_name, shipping_address, user_phone, user_email, total_price, payment_method } = req.body
     // if (req.body) {
     //     await orderService.createOrder(user_email, shipping_address, total_price, payment_method)
     //     const newestOrder = await orderService.getNewestOrder(user_email)
@@ -39,7 +39,25 @@ exports.create = async (req, res) => {
     //     await orderService.addProductOrder(newestOrder)
 
     // }
-    res.json({})
+    if(req.user == undefined)
+    {
+        res.redirect('/auth/sign');
+    }
+    else if(req.body)
+    {
+        const { user_name, shipping_address, user_phone, user_email, total_price, promotion_id, payment_method } = req.body
+        
+        const result = await orderService.createOrder(user_email, user_name, user_phone, shipping_address, total_price, promotion_id, payment_method);
+        if(result == true)
+        {
+            res.status(200).json(result).redirect('/order')
+        }
+        else if(result == false)
+        {
+            res.json(result);
+        }
+    }
+
 }
 
 exports.getAllOrder = async (req, res) => {
@@ -65,17 +83,18 @@ exports.getOrderDetail = async (req, res) => {
     res.render('admin/order/orderDetail', { layout: "layoutAdmin", order: order, product_order: product_order })
 }
 
-exports.updateOrderStatus = async (req, res) => {
-    const orderId = req.query.orderId
-    const status = req.query.status
-    console.log(orderId + status)
-    const result = await orderService.updateOrderStatus(orderId, status)
-    if (result) {
-        res.redirect('/order/all')
-    } else {
-        return null
-    }
-}
+// exports.updateOrderStatus = async (req, res) => {
+//     const orderId = req.query.orderId
+//     const status = req.query.status
+//     console.log(orderId + status)
+//     const result = await orderService.updateOrderStatus(orderId, status)
+//     if (result) {
+//         console.log("hahaha duoc roi ne");
+//         //res.redirect('/order/all')
+//     } else {
+//         return null
+//     }
+// }
 
 exports.test = async (req, res) => {
     res.render('admin/order/orderDetail', { layout: "layoutAdmin" })
@@ -179,4 +198,21 @@ exports.reviewProduct= async (req, res) => {
     //     return null
     // }    
 }
+
+
+
+exports.changeStatus= async(req, res) =>{
+
+    const id = req.params.id;
+    const status = req.body.status;
+    // const idUser = parseInt(req.body.user_id);
+    console.log(req.body);
+    const changeStatus = await orderService.changeStatus(id, status);
+    //doc database de check ket qua 
+    if (changeStatus) {
+      res.status(200).send(changeStatus);
+    } else {
+      res.status(404).send({ status: 0, message: 'Failed' });
+    }
+  }
 
