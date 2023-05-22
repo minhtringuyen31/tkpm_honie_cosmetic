@@ -5,7 +5,7 @@ const db = require('../connect_DB');
 exports.getAllPromotion = async () => {
     try {
         const poolPromise = db.promise();
-        const [promotion] = await poolPromise.query("SELECT id, name, description, discount,  DATE_FORMAT(start_date, '%Y-%m-%d %H:%i:%s') AS start_date, DATE_FORMAT(end_date, '%Y-%m-%d %H:%i:%s') AS end_date FROM promotion ORDER BY id DESC");
+        const [promotion] = await poolPromise.query("SELECT id, name, description, discount,  DATE_FORMAT(start_date, '%Y-%m-%d %H:%i:%s') AS start_date, DATE_FORMAT(end_date, '%Y-%m-%d %H:%i:%s') AS end_date, image FROM promotion ORDER BY id DESC");
         console.log(promotion);
         return promotion;
     }

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Cold Brew Coffee | Admin Dashboard</title>
+    <title>Honie Cosmetic | Admin Dashboard</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="/admin/images/favicon.ico" />
@@ -28,7 +28,7 @@
     <!-- Wrapper Start -->
     <div class="iq-sidebar sidebar-default">
         <div class="iq-sidebar-logo d-flex align-items-center">
-            <a href="../backend/index.html" class="header-logo">
+            <a href="/index" class="header-logo">
                 <img src="/admin/images/logo.svg" alt="logo" />
                 <h3 class="logo-title light-logo">Dashboard</h3>
             </a>
@@ -324,7 +324,7 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-right border-none"
                                     aria-labelledby="dropdownMenuButton">
-                                    <li class="dropdown-item d-flex svg-icon">
+                                    {{!-- <li class="dropdown-item d-flex svg-icon">
                                         <svg class="svg-icon mr-0 text-primary" id="h-02-p" width="20"
                                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke="currentColor">
@@ -352,15 +352,15 @@
                                                 d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                                         </svg>
                                         <a href="../app/user-privacy-setting.html">Privacy Settings</a>
-                                    </li>
-                                    <li class="dropdown-item d-flex svg-icon border-top">
+                                    </li> --}}
+                                    <li class="dropdown-item d-flex svg-icon ">
                                         <svg class="svg-icon mr-0 text-primary" id="h-05-p" width="20"
                                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                                         </svg>
-                                        <a href="../backend/auth-sign-in.html">Logout</a>
+                                        <a href="/auth/logout">Logout</a>
                                     </li>
                                 </ul>
                             </li>
@@ -425,6 +425,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
     {{{block "scripts"}}}
 </body>
 
