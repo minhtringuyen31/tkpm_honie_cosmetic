@@ -18,10 +18,20 @@
     <div class="container vertical-scrollable text-left scrollBox">
         <div class="card row order_management mx-auto p-3">
             <h5 class="card-title">Receiver information</h5>
-            <p class="card-text">{{order.receiver_name}}</p>
-
-            <p class="card-text ">{{order.phone_number}}</p>
-            <p class="card-text ">{{order.shipping_address}}</p>
+            <div class="card-body">
+                <div class="row p-0">
+                    <p class="col-4 text-left ">Name</p>
+                    <p class="col-8 text-right ">{{order.receiver_name}}</p>
+                </div>
+                <div class="row">
+                    <p class="col-4 text-left ">Phone number</p>
+                    <p class="col-8 text-right ">{{order.phone_number}}</p>
+                </div>
+                <div class="row">
+                    <p class="col-4 text-left ">Address</p>
+                    <p class="col-8 text-right ">{{order.shipping_address}}</p>
+                </div>
+            </div>
             <h5 class="card-title">Order ID: {{order.id}}</h5>
             {{#each products}}
             <div class="row" value={{id}}>
