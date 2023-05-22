@@ -1,3 +1,4 @@
+const async = require('hbs/lib/async');
 const connection = require('../connect_DB');
 
 
@@ -96,16 +97,32 @@ exports.getAllProductOrder = async (orderId) => {
     }
 }
 
-exports.updateOrderStatus = async (orderId, status) => {
+// exports.updateOrderStatus = async (orderId, status) => {
+//     try {
+//         const poolPromise = connection.promise();
+//         const query = `UPDATE orders SET status = ? WHERE id = ?`
+//         const value = [status, orderId]
+//         const [res] = await poolPromise.query(query, [orderId]);
+//         console.log(res);
+//         //res.[0];
+//         return res;
+//     }
+//     catch (e) {
+//         console.log(e);
+//         return null;
+//     }
+// }
+
+exports.changeStatus = async(id, status)=> {
+    
     try {
         const poolPromise = connection.promise();
-        const query = `UPDATE orders SET status = ? WHERE id = ?`
-        const value = [status, orderId]
-        const [res] = await poolPromise.query(query, [orderId]);
-        return res;
+        const query = `UPDATE orders SET status=? WHERE id=?`;
+        const values = [status, id];
+      const [result] =  await poolPromise.query(query, values);
+      return result;
+    } catch (error) {
+      console.error(error);
+      return false;
     }
-    catch (e) {
-        console.log(e);
-        return null;
-    }
-}
+  }

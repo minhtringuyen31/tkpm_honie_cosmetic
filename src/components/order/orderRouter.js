@@ -14,7 +14,7 @@ router.get('/review', orderController.showOrderReview);
 //API for admin
 router.get('/all', orderController.getAllOrder);
 router.get('/detail/:orderId', orderController.getOrderDetail);
-router.post('/update/:id', orderController.updateOrderStatus)
+router.post('/update/:id', orderController.changeStatus);
 
 // router.get('/test', orderController.test)
 

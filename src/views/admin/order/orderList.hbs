@@ -118,22 +118,17 @@
                                             </div>
                                             {{else}}
                                             {{#if (isEqual status 1)}}
-                                            <div class="flex align-items-center list-user-action">
-                                                {{!-- <a class="btn btn-sm bg-primary" data-toggle="tooltip"
-                                                    data-placement="top" title="" data-original-title="Add" href="#"><i
-                                                        class="ri-user-add-line mr-0"></i></a> --}}
-                                                {{!-- <a class="btn btn-sm bg-primary" data-toggle="tooltip"
-                                                    data-placement="top" title="" data-original-title="Accept Order"
-                                                    href="#"><i class="ri-pencil-line mr-0"></i></a>
-                                                <a class="btn btn-sm bg-primary" data-toggle="tooltip"
-                                                    data-placement="top" title="" data-original-title="Cancle Order"
-                                                    href="#"><i class="ri-delete-bin-line mr-0"></i></a> --}}
-                                                <a class="btn btn-danger" onclick="updateStatus({{id}},{{status}})" data-target="#new-task-modal"
-                                                    data-toggle="modal" style="max-width: 10    0px"> Cancel </a>
+                                            {{!-- <form action="update" method="POST"> --}}
+                                                <div class="flex align-items-center list-user-action">
+                                                
+                                                <button class="btn btn-danger" onclick="updateStatus({{id}},0)" data-target="#new-task-modal"
+                                                    data-toggle="modal" style="max-width: 10    0px"> Cancel </button>
 
-                                                <a class="btn btn-primary" data-target="#new-task-modal"
-                                                    data-toggle="modal" style="max-width: 100px"> Accept</a>
+                                                <button class="btn btn-primary"  onclick="updateStatus({{id}},2)" data-target="#new-task-modal"
+                                                    data-toggle="modal" style="max-width: 100px"> Accept</button>
                                             </div>
+                                            {{!-- </form> --}}
+                                            
                                             {{else}}
                                             {{#if (isEqual status 2)}}
                                             <div class="flex align-items-center list-user-action">
@@ -146,8 +141,8 @@
                                                 {{!-- <a class="btn btn-sm bg-primary" data-toggle="tooltip"
                                                     data-placement="top" title="" data-original-title="Delete"
                                                     href="#"><i class="ri-delete-bin-line mr-0"></i></a> --}}
-                                                <a class="btn btn-light" data-target="#new-task-modal"
-                                                    data-toggle="modal" style="max-width: 100px">Delivered</a>
+                                                <button class="btn btn-light"  onclick="updateStatus({{id}},3)" data-target="#new-task-modal"
+                                                    data-toggle="modal" style="max-width: 100px">Delivered</button>
                                             </div>
                                             {{else}}
                                             {{#if (isEqual status 3 )}}
@@ -203,20 +198,20 @@
 </div>
 
 <script>
-    function updateStatus(id,status){
-        fetch(`/order/update/${id}`,{
-            method:"POST",
-            headers: { 'Content-Type': 'application/json'},
-            body: JSON.stringify([id,status])  
-
-        }
-         )
-      .then(response => response.json())
+   function updateStatus(id, status) {
+  fetch(`/order/update/${id}`, {
+    method: "POST",
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ status: status })
+  })
+  .then(response => response.json())
   .then(data => {
     console.log('Status change successful:', data);
   })
   .catch(error => {
     console.error('Error changing status:', error);
   });
+}
+
     
 </script>

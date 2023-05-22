@@ -1,3 +1,4 @@
+const async = require('hbs/lib/async');
 const orderService = require('./orderService');
 
 exports.getAllUserOrder = async (req, res) => {
@@ -51,17 +52,18 @@ exports.getOrderDetail = async (req, res) => {
     res.render('admin/order/orderDetail', { layout: "layoutAdmin", order: order, product_order: product_order })
 }
 
-exports.updateOrderStatus = async (req, res) => {
-    const orderId = req.query.orderId
-    const status = req.query.status
-    console.log(orderId + status)
-    const result = await orderService.updateOrderStatus(orderId, status)
-    if (result) {
-        res.redirect('/order/all')
-    } else {
-        return null
-    }
-}
+// exports.updateOrderStatus = async (req, res) => {
+//     const orderId = req.query.orderId
+//     const status = req.query.status
+//     console.log(orderId + status)
+//     const result = await orderService.updateOrderStatus(orderId, status)
+//     if (result) {
+//         console.log("hahaha duoc roi ne");
+//         //res.redirect('/order/all')
+//     } else {
+//         return null
+//     }
+// }
 
 exports.test = async (req, res) => {
     res.render('admin/order/orderDetail', { layout: "layoutAdmin" })
@@ -89,4 +91,21 @@ exports.showOrderReview = async (req, res) => {
     // res.render('order/order');
     res.render('order/order_review')
 }
+
+
+
+exports.changeStatus= async(req, res) =>{
+
+    const id = req.params.id;
+    const status = req.body.status;
+    // const idUser = parseInt(req.body.user_id);
+    console.log(req.body);
+    const changeStatus = await orderService.changeStatus(id, status);
+    //doc database de check ket qua 
+    if (changeStatus) {
+      res.status(200).send(changeStatus);
+    } else {
+      res.status(404).send({ status: 0, message: 'Failed' });
+    }
+  }
 

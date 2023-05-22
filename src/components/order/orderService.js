@@ -44,6 +44,6 @@ exports.getAllProductOrder = async (orderId) => {
     return await orderRepository.getAllProductOrder(orderId)
 }
 
-exports.updateOrderStatus = async (orderId, status) => {
-    return await orderRepository.updateOrderStatus(orderId, status)
+exports.changeStatus= async (id, status) => {
+    return await orderRepository.changeStatus(id, status)
 }
