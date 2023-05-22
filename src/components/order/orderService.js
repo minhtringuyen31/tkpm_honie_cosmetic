@@ -1,6 +1,7 @@
 const orderRepository = require('./orderRepository');
 const cartRepository = require('../cart/cartRepository')
 const productService = require('../products/productService')
+const myConstant = require('../../constant/index')
 
 exports.getAllUserOrder = async (_userEmail) => {
     const orders = await orderRepository.getOrdersByEmail(_userEmail);
@@ -10,8 +11,46 @@ exports.getAllUserOrder = async (_userEmail) => {
     return orders;
 }
 
-exports.createOrder = async (user_email, shipping_address, total_price, payment_method) => {
-    return await orderRepository.createOrder(user_email, shipping_address, total_price, payment_method)
+
+function convertToPaymentMethodId(payment_method)
+{
+    let PMI = myConstant.PAY_BY_CASH;
+    if(payment_method.includes("momo"))
+    {
+        PMI = myConstant.PAY_BY_MOMO;
+    }
+    else if(payment_method.includes("zalopay"))
+    {
+        PMI = myConstant.PAY_BY_ZALOPAY;
+    }
+    return PMI;
+}
+
+exports.createOrder = async (user_email, user_name, user_phone, shipping_address, total_price, promotion_id, payment_method) => {
+    if(user_email.length == 0 || user_email == null)
+    {
+        return false;
+    }
+    if(user_phone.length == 0 || user_phone == null)
+    {
+        return false;
+    }
+    if(shipping_address.length == 0 || shipping_address == null)
+    {
+        return false;
+    }
+    if(payment_method.length == 0 || payment_method == null)
+    {
+        return false;
+    }
+    if(promotion_id.length == 0)
+    {
+        promotion_id = null;
+    }
+    
+    const payment_method_id = convertToPaymentMethodId(payment_method);
+    console.log("inside order Service: PASS");
+    return await orderRepository.createOrder(user_email, user_name, user_phone, shipping_address, total_price, promotion_id, payment_method_id)
 }
 
 exports.getNewestOrder = async (user_email) => {
