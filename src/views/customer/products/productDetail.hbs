@@ -72,13 +72,46 @@
                 </script>
             </div>
         </div>
-        <<<<<<< HEAD </section>
-            {{!-- End: 5 other courses in the same category are bought the most --}}
-    </div>
-    =======
-    </div>
+</section>
+{{!-- End: 5 other courses in the same category are bought the most --}}
+</div>
+</div>
 </section>
 <!-- Shop Details Section End -->
+
+<!-- Review Section Begin -->
+<section class="related spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="related-title">CUSTOMER'S FEEDBACK</h3>
+            </div>
+        </div>
+        <div class="row">
+            {{#each reviews}}
+            <div class="container text-left mb-5 p-0">
+                <div class=" order-card card row  review mx-auto p-3" id="1">
+
+                    <div class="card-body">
+                        <h5 class="card-text email_title">{{USER_EMAIL}}</h5>
+                        <div class="small_card row m-3 p-0">
+
+                            <div class="rating">
+                                {{{starRating PRODUCT_RATING}}}
+                            </div>
+
+                        </div>
+                        <p class="card-text text-left px-2">{{PRODUCT_REVIEW}}</p>
+
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+
+    </div>
+</section>
+<!-- Review Section End -->
 
 <!-- Related Section Begin -->
 <section class="related spad">
@@ -93,17 +126,17 @@
             <div class="col-lg-3 col-md-6 col-sm-6 col-sm-6">
                 <div class="product__item">
                     <div class="product__item__pic set-bg">
-                        <img class="set-bg" src={{related.PRODUCT_IMAGE}}>
+                        <img class="set-bg" src="/img/product/ES01-3.png">
                         <ul class="product__hover">
 
-                            <a href="/product/{{related.PRODUCT_ID}}"><img src="/img/icon/search.png" alt=""></a>
+                            <a href="/product/1"><img src="/img/icon/search.png" alt=""></a>
                         </ul>
                     </div>
                     <div class="product__item__text">
-                        <h6>{{related.PRODUCT_NAME}}</h6>
-                        <a href="/cart/add-to-cart/{{PRODUCT_ID}}" class="add-cart">+ Add To Cart</a>
+                        <h6>Lipstick</h6>
+                        <a href="/cart/add-to-cart/1" class="add-cart">+ Add To Cart</a>
 
-                        <h5>${{related.PRODUCT_PRICE}}</h5>
+                        <h5>$đ.100.000</h5>
                         <div class="product__color__select">
                             <label for="pc-1">
                                 <input type="radio" id="pc-1">

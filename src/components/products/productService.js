@@ -45,13 +45,13 @@ exports.search = async (keyword) => {
 
 exports.createNewProduct = async (reqBody) =>
 {
-    let result = await productRepository.createProductBasically(reqBody.product_id, reqBody.product_name, reqBody.product_price, reqBody.product_category, reqBody.product_brand, reqBody.product_description);
+    let result = await productRepository.createProductBasically(reqBody.product_id, reqBody.product_name, reqBody.product_price, reqBody.product_category, reqBody.product_brand, reqBody.product_description, reqBody.product_number);
     return result;
 }
 
 exports.editProduct = async (reqBody) =>
 {
-    const result = await productRepository.editProduct(reqBody.product_id, reqBody.product_name, reqBody.product_price, reqBody.product_category, reqBody.product_brand, reqBody.product_description);
+    const result = await productRepository.editProduct(reqBody.product_id, reqBody.product_name, reqBody.product_price, reqBody.product_category, reqBody.product_brand, reqBody.product_description, reqBody.product_number);
     return result;
 }
 

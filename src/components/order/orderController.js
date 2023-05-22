@@ -1,33 +1,47 @@
 const async = require('hbs/lib/async');
 const orderService = require('./orderService');
+const productService = require('../products/productService');
 
 exports.getAllUserOrder = async (req, res) => {
-    const orders = await orderService.getAllUserOrder(req.user.loginEmail);
-    console.log(orders);
-    res.render('order/order', { order: orders });
-    // res.render('order/order');
+    //const orders = await orderService.getAllUserOrder(req.user.loginEmail);
+    //console.log(orders);
+    
+    const orders=[
+        {
+            id:"1",
+            total:123456,
+            promotion_id:"THFGKK",
+            payment_method_name:"ZaloPay",
+            order_date:"25-12-2022",
+            shipping_address:"HCM"
+    
+        },
+        {
+            id:"2",
+            total:987654,
+            promotion_id:"THFGKK",
+            payment_method_name:"ZaloPay",
+            order_date:"25-12-2022",
+            shipping_address:"HCM"
+    
+        }
+    ]
+
+    res.render('customer/order/order',{orders})
 }
 
 exports.create = async (req, res) => {
     console.log(req.body)
     const { user_name, shipping_address, user_phone, user_email, total_price, payment_method } = req.body
-    if (req.body) {
-        await orderService.createOrder(user_email, shipping_address, total_price, payment_method)
-        const newestOrder = await orderService.getNewestOrder(user_email)
+    // if (req.body) {
+    //     await orderService.createOrder(user_email, shipping_address, total_price, payment_method)
+    //     const newestOrder = await orderService.getNewestOrder(user_email)
 
-        await orderService.addProductOrder(newestOrder)
+    //     await orderService.addProductOrder(newestOrder)
 
-    }
+    // }
+    res.json({})
 }
-
-/////
-// getOrderList(user_email){
-//     // orderlist = query llay toan bo oder cua nguoi do
-//     //  
-// }
-
-
-
 
 exports.getAllOrder = async (req, res) => {
     if (req.user.loginRole == 1) {
@@ -68,28 +82,104 @@ exports.getOrderDetail = async (req, res) => {
 exports.test = async (req, res) => {
     res.render('admin/order/orderDetail', { layout: "layoutAdmin" })
 }
-exports.showOrders = async (req, res) => {
-    //const orders = await orderService.getAllOrders(req.user.loginEmail);
-    //console.log(orders);
-    //res.render('order/order', { order: orders });
-    // res.render('order/order');
-    res.render('order/order')
+exports.getOrderByStatus = async (req, res) => {
+    const statusId = req.params.orderId
+     //const orders = await orderService.getAllUserOrderByStatus(req.user.loginEmail,statusId);
+    const orders=[
+        {
+            id:"1",
+            total:123456,
+            promotion_id:"THFGKK",
+            payment_method_name:"ZaloPay",
+            order_date:"25-12-2022",
+            shipping_address:"Dong Nai"
+    
+        },
+        {
+            id:"2",
+            total:987654,
+            promotion_id:"THFGKK",
+            payment_method_name:"ZaloPay",
+            order_date:"25-12-2022",
+            shipping_address:"My Tho"
+    
+        }
+    ]
+    
+    res.render('customer/order/order', { orders })
 }
-
 exports.showOrderDetail = async (req, res) => {
-    //const orders = await orderService.getAllOrders(req.user.loginEmail);
-    //console.log(orders);
-    //res.render('order/order', { order: orders });
-    // res.render('order/order');
-    res.render('order/order_detail')
+    const orderId = req.params.orderId
+    //const order = await orderService.getOrder(orderId);
+    //const products = await orderService.getOrderDetail(orderId);
+    
+    const order=
+        {
+            id:"1",
+            total:123456,
+            promotion_id:"THFGKK",
+            payment_method_name:"ZaloPay",
+            order_date:"25-12-2022",
+            shipping_address:"HCM",
+            receiver_name:"John",
+            phone_number:"0987123456"
+    
+        }
+    
+    const products=[
+        {
+            id:23,
+            PRODUCT_NAME:"Hadalabo cleaner",
+            quantity:5,
+            price:1000000,
+            PRODUCT_IMAGE:"PE01-2.png"
+        },
+        {
+            id:12,
+            PRODUCT_NAME:"Vichy cleaner",
+            quantity:3,
+            price:1000000,
+            PRODUCT_IMAGE:"PE01-2.png"
+        },
+        {
+            id:10,
+            PRODUCT_NAME:"Lapoche Rosay cleaner",
+            quantity:5,
+            price:2000000,
+            PRODUCT_IMAGE:"PE01-2.png"
+        },
+    ]
+
+    res.render('customer/order/order_detail',{order,products})
 }
 
 exports.showOrderReview = async (req, res) => {
-    //const orders = await orderService.getAllOrders(req.user.loginEmail);
-    //console.log(orders);
-    //res.render('order/order', { order: orders });
-    // res.render('order/order');
-    res.render('order/order_review')
+    const productId = req.params.productId
+    //const product = await productService.getAProduct(productId);
+    const product=
+        {
+            id:12,
+            PRODUCT_NAME:"Hadalabo cleaner",
+            PRODUCT_BRAND:"Hadalabo",
+            price:1000000,
+            PRODUCT_IMAGE:"PE01-2.png"
+        }
+
+    res.render('customer/order/order_review', { product })
+}
+
+exports.reviewProduct= async (req, res) => {
+    console.log(req.body)   //{ comment: 'good', rating: '4' }
+    const orderId = req.params.orderId
+    const {comment, rating} = req.body
+    
+    
+    // const result = await orderService.updateOrderStatus(orderId, req.user.loginEmail, comment, rating)
+    // if (result) {
+    //     res.redirect(`/order/order_detail${orderId}`)
+    // } else {
+    //     return null
+    // }    
 }
 
 

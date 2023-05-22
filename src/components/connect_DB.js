@@ -5,7 +5,7 @@ var connection = null;
 connectTo_DB = () => {
     console.log("Connecting to Cosmetic DB");
     connection = mysql.createPool({
-        host: 'localhost', user: 'root', password: '', database: 'cosmetic'
+        host: 'localhost', user: 'root', password: 'root', database: 'dbcosmetic'
     });
     console.log("Connected to Cosmetic DB");
 };

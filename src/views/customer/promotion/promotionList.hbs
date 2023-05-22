@@ -105,7 +105,7 @@
       <div class="my-3 box">
         <div>
         <button onclick="openModal('${promotion.id}')" class="btn btn-danger btn-width ">See Detail</button>
-        <button href="#" class="btn btn-danger btn-width my-3 ">Add </button>
+        <a href="/cart/checkout?promotion_id=${promotion.id}" class="btn btn-danger btn-width my-3 ">Add </a>
       </div>
       </div>
       
@@ -150,7 +150,7 @@
       <div>Start day: ${promotiondetail.start_date}</div>
       <div>End day: ${promotiondetail.end_date}</div>
       <div>Description: ${promotiondetail.description}</div>
-       <button href="#" class="btn btn-danger btn-width my-3 ">Add </button>
+       <a href="/cart/checkout?promotion_id=${promotiondetail.id}" class="btn btn-danger btn-width my-3 ">Add </a>
         </div>
         
      

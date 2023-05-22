@@ -149,6 +149,13 @@
                            Invalid currency value
                         </div>
 
+                        <div class="col-lg-12" style="display: none;">
+                            <div class="mb-3">
+                                <label for="product-number" class="h5">Number in stock*</label>
+                                <input type="text" class="form-control" id="product-number" placeholder="the number of products in the stock" name="product_number" value="0" required>
+                            </div>
+                        </div>
+
                         <div class="col-lg-12">
                             <div class="mb-0">
                                 <label for="product-image" class="h5">Attachments</label>
@@ -238,6 +245,13 @@
                                 <input type="text" class="form-control" id="edit-product-price" placeholder="price" name="product_price" value="" required>
                             </div>
                         </div>
+
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label for="edit-product-number" class="h5">Number in stock*</label>
+                                <input type="text" class="form-control" id="edit-product-number" placeholder="the number of products in the stock" name="product_number" value="" required>
+                            </div>
+                        </div>
                         
                         <div id="empty-edit-product-price" class="error ml-3" style="display: none;">
                            Please provide price of the product
@@ -294,6 +308,11 @@
          <a class="btn btn-sm bg-primary admin_product_list_page_edit_button" data-toggle="modal" data-placement="top" title=""
             data-original-title="Edit" id="\{{PRODUCT_ID}}" data-target="#edit-product-modal"
             onclick="handleEditButtonClick(id)"><i class="ri-pencil-line mr-0"></i></a>
+
+         {{!-- <a class="btn btn-sm bg-primary admin_product_list_page_edit_button" data-toggle="modal" data-placement="top" title=""
+            data-original-title="Stock" id="\{{PRODUCT_ID}}" data-target="#edit-product-modal"
+            onclick="handleEditButtonClick(id)"><i class="ri-pencil-line mr-0"></i></a> --}}
+
          <a class="btn btn-sm bg-primary" name = "delete-btn" data-toggle="tooltip" data-placement="top" title=""
             onclick="handleDeleteButtonClick(id)"
             data-original-title="Delete" id="\{{PRODUCT_ID}}"><i class="ri-delete-bin-line mr-0"></i></a>
@@ -510,7 +529,7 @@
             if(result != 0)
             {
                alert("Create new product successfully")
-
+               loadProductPage(1)
             }
             else
             {
@@ -566,6 +585,7 @@
                if(result != 0)
                {
                   alert("Create new product successfully")
+                  loadProductPage(1)
                }
                else
                {
@@ -581,6 +601,7 @@
                if(result != 0)
                {
                   alert("Create new product successfully")
+                  loadProductPage(1)
                }
                else
                {
@@ -649,6 +670,7 @@
          //$("edit-product-brand").val()
          document.getElementById("edit-product-description").textContent = result.PRODUCT_DESCRIPTION
          document.getElementById("edit-product-price").setAttribute("value", result.PRODUCT_PRICE)
+         document.getElementById("edit-product-number").setAttribute("value", result.NUMBER_OF)
       });
 
    }
@@ -669,6 +691,7 @@
          if(result != 0 )
          {
             alert("Remove " + productId + " feature successfully!")
+            loadProductPage(1)
          }
          else
          {

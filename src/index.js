@@ -21,6 +21,7 @@ const storeRouter = require('./components/store/storeRouter');
 const promotionRouter=require('./components/promotion/promotionRouter');
 
 
+
 const app = express();
 
 // view engine setup   
@@ -56,6 +57,19 @@ hbs.registerHelper('block', function (name) {
   blocks[name] = [];
   return val;
 });
+
+hbs.registerHelper('starRating', function(rating) {
+  let stars = '';
+  for (let i = 4; i >= 0; i--) {
+    if (i >= rating) {
+      stars += '<span class="star">&#9734;</span>'; // Ký tự dấu sao rỗng (unicode)
+    } else {
+      stars += '<span class="star filled">&#9733;</span>'; // Ký tự dấu sao (unicode)
+    }
+  }
+  return new hbs.SafeString(stars);
+});
+
 
 
 // app.use(session({
@@ -100,7 +114,7 @@ app.use('/dashboard', indexRouter);
 app.use('/promotion',promotionRouter);
 app.use('/store',storeRouter);
 app.use('/user', userRouter)
-app.use('/promotion', promotionRouter)
+// app.use('/promotion', promotionRouter)
 
 app.use('/store', storeRouter);
 

@@ -58,3 +58,15 @@ exports.getPromotionByID=async(req,res)=>{
 
 }
 
+exports.applyPromotion = async (req, res) =>
+{
+    if(req.user == undefined)
+    {
+        res.redirect('/auth/sign')
+    }
+    const promotionId = req.params.id
+    console.log("promotionId applied: " + promotionId)
+    const selected_promotion = await promotionService.getPromotionByID(promotionId)
+    res.redirect('/cart/checkout')
+}
+
