@@ -8,6 +8,9 @@ module.exports = {
     POWDER_START_ID_KEY: "PO",
     PRIMER_START_ID_KEY: "PR",
     SERUM_START_ID_KEY: "SE",
-    SKINCARE_START_ID_KEY: "SK"
+    SKINCARE_START_ID_KEY: "SK",
 
+    PAY_BY_CASH: 2,
+    PAY_BY_MOMO: 4,
+    PAY_BY_ZALOPAY: 3
 }

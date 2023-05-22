@@ -32,7 +32,6 @@ exports.getAllUserOrder = async (req, res) => {
 
 exports.create = async (req, res) => {
     console.log(req.body)
-    const { user_name, shipping_address, user_phone, user_email, total_price, payment_method } = req.body
     // if (req.body) {
     //     await orderService.createOrder(user_email, shipping_address, total_price, payment_method)
     //     const newestOrder = await orderService.getNewestOrder(user_email)
@@ -40,7 +39,25 @@ exports.create = async (req, res) => {
     //     await orderService.addProductOrder(newestOrder)
 
     // }
-    res.json({})
+    if(req.user == undefined)
+    {
+        res.redirect('/auth/sign');
+    }
+    else if(req.body)
+    {
+        const { user_name, shipping_address, user_phone, user_email, total_price, promotion_id, payment_method } = req.body
+        
+        const result = await orderService.createOrder(user_email, user_name, user_phone, shipping_address, total_price, promotion_id, payment_method);
+        if(result == true)
+        {
+            res.status(200).json(result).redirect('/order')
+        }
+        else if(result == false)
+        {
+            res.json(result);
+        }
+    }
+
 }
 
 exports.getAllOrder = async (req, res) => {
