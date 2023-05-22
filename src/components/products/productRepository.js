@@ -200,8 +200,8 @@ exports.filterByCategory = async (option) => {
 exports.search = async (keyword) => {
     try {
         const poolPromise = db.promise();
-        const result = await poolPromise.query("SELECT * FROM PRODUCT WHERE PRODUCT.PRODUCT_NAME LIKE ? ", [keyword]);
-        console.log(result[0]);
+        const result = await poolPromise.query(`SELECT * FROM PRODUCT WHERE PRODUCT.PRODUCT_NAME LIKE '%${keyword}%' `);
+        console.log(result);
         return result[0];
     }
     catch (e) {
