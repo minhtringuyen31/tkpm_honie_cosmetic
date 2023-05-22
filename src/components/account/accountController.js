@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const authService = require('../auth/authRepository');
 const async = require('hbs/lib/async');
 const nodemailer = require('nodemailer');
+const { render } = require('../..');
 
 
 exports.editProfile = async (req, res) => {
@@ -114,7 +115,7 @@ exports.sendMail= async (req, res) =>  {
       from: 'infinitycoffee06@gmail.com',
       to: email,
       subject: 'Reset your password',
-      text: `This is NEW PASSWORD: ${{pass}} \n Use this password for Login.\nKeep it secure, don't share it with anyone! \nThank you!!!`,
+      text: `This is NEW PASSWORD: ${pass} \n Use this password for Login.\nKeep it secure, don't share it with anyone! \nThank you!!!`,
     };
   
     // Send the email
@@ -123,8 +124,9 @@ exports.sendMail= async (req, res) =>  {
         console.error(error);
         return res.status(500).send('Error sending mail');
       } else {
-        console.log('Pass sent: ' + info.response);
-        return res.status(200).json({ email: req.body.email,pass});
+        res.render(`customer/auth/forgotPassword`, { layout: false });
+        // console.log('Pass sent: ' + info.response);
+        // return res.status(200).json({ email: req.body.email,pass});
       }
     });
   }
