@@ -39,3 +39,4 @@ exports.removeFromCart = async (_userEmail, _idProduct) => {
 exports.addOrder = async (newestOrder, products) => {
     await cartRepository.addNewOrder(newestOrder);
 }
+

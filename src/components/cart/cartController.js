@@ -44,7 +44,7 @@ exports.removeFromCart = async (req, res) => {
     const idProduct = req.params.idProduct;
     console.log("remove ID: " + idProduct);
     await cartService.removeFromCart(req.user.loginEmail, idProduct);
-    res.redirect('/cart/cart-detail');
+    //res.redirect('/cart/cart-detail');
 }
 
 exports.showCheckout = async (req, res) => {
@@ -110,4 +110,26 @@ exports.addOrder = async (req, res) => {
     } else {
         res.redirect('/order');
     }
+}
+
+exports.incrQuantity= async (req, res)=> {
+    if (!req.user) {
+        return;
+    }
+
+    const {productId}= req.body;
+    if (!productId) return;
+        
+    await cartService.incrQuantity(req.user.loginEmail, productId);
+}
+
+exports.descQuantity= async (req, res) => {
+    if (!req.user) {
+        return;
+    }
+
+    const {productId}= req.body;
+    if (!productId) return;
+        
+    await cartService.descQuantity(req.user.loginEmail, productId);
 }

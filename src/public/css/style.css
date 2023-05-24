@@ -4420,3 +4420,11 @@ ol {
 		.modal-xl {
 		  max-width: 1140px; } }
 	  
+.product-btn {
+	background-color: transparent;
+	background-repeat: no-repeat;
+	border: none;
+	cursor: pointer;
+	overflow: hidden;
+	outline: none;
+}
