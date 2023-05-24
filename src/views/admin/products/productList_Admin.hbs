@@ -81,7 +81,7 @@
             <h3 class="modal-title" id="exampleModalCenterTitle">New Product</h3>
          </div>
          <div class="modal-body">
-            <form id="product-form" action="" method="post">
+            <form id="product-form" method="post" enctype="multipart/form-data">
                <div class="row">
                   <div class="col-lg-12">
                      <div class="mb-3">
@@ -166,7 +166,10 @@
                   </div>
                   <div class="col-lg-12">
                      <div class="d-flex flex-wrap align-items-ceter justify-content-center mt-4">
-                        <div id="save-button" class="btn btn-primary mr-3">Save</div>
+                        {{!-- <div class="btn btn-primary mr-3">
+                           <input type="submit" id="save-button" class="btn btn-primary mr-3" name="product_img" value="Save"/>
+                        </div> --}}
+                        <div class="btn btn-primary mr-3" id="save-button">Save</div>
                         {{!-- <input class="btn btn-primary mr-3" type="submit" id="submit-button" value="Save"> --}}
                         <div class="btn btn-primary" data-dismiss="modal">Cancel</div>
                      </div>
@@ -462,7 +465,7 @@
 
 
 <script>
-
+   
    $("#save-button").click(
       function executeProduct(mode) {
          var check = true;
@@ -490,9 +493,19 @@
             return;
          }
          $("#product-id").removeAttr("disabled")
-         var data = $("#product-form").serialize();
+         var data = $("#product-form")
+         var formData = new FormData();
+
          console.log(data);
-         $.post('product/new', data, function (result) {
+
+         /*
+         $.ajax({
+            url:'/product/new',
+            type:'POST',
+            processData: false,
+            contentType: false,
+            data: data,
+            success: function (result) {
             console.log(result);
             if (result != 0) {
                alert("Create new product successfully")
@@ -501,7 +514,20 @@
             else {
                alert("Create new product failed")
             }
-         })
+         }
+         })*/
+
+
+         /*$.post('product/new', data, function (result) {
+            console.log(result);
+            if (result != 0) {
+               alert("Create new product successfully")
+
+            }
+            else {
+               alert("Create new product failed")
+            }
+         })*/
          document.getElementById("product-id").setAttribute("disabled", "true")
       }
    )
