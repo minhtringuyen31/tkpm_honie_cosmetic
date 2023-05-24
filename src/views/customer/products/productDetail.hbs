@@ -1,4 +1,4 @@
-<section class="shop-details">
+<section class="shop-details pt-5 mt-5">
     <div class="product__details__pic">
         <div class="container">
             <div class="row">
@@ -15,7 +15,7 @@
                     <div class="tab-content">
                         <div class="tab-pane active" id="tabs-1" role="tabpanel">
                             <div class="product__details__pic__item">
-                                <img src="/img/product/{{product.PRODUCT_IMAGE}}" alt="">
+                                <img src="/img/product/{{product.PRODUCT_IMAGE}}" alt="" width="300" height="350">
                             </div>
                         </div>
                     </div>
@@ -92,16 +92,16 @@
             <div class="container text-left mb-5 p-0">
                 <div class=" order-card card row  review mx-auto p-3" id="1">
 
-                    <div class="card-body">
-                        <h5 class="card-text email_title">{{user_name}}</h5>
-                        <div class="small_card row m-3 p-0">
-
+                    <div class="card-body ">
+                        <div class="small_card row m-3 p-0 flex">
+                            <h5 class="card-text email_title mr-3">{{user_name}}</h5>
                             <div class="rating">
                                 {{{starRating rating}}}
                             </div>
-
                         </div>
-                        <p class="card-text text-left px-2">{{review}}</p>
+                        <div class="small_card row m-3 p-0">
+                            <p class="card-text text-left px-2">{{review}}</p>
+                        </div>
 
                     </div>
                 </div>

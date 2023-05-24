@@ -26,6 +26,7 @@
                         <thead>
                             <tr>
                                 <th>Product</th>
+
                                 <th>Quantity</th>
                                 <th>Total</th>
                                 <th></th>
@@ -37,13 +38,15 @@
 
                                 <td class="product__cart__item">
                                     <div class="product__cart__item__pic">
-                                        <img src="/img/product/{{PRODUCT_IMAGE}}" alt="">
+                                        <img src="/img/product/{{PRODUCT_IMAGE}}" alt="" width="50" height="75">
                                     </div>
                                     <div class="product__cart__item__text">
                                         <h6>{{PRODUCT_NAME}}</h6>
                                         <h5>{{PRODUCT_PRICE}}</h5>
                                     </div>
                                 </td>
+
+
                                 <td class="quantity__item">
                                     <div class="quantity">
                                         <div class="pro-qty-2">
@@ -74,7 +77,7 @@
                     <ul>
                         <li>Total <span>{{total}}</span></li>
                     </ul>
-                    <a href="/cart/checkout" value="{{total}}" class="primary-btn">Checkout</a>
+                    <a href="/cart/checkout?promotion_id=" value="{{total}}" class="primary-btn">Checkout</a>
                 </div>
             </div>
         </div>

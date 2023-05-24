@@ -11,24 +11,6 @@ exports.getDetail = async (req, res) => {
     const product = await productService.getAProduct(productId);
     const related = await productService.getRelatedProduct(productId);
     const reviews = await productService.getReview(productId)
-    // res.render('products/productDetail', { result: result, related: related });
-    // const reviews = [
-    //     {
-    //         USER_EMAIL: "ltt@gmail.com",
-    //         PRODUCT_RATING: 4,
-    //         PRODUCT_REVIEW: "Good. Recommend to buy"
-    //     },
-    //     {
-    //         USER_EMAIL: "ngtt@gmail.com",
-    //         PRODUCT_RATING: 5,
-    //         PRODUCT_REVIEW: "nice...i love it som much. Thanks shop"
-    //     },
-    //     {
-    //         USER_EMAIL: "ltt@gmail.com",
-    //         PRODUCT_RATING: 2,
-    //         PRODUCT_REVIEW: "worst product that i have used. "
-    //     }
-    // ]
     res.render('customer/products/productDetail', { product: product, reviews: reviews, related: related });
 }
 
@@ -102,8 +84,44 @@ exports.filterByCategory = async (req, res) => {
 }
 
 exports.search = async (req, res) => {
-    const keyword = req.body.keyword;
-    const result = await productService.search(keyword);
+    const keyword = req.query.keyword;
+    console.log("search keyword: " + keyword)
+    let result = []
+    if (keyword) {
+
+        result = await productService.search(keyword);
+        console.log("get a product")
+    }
+    else {
+        result = await productService.getAllProduct();
+        console.log("get all");
+    }
+    // const result=[
+    //     {
+    //         PRODUCT_IMAGE: "PE01-2.png",
+    //         PRODUCT_ID: 12,
+    //         PRODUCT_NAME: "Perfume",
+    //         PRODUCT_PRICE:100000
+    //     },
+    //     {
+    //         PRODUCT_IMAGE: "PE01-2.png",
+    //         PRODUCT_ID: 22,
+    //         PRODUCT_NAME: "Lipstick",
+    //         PRODUCT_PRICE:100000
+    //     },
+    //     {
+    //         PRODUCT_IMAGE: "PE01-2.png",
+    //         PRODUCT_ID: 32,
+    //         PRODUCT_NAME: "Cleaner",
+    //         PRODUCT_PRICE:100000
+    //     },
+    //     {
+    //         PRODUCT_IMAGE: "PE01-2.png",
+    //         PRODUCT_ID: 12,
+    //         PRODUCT_NAME: "Sun block",
+    //         PRODUCT_PRICE:100000
+    //     }
+    // ]
     res.render('customer/products/productFilter', { result: result });
 }
 

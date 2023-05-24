@@ -10,7 +10,7 @@ router.post('/new', productController.createNewProduct)
 router.get('/filterByPrice/:option', productController.filterByPrice);
 router.get('/filterByBrand/:option', productController.filterByBrand);
 router.get('/filterByCategory/:option', productController.filterByCategory);
-router.post('/search', productController.search);
+router.get('/search/:key', productController.search);
 
 //background API/////////////////////////////////////
 router.get('/bg_filterByCategory/:option', productController.background_filterByCategory);

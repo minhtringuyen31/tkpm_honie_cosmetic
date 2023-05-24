@@ -25,7 +25,7 @@
                 <div class="card mb-4 mb-xl-0">
                     <div class="card-header">Change Password</div>
                     <div class="card-body">
-                        <form method="POST" action="/account/changePass">
+                        <form method="POST" action="changePass">
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputPassword">New Password</label>
                                 <input class="form-control" id="inputPassword" type="password"
@@ -37,8 +37,8 @@
                                 <input class="form-control" id="inputConfirmPassword" type="password"
                                     placeholder="Confirm your password" value={{user.changeConfirmPass}}>
                             </div>
-                            <button class="cancel">Cancel</button>
-                            <button>Save changes</button>
+                            <button class="cancel"><a href="/account/profile">Cancel</a></button>
+                            <button type="submit" value="changepass">Save changes</button>
                         </form>
                     </div>
                 </div>
