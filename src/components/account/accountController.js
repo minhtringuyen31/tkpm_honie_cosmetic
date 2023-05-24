@@ -9,46 +9,47 @@ const { render } = require('../..');
 
 
 exports.editProfile = async (req, res) => {
-    console.log("controller");
-    console.log(req.body.emailEdit);
-    const user = await accountService.editProfile(req.body.nameEdit, req.body.emailEdit, req.body.addressEdit, req.body.phoneEdit, req.body.birthdayEdit);
-    console.log("acc: ");
-    console.log(user[0]);
+  console.log("controller");
+  console.log(req.body.emailEdit);
+  const user = await accountService.editProfile(req.body.nameEdit, req.body.emailEdit, req.body.addressEdit, req.body.phoneEdit, req.body.birthdayEdit);
+  console.log("acc: ");
+  console.log(user[0]);
 
 
-    if (user) {
-        res.render(`customer/account/editProfile`);
-        res.locals.user.loginName = user[0].USER_NAME;
-        res.locals.user.loginAddress = user[0].USER_ADDRESS;
-        res.locals.user.loginPhone = user[0].USER_PHONE;
-        res.locals.user.loginBirthday = user[0].USER_BIRTHDAY;
-        return user[0];
-    }
-    else {
-        res.render(`customer/home/index`);
-        return null;
-    }
+  if (user) {
+    res.render(`customer/account/editProfile`);
+    res.locals.user.loginName = user[0].USER_NAME;
+    res.locals.user.loginAddress = user[0].USER_ADDRESS;
+    res.locals.user.loginPhone = user[0].USER_PHONE;
+    res.locals.user.loginBirthday = user[0].USER_BIRTHDAY;
+    return user[0];
+  }
+  else {
+    res.render(`customer/home/index`);
+    return null;
+  }
 }
 
 exports.editPassword = async (req, res) => {
-    const {changePass,changeConfirmPass}=req.body;
-    if (changePass!==changeConfirmPass){
-      console.log("password and confirm password not equal");
-      return false;
-    }
-    const email= req.user.loginEmail;
-    const salt = await bcrypt.genSalt(10);
-    const password=   await bcrypt.hash(changePass,salt);
-    const user = await accountService.changePassword(password,email);
-    if (user) {
-        res.render(`customer/account/changePass`)
-        res.locals.use.changePass = user[0].USER_PASSWORD;
-        return user[0];
-    }
-    else {
-        res.render(`customer/account/editProfile`);
-        return null;
-    }
+  const changePass = req.body.new_password
+  const changeConfirmPass = req.body.confirm_password;
+  if (changePass !== changeConfirmPass) {
+    console.log("password and confirm password not equal");
+    return false;
+  }
+  const email = req.user.loginEmail;
+  const salt = await bcrypt.genSalt(10);
+  const password = await bcrypt.hash(changePass, salt);
+  const user = await accountService.changePassword(password, email);
+  if (user) {
+    res.render(`customer/account/editProfile`)
+    // res.locals.use.changePass = user[0].USER_PASSWORD;
+    // return user[0];
+  }
+  else {
+    res.render(`customer/account/editProfile`);
+    return null;
+  }
 }
 // exports.changepass=async (req,res)=>{
 //     try{
@@ -56,11 +57,11 @@ exports.editPassword = async (req, res) => {
 //         if(!email){
 //             res.status(200).json({ message: "Email not exit!" })
 //         }
-        
+
 //         const  {  newpassword, confirmpass } = req.body
 //         const id = req.params.id;
 //         console.log("id " + id)
-        
+
 
 //         //console.log("id " + req.body.newpassword+ req.body.confirmpass)
 
@@ -70,7 +71,7 @@ exports.editPassword = async (req, res) => {
 //         else {
 //             //console.log(req.body)   
 //             const hashedPassword = await bcrypt.hash(newpassword, 10);
-            
+
 //             await accountService.changepass(email,hashedPassword)
 //             console.log(hashedPassword)
 //             res.status(200).json({newpassword,confirmpass})    
@@ -81,62 +82,62 @@ exports.editPassword = async (req, res) => {
 //     }
 // }
 
-exports.sendMail= async (req, res) =>  {
-    // console.log("acc: ");
-    const transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 587,
-      secure: false,
-      auth: {
-        user: 'infinitycoffee06@gmail.com',
-        pass: 'ngdjrtpcqtucojbj',
-      },
-      tls: {
-        ciphers: 'SSLv3',
-        minVersion: 'TLSv1.2',
-      },
-    });
-  
-    const email = req.body.email;
+exports.sendMail = async (req, res) => {
+  // console.log("acc: ");
+  const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false,
+    auth: {
+      user: 'infinitycoffee06@gmail.com',
+      pass: 'ngdjrtpcqtucojbj',
+    },
+    tls: {
+      ciphers: 'SSLv3',
+      minVersion: 'TLSv1.2',
+    },
+  });
 
-    // Generate new pass
-    const passLength = 6;
-    let pass = '';
-  
-    for (let i = 0; i < passLength; i++) {
-      pass += Math.floor(Math.random() * 10); // Generate a random digit (0-9)
-    }
-  
-    const check = await accountService.getUserByEmail(email);
-  
-    if (!check) {
-      return res.status(200).json({ message: 'Email does not exist!' });
-    }
-    console.log("hihi")
+  const email = req.body.email;
 
-    
-    await accountService.resetpass(req.body.email,pass)
-      
-    console.log(check);
-    
-    const mailOptions = {
-      from: 'infinitycoffee06@gmail.com',
-      to: email,
-      subject: 'Reset your password',
-      text: `This is NEW PASSWORD: ${pass} \n Use this password for Login.\nKeep it secure, don't share it with anyone! \nThank you!!!`,
-    };
-  
-    // Send the email
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.error(error);
-        return res.status(500).send('Error sending mail');
-      } else {
-        res.render(`customer/auth/forgotPassword`, { layout: false });
-        // console.log('Pass sent: ' + info.response);
-        // return res.status(200).json({ email: req.body.email,pass});
-      }
-    });
+  // Generate new pass
+  const passLength = 6;
+  let pass = '';
+
+  for (let i = 0; i < passLength; i++) {
+    pass += Math.floor(Math.random() * 10); // Generate a random digit (0-9)
   }
+
+  const check = await accountService.getUserByEmail(email);
+
+  if (!check) {
+    return res.status(200).json({ message: 'Email does not exist!' });
+  }
+  console.log("hihi")
+
+
+  await accountService.resetpass(req.body.email, pass)
+
+  console.log(check);
+
+  const mailOptions = {
+    from: 'infinitycoffee06@gmail.com',
+    to: email,
+    subject: 'Reset your password',
+    text: `This is NEW PASSWORD: ${pass} \n Use this password for Login.\nKeep it secure, don't share it with anyone! \nThank you!!!`,
+  };
+
+  // Send the email
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error(error);
+      return res.status(500).send('Error sending mail');
+    } else {
+      res.render(`customer/auth/forgotPassword`, { layout: false });
+      // console.log('Pass sent: ' + info.response);
+      // return res.status(200).json({ email: req.body.email,pass});
+    }
+  });
+}
 
 

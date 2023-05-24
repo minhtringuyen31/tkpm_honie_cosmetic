@@ -16,6 +16,31 @@ exports.getAllProduct = async () => {
     }
 }
 
+exports.getAllProductWithRating = async () => {
+    try {
+        const poolPromise = db.promise();
+        const result = await poolPromise.query('SELECT product.*, COUNT(rating.product_id) AS review_count, AVG(rating.rating) AS avg_rating FROM product JOIN rating ON product.PRODUCT_ID = rating.product_id GROUP BY PRODUCT_ID');
+        return result[0];
+    }
+    catch (e) {
+        console.log(e);
+        return [];
+    }
+}
+
+exports.getReview = async (productId) => {
+    try {
+        const poolPromise = db.promise();
+        const result = await poolPromise.query('SELECT rating.*, users.USER_NAME FROM rating JOIN users ON rating.user_email = users.USER_EMAIL WHERE rating.product_id = ?', [productId]);
+        return result[0];
+    }
+    catch (e) {
+        console.log(e);
+        return [];
+    }
+}
+
+
 exports.getAProduct = async (productID) => {
     console.log("here");
     try {
@@ -47,8 +72,9 @@ exports.getReview = async (productId) => {
     try {
         const poolPromise = db.promise();
         const query = `SELECT rating.*, users.USER_NAME as user_name FROM rating JOIN users ON rating.user_email = users.USER_EMAIL WHERE rating.product_id = ?`
-        const [result] = await poolPromise.query(query, [productId])
-        return result;
+        const result = await poolPromise.query(query, [productId])
+        console.log(result[0])
+        return result[0];
     }
     catch (e) {
         console.log(e);

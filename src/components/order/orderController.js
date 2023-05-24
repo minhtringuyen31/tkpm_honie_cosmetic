@@ -6,35 +6,6 @@ exports.getAllUserOrder = async (req, res) => {
     const orders = await orderService.getAllUserOrder(req.user.loginEmail);
     console.log(orders);
     res.render('customer/order/order', { order: orders });
-    // res.render('order/order');
-
-    // exports.getAllUserOrder = async (req, res) => {
-    //     //const orders = await orderService.getAllUserOrder(req.user.loginEmail);
-    //     //console.log(orders);
-
-    //     const orders=[
-    //         {
-    //             id:"1",
-    //             total:123456,
-    //             promotion_id:"THFGKK",
-    //             payment_method_name:"ZaloPay",
-    //             order_date:"25-12-2022",
-    //             shipping_address:"HCM"
-
-    //         },
-    //         {
-    //             id:"2",
-    //             total:987654,
-    //             promotion_id:"THFGKK",
-    //             payment_method_name:"ZaloPay",
-    //             order_date:"25-12-2022",
-    //             shipping_address:"HCM"
-
-    //         }
-    //     ]
-
-    //     res.render('customer/order/order',{orders})
-    // 
 }
 
 exports.create = async (req, res) => {
@@ -72,33 +43,6 @@ exports.getOrderByStatus = async (req, res) => {
     res.render('customer/order/order', { orders: result })
 
 }
-
-// exports.getOrderByStatus = async (req, res) => {
-//     const statusId = req.params.orderId
-//     //const orders = await orderService.getAllUserOrderByStatus(req.user.loginEmail,statusId);
-//     const orders = [
-//         {
-//             id: "1",
-//             total: 123456,
-//             promotion_id: "THFGKK",
-//             payment_method_name: "ZaloPay",
-//             order_date: "25-12-2022",
-//             shipping_address: "Dong Nai"
-
-//         },
-//         {
-//             id: "2",
-//             total: 987654,
-//             promotion_id: "THFGKK",
-//             payment_method_name: "ZaloPay",
-//             order_date: "25-12-2022",
-//             shipping_address: "My Tho"
-
-//         }
-//     ]
-
-//     res.render('customer/order/order', { orders })
-// }
 
 
 exports.showOrderReview = async (req, res) => {
@@ -185,50 +129,7 @@ exports.test = async (req, res) => {
     res.render('admin/order/orderDetail', { layout: "layoutAdmin" })
 }
 
-// exports.showOrderDetail = async (req, res) => {
-//     const orderId = req.params.orderId
-//     //const order = await orderService.getOrder(orderId);
-//     //const products = await orderService.getOrderDetail(orderId);
 
-//     const order =
-//     {
-//         id: "1",
-//         total: 123456,
-//         promotion_id: "THFGKK",
-//         payment_method_name: "ZaloPay",
-//         order_date: "25-12-2022",
-//         shipping_address: "HCM",
-//         receiver_name: "John",
-//         phone_number: "0987123456"
-
-//     }
-
-//     const products = [
-//         {
-//             id: 23,
-//             PRODUCT_NAME: "Hadalabo cleaner",
-//             quantity: 5,
-//             price: 1000000,
-//             PRODUCT_IMAGE: "PE01-2.png"
-//         },
-//         {
-//             id: 12,
-//             PRODUCT_NAME: "Vichy cleaner",
-//             quantity: 3,
-//             price: 1000000,
-//             PRODUCT_IMAGE: "PE01-2.png"
-//         },
-//         {
-//             id: 10,
-//             PRODUCT_NAME: "Lapoche Rosay cleaner",
-//             quantity: 5,
-//             price: 2000000,
-//             PRODUCT_IMAGE: "PE01-2.png"
-//         },
-//     ]
-
-//     res.render('customer/order/order_detail', { order, products })
-// }
 
 exports.showOrderReview = async (req, res) => {
     const productId = req.params.productId

@@ -25,14 +25,14 @@ router.post('/editProfile', accountController.editProfile);
 
 router.post('/changePass', accountController.editPassword);
 
-router.post('/resetpass',accountController.sendMail);
+router.post('/resetpass', accountController.sendMail);
 router.get('/resetpass', function (req, res, next) {
     //throw new Error('Unknown error!');
     res.render('customer/auth/forgotpassword', { layout: false });
 });
 router.get('/changepass', function (req, res, next) {
     //throw new Error('Unknown error!');
-    res.render('customer/account/changepass', { layout: false });
+    res.render('customer/account/changepass');
 });
 
 module.exports = router;

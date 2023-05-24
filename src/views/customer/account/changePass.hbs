@@ -14,11 +14,25 @@
 </head>
 
 <body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb__text">
+                    <h4>Shopping Cart</h4>
+                    <div class="breadcrumb__links">
+                        <a href="./index.html">Home</a>
+                        <a href="./shop.html">Accoount</a>
+                        <span>Change Password</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container-xl px-4 mt-4">
-         <nav class="nav nav-borders">
+        <nav class="nav nav-borders">
             <a class="nav-link active ms-0" href="#"><i class="fa fa-home"></i></a>
         </nav>
-       
+
         <hr class="mt-0 mb-4">
         <div class="row box">
             <div class="col-xl-8">
@@ -28,19 +42,32 @@
                         <form method="POST" action="changePass">
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputPassword">New Password</label>
-                                <input class="form-control" id="inputPassword" type="password"
+                                <input class="form-control" id="inputPassword" type="password" name="new_password"
                                     placeholder="Enter your new password" value={{user.changePass}}>
                             </div>
-                         
+
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputConfirmPass">Confirm New Password</label>
                                 <input class="form-control" id="inputConfirmPassword" type="password"
-                                    placeholder="Confirm your password" value={{user.changeConfirmPass}}>
+                                    name="confirm_password" placeholder="Confirm your password"
+                                    value={{user.changeConfirmPass}}>
                             </div>
-                            <button class="cancel"><a href="/account/profile">Cancel</a></button>
+                            <button class="cancel"><a href="/account/myProfile">Cancel</a></button>
                             <button type="submit" value="changepass">Save changes</button>
                         </form>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="breadcrumb__text">
+                <h4></h4>
+                <div class="breadcrumb__links">
+                    <a href="./index.html"></a>
+                    <a href="./shop.html"></a>
+                    <span></span>
                 </div>
             </div>
         </div>

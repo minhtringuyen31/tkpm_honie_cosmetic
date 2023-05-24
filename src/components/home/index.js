@@ -1,22 +1,9 @@
 const express = require('express');
+const indexController = require('./indexController')
 const router = express.Router();
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
-    //throw new Error('Unknown error!');
-    console.log(req.user)
-    if (req.user != undefined) {
-        if (req.user.loginRole == 1) {
-            console.log("admin")
-            res.render('admin/dashboard/dashboard.hbs', { layout: 'layoutAdmin.hbs' })
-        } else {
-            console.log("customer")
-            res.render('customer/home/index');
-        }
-    } else {
-        res.render('customer/home/index');
-    }
-});
+router.get('/', indexController.index);
 
 //  GET order page
 router.get('/orderPage', function (req, res, next) {

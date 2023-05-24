@@ -9,6 +9,14 @@ exports.getAllProduct = async () => {
     return result;
 }
 
+exports.getAllProductWithRating = async () => {
+    return await productRepository.getAllProductWithRating()
+}
+
+exports.getReview = async (productId) => {
+    return await productRepository.getReview(productId)
+}
+
 exports.getAProduct = async (productID) => {
     const result = await productRepository.getAProduct(productID);
     return result;

@@ -3,6 +3,7 @@ const connection = require('../connect_DB');
 
 const { ITEM_PER_PAGE, TOTAL_PAGING_LINK } = require('../../constant');
 const async = require('hbs/lib/async');
+const { json } = require('express');
 
 exports.getDetail = async (req, res) => {
     const productId = req.params['id'];
@@ -96,32 +97,6 @@ exports.search = async (req, res) => {
         result = await productService.getAllProduct();
         console.log("get all");
     }
-    // const result=[
-    //     {
-    //         PRODUCT_IMAGE: "PE01-2.png",
-    //         PRODUCT_ID: 12,
-    //         PRODUCT_NAME: "Perfume",
-    //         PRODUCT_PRICE:100000
-    //     },
-    //     {
-    //         PRODUCT_IMAGE: "PE01-2.png",
-    //         PRODUCT_ID: 22,
-    //         PRODUCT_NAME: "Lipstick",
-    //         PRODUCT_PRICE:100000
-    //     },
-    //     {
-    //         PRODUCT_IMAGE: "PE01-2.png",
-    //         PRODUCT_ID: 32,
-    //         PRODUCT_NAME: "Cleaner",
-    //         PRODUCT_PRICE:100000
-    //     },
-    //     {
-    //         PRODUCT_IMAGE: "PE01-2.png",
-    //         PRODUCT_ID: 12,
-    //         PRODUCT_NAME: "Sun block",
-    //         PRODUCT_PRICE:100000
-    //     }
-    // ]
     res.render('customer/products/productFilter', { result: result });
 }
 
@@ -193,4 +168,16 @@ exports.bg_removeProduct = async (req, res, next) => {
     console.log("productID: " + productId)
     const result = await productService.removeProduct(productId)
     res.json(result)
+}
+
+exports.manageReview = async (req, res) => {
+    const product = await productService.getAllProductWithRating()
+    res.render('admin/products/manage_review', { layout: 'layoutAdmin.hbs', product: product });
+}
+
+exports.getReview = async (req, res) => {
+    const product_id = req.params.productId
+    const result = await productService.getReview(product_id)
+    console.log("controller" + result)
+    res.json({ result })
 }

@@ -58,7 +58,7 @@ hbs.registerHelper('block', function (name) {
   return val;
 });
 
-hbs.registerHelper('starRating', function(rating) {
+hbs.registerHelper('starRating', function (rating) {
   let stars = '';
   for (let i = 4; i >= 0; i--) {
     if (i >= rating) {
