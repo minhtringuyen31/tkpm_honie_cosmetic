@@ -50,13 +50,13 @@
                                         {{!-- <div class="pro-qty-2">
                                             <input type="text" value="{{QUANTITY}}">
                                         </div> --}}
-                                        <div class="pro-qty">
-                                            <button class="product-btn" value="{{PRODUCT_ID}}"
+                                        <div class="pro-qty row">
+                                            <button class="product-btn col-1" value="{{PRODUCT_ID}}"
                                                 onclick="descQuantity(this.value)">
                                                 <span class="dec qtybtn">-</span>
                                             </button>
-                                            <input type="text" value="{{QUANTITY}}" disabled>
-                                            <button class="product-btn " value="{{PRODUCT_ID}}"
+                                            <input class="col-3" type="text" value="{{QUANTITY}}" disabled>
+                                            <button class="product-btn col-1" value="{{PRODUCT_ID}}"
                                                 onclick="incrQuantity(this.value)">
                                                 <span class="inc qtybtn">+</span>
                                             </button>
@@ -67,7 +67,7 @@
                                 <td class="cart__close">
                                     {{!-- <a href="/cart/remove/{{PRODUCT_ID}}"><i
                                             class="fa fa-close"></i></a> --}}
-                                    <button class="product-btn" onclick="removeSer(this.value)" value="{{PRODUCT_ID}}">
+                                    <button class="product-btn" onclick="removeProduct(this.value)" value="{{PRODUCT_ID}}">
                                         <span class="fa fa-close"></span>
                                     </button>
                                 </td>

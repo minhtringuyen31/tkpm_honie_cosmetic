@@ -147,7 +147,7 @@ exports.descQuantity= async (userEmail, idProduct)=> {
         console.log('increase quantity');
         const poolPromise = connection.promise();
         await poolPromise.query('UPDATE PRODUCT_CART \
-                                SET PRODUCT_CART.QUANTITY = IF(PRODUCT_CART.QUANTITY - 1 > 0,PRODUCT_CART.QUANTITY - 1, 1) \
+                                SET PRODUCT_CART.QUANTITY = PRODUCT_CART.QUANTITY - 1 \
                                 WHERE PRODUCT_CART.USER_EMAIL = ? AND PRODUCT_CART.PRODUCT_ID = ?', [userEmail, idProduct], function (err) {
             if (err) {
                 return false;

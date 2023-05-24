@@ -39,12 +39,13 @@ exports.addToCart = async (req, res) => {
 
 exports.removeFromCart = async (req, res) => {
     if (!req.user) {
-        return;
+        res.json(false);
     }
-    const idProduct = req.params.idProduct;
+    const idProduct = req.body.productId;
     console.log("remove ID: " + idProduct);
-    await cartService.removeFromCart(req.user.loginEmail, idProduct);
+    const result = await cartService.removeFromCart(req.user.loginEmail, idProduct);
     //res.redirect('/cart/cart-detail');
+    res.json(result)
 }
 
 exports.showCheckout = async (req, res) => {
@@ -114,22 +115,24 @@ exports.addOrder = async (req, res) => {
 
 exports.incrQuantity= async (req, res)=> {
     if (!req.user) {
-        return;
+        res.json(false);
     }
 
     const {productId}= req.body;
-    if (!productId) return;
+    if (!productId) res.json(false);
         
-    await cartService.incrQuantity(req.user.loginEmail, productId);
+    await cartService.increaseProductQuantity(req.user.loginEmail, productId);
+    res.json(true)
 }
 
 exports.descQuantity= async (req, res) => {
     if (!req.user) {
-        return;
+        res.json(false);
     }
 
     const {productId}= req.body;
-    if (!productId) return;
+    if (!productId) res.json(false);
         
-    await cartService.descQuantity(req.user.loginEmail, productId);
+    await cartService.descreaseProductQuantity(req.user.loginEmail, productId);
+    res.json(true)
 }
