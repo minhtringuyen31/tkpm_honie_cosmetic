@@ -13,7 +13,16 @@
     border-radius: 10px;
     overflow: hidden;
 }
+.a-btn{
+    color: white;
+    text-decoration: none;
+    
+}
+.a-btn:hover{
+    color: wheat;
+    text-decoration: none;
 
+}
 .slides {
     width: 500%;
     height: 500px;
@@ -122,10 +131,10 @@
     font-size: 30px;
     line-height: 24px;
     text-align: center;
-    background-color: wheat;
+    background-color: #71cdc1;
     padding: 30px;
 
-    color: #D95050;
+    color:  #227C70;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
 
@@ -133,6 +142,7 @@
 
 .hover-note {
     position: relative;
+    text-decoration: none;
 }
 
 .hover-note:hover::before {
@@ -186,7 +196,7 @@
 }
 
 .text_highlight {
-    color: var(--red)
+    color:  #227C70;
 }
 
 .promotion {
@@ -275,7 +285,7 @@
     line-height: 24px;
     text-align: center;
 
-    color: #D95050;
+    color:  #227C70;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
