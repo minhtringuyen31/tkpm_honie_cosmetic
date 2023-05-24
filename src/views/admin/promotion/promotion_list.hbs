@@ -135,17 +135,21 @@
                         <div class="col-lg-4">
                             <div class="mb-3">
                                 <label for="product-id" class="h5">Start Date* </label>
-                                <input type="text" class="form-control" id="promotion-date" name="promotion_start_date"
+                                <input type="text" class="form-control" id="promotion-sdate" name="promotion_start_date"
                                     value="" placeholder="Enter Start Date Of Promotion" value="" required>
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="mb-3">
                                 <label for="product-id" class="h5">End Date* </label>
-                                <input type="text" class="form-control" id="promotion-date" name="promotion_end_date"
+                                <input type="text" class="form-control" id="promotion-edate" name="promotion_end_date"
                                     value="" placeholder="Enter End Date Of Promotion" value="" required>
                             </div>
                         </div>
+                        <div class="error ml-3" id="invalid-product-date" style="display: none;">
+                            Wrong format! Please enter date like format: YYYY/MM/DD
+                        </div>
+
 
                         <div class="col-lg-12">
                             <div class="mb-0">
@@ -244,6 +248,10 @@
                                     value="" required>
                             </div>
                         </div>
+                        <div class="error ml-3" id="invalid-edit-product-date" style="display: none;">
+                            Wrong format! Please enter date like format: YYYY/MM/DD HH/MM/SS
+                        </div>
+
 
                         <div class="col-lg-12">
                             <div class="mb-0">
@@ -277,15 +285,20 @@
 
 <script>
 
+
     $("#save-button").click(
         function executeProduct(mode) {
             var check = true;
             $("#empty-product-name").hide();
             $("#empty-product-price").hide();
             $("#invalid-product-price").hide();
+            $("#invalid-product-date").hide();
+
             console.log("executeProduct");
             var promotion_name = $("#promotion-name").val();
             var promotion_discount = $("#promotion-discount").val();
+            var promotion_start_date=$("#promotion-sdate").val();
+            var promotion_end_date=$("#promotion-edate").val();
 
             console.log(promotion_name);
             if (promotion_name.length == 0) {
@@ -299,6 +312,10 @@
                 check = false;
             }
             //check isValidPriceValue
+            if (isValidDateFormat(promotion_end_date)==false||isValidDateFormat(promotion_start_date)==false){
+                 $("#invalid-product-date").show();
+                 check=false;
+            }
 
             if (check == false) {
                 return;
@@ -326,10 +343,12 @@
             $("#empty-edit-product-name").hide();
             $("#empty-edit-product-price").hide();
             $("#invalid-edit-product-price").hide();
+            $("#invalid-edit-product-date").hide();
             console.log("executeProduct");
             var promotion_name = $("#edit-promotion-name").val();
             var promotion_discount = $("#edit-promotion-discount").val();
-
+            var promotion_start_date=$("#edit-promotion-start-date").val();
+            var promotion_end_date=$("#edit-promotion-end-date").val();
 
             console.log(promotion_name);
             if (promotion_name.length == 0) {
@@ -343,6 +362,11 @@
                 check = false;
             }
             //check isValidPriceValue
+             if (isValidDateFormat(promotion_end_date)==false||isValidDateFormat(promotion_start_date)==false){
+                 $("#invalid-product-date").show();
+                 check=false;
+            }
+
 
             if (check == false) {
                 return;
@@ -367,8 +391,11 @@
     )
 
 </script>
-
 <script>
+    function isValidDateFormat(dateString) {
+        const date = new Date(dateString);
+        return !isNaN(date);
+    }
 
     function handleEditButtonClick(promotion_id) {
         console.log("edit-button-click")
