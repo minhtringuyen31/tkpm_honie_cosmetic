@@ -1,58 +1,134 @@
 const promotionService = require('./promotionService');
 
-exports.createPromotion=async(req,res)=>{
-    const { name, description, discount, start_date, end_date }=req.body;
-    
-
-    const newPromotion=await promotionService.createPromotion(name, description, discount, start_date, end_date);
-    if (newPromotion){
-        res.redirect('/promotion');
+exports.showPromotionList = async (req, res) => {
+    if (req.user != undefined) {
+        if (req.user.loginRole == 0) {
+            res.render('customer/promotion/promotionList');
+        } else {
+            if (req.user.loginRole == 1) {
+                const result = await promotionService.getAllPromotion()
+                console.log(result)
+                res.render('admin/promotion/promotion_list', { layout: 'layoutAdmin.hbs', result })
+            } else {
+                res.redirect('/index')
+            }
+        }
+    } else {
+        res.redirect('/auth/sign')
     }
-    else{
+}
+
+exports.createPromotion = async (req, res) => {
+    console.log(req.body)
+    const name = req.body.promotion_name
+    const description = req.body.promotion_description
+    const discount = req.body.promotion_discount
+    const start_date = req.body.promotion_start_date
+    const end_date = req.body.promotion_end_date
+    const image = ""
+    console.log(name + description)
+
+    const result = await promotionService.createPromotion(name, description, discount, start_date, end_date, image);
+    console.log(result)
+    if (result) {
+        res.json(result)
+    }
+    else {
         console.log(500);
     }
 }
 
-exports.updatePromotion=async(req,res)=>{
-    const id = req.params.id;
-    const { name, description, discount, start_date, end_date }=req.body;
+exports.editPromotion = async (req, res) => {
+    console.log(req.body)
+    const id = req.body.edit_promotion_id
+    const name = req.body.edit_promotion_name
+    const description = req.body.edit_promotion_description
+    const discount = req.body.edit_promotion_discount
+    const start_date = req.body.edit_promotion_start_date
+    const end_date = req.body.edit_promotion_end_date
+    const image = ""
+    console.log(name + description)
 
-    const updatePromotion=await promotionService.updatePromotion(id,name, description, discount, start_date, end_date);
-    if (updatePromotion){
+    const result = await promotionService.editPromotion(id, name, description, discount, start_date, end_date, image);
+    console.log(result)
+    if (result) {
+        console.log("YES")
+        res.json(result)
+    }
+    else {
+        console.log(500);
+    }
+}
+
+exports.removePromotion = async (req, res, next) => {
+    if (req.user == undefined) {
+        next();
+    }
+    if (req.user.loginRole != 1) {
+        next();
+    }
+    const promotionId = req.params.id
+    console.log("promotionId: " + promotionId)
+    const result = await promotionService.removePromotion(promotionId)
+    res.json(result)
+}
+
+exports.background_getDetail = async (req, res, next) => {
+    if (req.user == undefined) {
+        next();
+    }
+    if (req.user.loginRole != 1) {
+        next();
+    }
+
+    const promotionId = req.params.id
+    console.log("bg_detail: " + promotionId)
+    const result = await promotionService.getAPromotion(promotionId);
+    console.log(result)
+    res.json(result)
+}
+
+exports.updatePromotion = async (req, res) => {
+    const id = req.params.id;
+    const { name, description, discount, start_date, end_date } = req.body;
+
+    const updatePromotion = await promotionService.updatePromotion(id, name, description, discount, start_date, end_date);
+    if (updatePromotion) {
         res.status(200).json(updatePromotion)
     }
-    else{
-        res.status(500).json(error);    }
+    else {
+        res.status(500).json(error);
+    }
 }
-exports.deletePromotion=async(req,res)=>{
+exports.deletePromotion = async (req, res) => {
     const id = req.params.id;
     const status = await promotionService.deletePromotion(id);
-    if(status){
+    if (status) {
         res.redirect('/promotion');
-    
+
     }
-    else{
+    else {
         res.status(500).json(error);
     }
 }
-exports.getAllPromotion=async(req,res)=>{
+exports.getAllPromotion = async (req, res) => {
     const promotions = await promotionService.getAllPromotion();
-    if (promotions){
+    if (promotions) {
         res.status(200).json(promotions)
     }
-    else{
+    else {
         res.status(500).json(error);
-}
+    }
 
 }
-exports.getPromotionByID=async(req,res)=>{
+exports.getPromotionByID = async (req, res) => {
     const id = req.params.id;
     const promotion = await promotionService.getPromotionByID(id);
-    if (promotion){
+    if (promotion) {
         // console.log("hgggggh"+promotion)
         res.status(200).json(promotion);
     }
-    else{
+    else {
         res.status(200).json({ message: "Promotion not found" });
     }
 

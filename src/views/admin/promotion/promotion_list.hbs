@@ -1,0 +1,417 @@
+<div class="content-page">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between">
+                        <div class="header-title">
+                            <h4 class="card-title">Promotion List</h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <div class="row justify-content-between">
+                                <div class="col-sm-6 col-md-6">
+
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="user-list-files d-flex">
+                                        <a class="btn btn-primary" href="#" data-target="#new-product-modal"
+                                            data-toggle="modal">
+                                            Add New Promotion
+                                        </a>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <table id="user-list-table" class="table table-striped dataTable mt-4" role="grid"
+                                aria-describedby="user-list-page-info">
+                                <thead>
+                                    <tr class="ligth">
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Image</th>
+                                        <th>Description</th>
+                                        <th>Discount</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
+                                        <th style="min-width: 100px">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{#each result}}
+                                    <tr>
+                                        <td>{{id}}</td>
+                                        <td>{{name}}</td>
+                                        <td class="text-center">
+                                            <img class="rounded img-fluid avatar-40" src="/img/promotion/{{image}}"
+                                                alt="">
+                                        </td>
+                                        <td>{{description}}</td>
+                                        <td class="text-center">{{discount}}</td>
+                                        {{!-- <td><span class="badge bg-primary">Active</span></td> --}}
+
+                                        <td>{{start_date}}</td>
+                                        <td>{{end_date}}</td>
+                                        <td>
+                                            <div class="flex align-items-center list-user-action">
+
+
+
+                                                <a class="btn btn-sm bg-primary " data-toggle="modal"
+                                                    data-placement="top" title="" data-original-title="Edit" id="{{id}}"
+                                                    data-target="#edit-product-modal"
+                                                    onclick="handleEditButtonClick(id)"><i
+                                                        class="ri-pencil-line mr-0"></i></a>
+
+                                                <a class="btn btn-sm bg-primary" data-toggle="tooltip" id="{{id}}"
+                                                    data-placement="top" title="" data-original-title="Delete"
+                                                    onclick="handleDeleteButtonClick(id)"><i
+                                                        class="ri-delete-bin-line mr-0"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" role="dialog" aria-modal="true" id="new-product-modal">
+    <div id="dialog" class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header d-block text-center pb-3 border-bttom">
+                <h3 class="modal-title" id="exampleModalCenterTitle">New Promotion</h3>
+            </div>
+            <div class="modal-body">
+                <form id="product-form" action="" method="post">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label for="product-name" class="h5">Promotion Name*</label>
+                                <input type="text" class="form-control" id="promotion-name" name="promotion_name"
+                                    placeholder="Enter Promotion Name" value="" required>
+                                <a href="#" class="task-edit text-body"><i class="ri-edit-box-line"></i></a>
+                            </div>
+                            <div id="empty-product-name" class="error ml-3" style="display: none;">
+                                Please provide name of the new promotion
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label for="product-description" class="h5">Description</label>
+                                <textarea class="form-control" id="promotion-description" rows="3"
+                                    name="promotion_description"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label for="product-price" class="h5">Discount*</label>
+                                <input type="text" class="form-control" id="promotion-discount" placeholder="Discount"
+                                    name="promotion_discount" value="" required>
+                            </div>
+                        </div>
+
+
+
+                        <div id="empty-product-price" class="error ml-3" style="display: none;">
+                            Please provide discount value of the new promotion
+                        </div>
+
+                        <div class="error ml-3" id="invalid-product-price" style="display: none;">
+                            Invalid value
+                        </div>
+
+
+
+                        <div class="col-lg-4">
+                            <div class="mb-3">
+                                <label for="product-id" class="h5">Start Date* </label>
+                                <input type="text" class="form-control" id="promotion-date" name="promotion_start_date"
+                                    value="" placeholder="Enter Start Date Of Promotion" value="" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="mb-3">
+                                <label for="product-id" class="h5">End Date* </label>
+                                <input type="text" class="form-control" id="promotion-date" name="promotion_end_date"
+                                    value="" placeholder="Enter End Date Of Promotion" value="" required>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="mb-0">
+                                <label for="product-image" class="h5">Attachments</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="promotion-image"
+                                        name="promotion_image">
+                                    <label class="custom-file-label" for="product-image">Upload image</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="d-flex flex-wrap align-items-ceter justify-content-center mt-4">
+                                <div id="save-button" class="btn btn-primary mr-3">Save</div>
+                                {{!-- <input class="btn btn-primary mr-3" type="submit" id="submit-button" value="Save">
+                                --}}
+                                <div class="btn btn-primary" data-dismiss="modal">Cancel</div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" role="dialog" aria-modal="true" id="edit-product-modal">
+    <div id="dialog" class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header d-block text-center pb-3 border-bttom">
+                <h3 class="modal-title" id="exampleModalCenterTitle">Edit Promotion</h3>
+            </div>
+            <div class="modal-body">
+                <form id="edit-promotion-form" action="" method="post">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="mb-3">
+                                <label for="edit-product-id" class="h5">Promotion ID </label>
+                                <input type="text" class="form-control" id="edit-promotion-id" readonly value=""
+                                    placeholder="Promotion ID" name="edit_promotion_id">
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label for="product-name" class="h5">Promotion Name*</label>
+                                <input type="text" class="form-control" id="edit-promotion-name"
+                                    name="edit_promotion_name" placeholder="Enter product Name" value="" required>
+                                <a href="#" class="task-edit text-body"><i class="ri-edit-box-line"></i></a>
+                            </div>
+                            <div id="empty-product-name" class="error ml-3" style="display: none;">
+                                Please provide name of the new promotion
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label for="product-description" class="h5">Description</label>
+                                <textarea class="form-control" id="edit-promotion-description" rows="3"
+                                    name="edit_promotion_description" value=""></textarea>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label for="product-price" class="h5">Discount*</label>
+                                <input type="text" class="form-control" id="edit-promotion-discount" placeholder="price"
+                                    name="edit_promotion_discount" value="" required>
+                            </div>
+                        </div>
+
+
+
+                        <div id="empty-product-price" class="error ml-3" style="display: none;">
+                            Please provide discount value of the new promotion
+                        </div>
+
+                        <div class="error ml-3" id="invalid-product-price" style="display: none;">
+                            Invalid value
+                        </div>
+
+
+
+                        <div class="col-lg-4">
+                            <div class="mb-3">
+                                <label for="product-id" class="h5">Start Date* </label>
+                                <input type="text" class="form-control" id="edit-promotion-start-date"
+                                    name="edit_promotion_start_date" value=""
+                                    placeholder="Enter Start Date Of Promotion" value="" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="mb-3">
+                                <label for="product-id" class="h5">End Date* </label>
+                                <input type="text" class="form-control" id="edit-promotion-end-date"
+                                    name="edit_promotion_end_date" value="" placeholder="Enter End Date Of Promotion"
+                                    value="" required>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="mb-0">
+                                <label for="product-image" class="h5">Attachments</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="edit-promotion-image"
+                                        name="edit_promotion_image">
+                                    <label class="custom-file-label" for="product-image">Upload image</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="d-flex flex-wrap align-items-ceter justify-content-center mt-4">
+                                <div id="edit-button" class="btn btn-primary mr-3">Save</div>
+                                {{!-- <input class="btn btn-primary mr-3" type="submit" id="submit-button" value="Save">
+                                --}}
+                                <div class="btn btn-primary" data-dismiss="modal">Cancel</div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+{{#extend "scripts"}}
+
+<script>
+
+    $("#save-button").click(
+        function executeProduct(mode) {
+            var check = true;
+            $("#empty-product-name").hide();
+            $("#empty-product-price").hide();
+            $("#invalid-product-price").hide();
+            console.log("executeProduct");
+            var promotion_name = $("#promotion-name").val();
+            var promotion_discount = $("#promotion-discount").val();
+
+            console.log(promotion_name);
+            if (promotion_name.length == 0) {
+                console.log("empty-product-name")
+                $("#empty-product-name").show()
+                check = false
+            }
+            if (promotion_discount.length == 0) {
+                console.log("empty-product-price")
+                $("#empty-product-price").show()
+                check = false;
+            }
+            //check isValidPriceValue
+
+            if (check == false) {
+                return;
+            }
+            $("#product-id").removeAttr("disabled")
+            var data = $("#product-form").serialize();
+            console.log(data);
+            $.post('promotion/new', data, function (result) {
+                console.log(result);
+                if (result != 0) {
+                    alert("Create new promotion successfully")
+
+                }
+                else {
+                    alert("Create new promotion failed")
+                }
+            })
+            document.getElementById("product-id").setAttribute("disabled", "true")
+        }
+    )
+
+    $("#edit-button").click(
+        function () {
+            var check = true;
+            $("#empty-edit-product-name").hide();
+            $("#empty-edit-product-price").hide();
+            $("#invalid-edit-product-price").hide();
+            console.log("executeProduct");
+            var promotion_name = $("#edit-promotion-name").val();
+            var promotion_discount = $("#edit-promotion-discount").val();
+
+
+            console.log(promotion_name);
+            if (promotion_name.length == 0) {
+                console.log("empty-edit-product-name")
+                $("#empty-edit-product-name").show()
+                check = false
+            }
+            if (promotion_discount.length == 0) {
+                console.log("empty-edit-product-price")
+                $("#empty-edit-product-price").show()
+                check = false;
+            }
+            //check isValidPriceValue
+
+            if (check == false) {
+                return;
+            }
+            $("#edit-product-id").removeAttr("disabled")
+            var data = $("#edit-promotion-form").serialize();
+
+            console.log(data);
+
+            $.post('promotion/edit', data, function (result) {
+                console.log(result);
+                if (result) {
+                    alert("Create new product successfully")
+                }
+                else {
+                    alert("Create new product failed")
+                }
+            })
+
+
+        }
+    )
+
+</script>
+
+<script>
+
+    function handleEditButtonClick(promotion_id) {
+        console.log("edit-button-click")
+        console.log("edit-promotion-id: " + promotion_id)
+
+        $.getJSON(`promotion/bg_detail/${promotion_id}`, function (result) {
+            oldPromotionId = result.id
+
+            console.log(result)
+            document.getElementById("edit-promotion-id").setAttribute("value", result.id)
+            document.getElementById("edit-promotion-name").setAttribute("value", result.name)
+            document.getElementById("edit-promotion-description").textContent = result.description
+
+
+            document.getElementById("edit-promotion-discount").setAttribute("value", result.discount)
+
+            document.getElementById("edit-promotion-start-date").setAttribute("value", result.start_date)
+            document.getElementById("edit-promotion-end-date").setAttribute("value", result.end_date)
+        });
+    }
+
+
+    function handleDeleteButtonClick(promotionId) {
+        console.log("handle-delete-button-click, id= " + promotionId)
+        let check = window.confirm("Do you want to delete " + promotionId + " voucher?")
+        console.log("delete option: " + check)
+        if (check == false) {
+            return;
+        }
+
+        $.get(`promotion/remove/${promotionId}`, function (result) {
+            console.log(result)
+            if (result != 0) {
+                alert("Remove voucher" + promotionId + "successfully!")
+            }
+            else {
+                alert("Remove voucher" + promotionId + "failed!")
+            }
+        })
+
+    }
+
+</script>
+
+
+{{/extend}}

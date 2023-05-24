@@ -18,7 +18,7 @@ const cartRouter = require('./components/cart/cartRouter');
 const orderRouter = require('./components/order/orderRouter');
 const userRouter = require('./components/user/userRouter')
 const storeRouter = require('./components/store/storeRouter');
-const promotionRouter=require('./components/promotion/promotionRouter');
+const promotionRouter = require('./components/promotion/promotionRouter');
 
 
 
@@ -103,6 +103,7 @@ app.use(function (req, res, next) {
 });
 
 
+app.use('/', indexRouter)
 app.use('/index', indexRouter);
 app.use('/product', productRouter);
 app.use('/auth', authRouter);
@@ -111,8 +112,8 @@ app.use('/cart', cartRouter);
 app.use('/order', orderRouter);
 
 app.use('/dashboard', indexRouter);
-app.use('/promotion',promotionRouter);
-app.use('/store',storeRouter);
+app.use('/promotion', promotionRouter);
+app.use('/store', storeRouter);
 app.use('/user', userRouter)
 // app.use('/promotion', promotionRouter)
 

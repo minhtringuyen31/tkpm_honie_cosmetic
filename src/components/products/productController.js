@@ -5,55 +5,33 @@ const { ITEM_PER_PAGE, TOTAL_PAGING_LINK } = require('../../constant');
 const async = require('hbs/lib/async');
 
 exports.getDetail = async (req, res) => {
-    // const productID = req.params['id'];
-    // console.log("alo");
-    // console.log(productID);
-    // const result = await productService.getAProduct(productID);
-    // const related = await productService.getRelatedProduct(productID);
-    // res.render('products/productDetail', { result: result, related: related });
-    const reviews=[
-        {
-            USER_EMAIL:"ltt@gmail.com",
-            PRODUCT_RATING: 4,
-            PRODUCT_REVIEW:"Good. Recommend to buy"
-        },
-        {
-            USER_EMAIL:"ngtt@gmail.com",
-            PRODUCT_RATING: 5,
-            PRODUCT_REVIEW:"nice...i love it som much. Thanks shop"
-        },
-        {
-            USER_EMAIL:"ltt@gmail.com",
-            PRODUCT_RATING: 2,
-            PRODUCT_REVIEW:"worst product that i have used. "
-        }
-    ]
-    res.render('customer/products/productDetail',{reviews});
+    const productId = req.params['id'];
+    console.log("alo");
+    console.log(productId);
+    const product = await productService.getAProduct(productId);
+    const related = await productService.getRelatedProduct(productId);
+    const reviews = await productService.getReview(productId)
+    res.render('customer/products/productDetail', { product: product, reviews: reviews, related: related });
 }
 
 exports.getAll = async (req, res) => {
     console.log("req.user (product: getAll) : ");
     console.log(req.user);
-    res.render('customer/products/productList');
-    // if(req.user != undefined)
-    // {
-    //     if(req.user.loginRole == 0) //customer
-    //     {
-    //         res.render('customer/products/productList');
-    //     }
-    //     else if(req.user.loginRole == 1)
-    //     {
-    //         res.render('admin/products/productList_Admin', {layout: 'layoutAdmin.hbs'});
-    //     }
-    //     else
-    //     {
-    //         next();
-    //     }
-    // }
-    // else
-    // {
-    //     res.redirect('auth/sign');
-    // }
+    if (req.user != undefined) {
+        if (req.user.loginRole == 0) //customer
+        {
+            res.render('customer/products/productList');
+        }
+        else if (req.user.loginRole == 1) {
+            res.render('admin/products/productList_Admin', { layout: 'layoutAdmin.hbs' });
+        }
+        else {
+            next();
+        }
+    }
+    else {
+        res.render('customer/products/productList');
+    }
 }
 
 exports.getProductByPage = async (req, res) => {
@@ -109,12 +87,12 @@ exports.search = async (req, res) => {
     const keyword = req.query.keyword;
     console.log("search keyword: " + keyword)
     let result = []
-    if (keyword){
-        
+    if (keyword) {
+
         result = await productService.search(keyword);
         console.log("get a product")
     }
-    else{
+    else {
         result = await productService.getAllProduct();
         console.log("get all");
     }
@@ -148,16 +126,13 @@ exports.search = async (req, res) => {
 }
 
 
-exports.createNewProduct = async (req, res, next) =>
-{
+exports.createNewProduct = async (req, res, next) => {
     console.log("create product")
     // console.log(req)
-    if(req.user == undefined)
-    {
+    if (req.user == undefined) {
         next();
     }
-    if(req.user.loginRole != 1)
-    {
+    if (req.user.loginRole != 1) {
         next();
     }
 
@@ -167,29 +142,24 @@ exports.createNewProduct = async (req, res, next) =>
     res.json(result)
 }
 
-exports.background_filterByCategory = async (req, res, next) =>
-{
-    if(req.user == undefined)
-    {
+exports.background_filterByCategory = async (req, res, next) => {
+    if (req.user == undefined) {
         next();
     }
     var option = req.params.option;
     console.log("bg_filterByCatrgory");
-    console.log(option +"\n\n");
+    console.log(option + "\n\n");
 
     var result = await productService.filterByCategory(option);
 
     res.json(result);
 }
 
-exports.background_getDetail = async (req, res, next) =>
-{
-    if(req.user == undefined)
-    {
+exports.background_getDetail = async (req, res, next) => {
+    if (req.user == undefined) {
         next();
     }
-    if(req.user.loginRole != 1)
-    {
+    if (req.user.loginRole != 1) {
         next();
     }
 
@@ -200,29 +170,23 @@ exports.background_getDetail = async (req, res, next) =>
     res.json(result)
 }
 
-exports.bg_editProduct = async (req, res, next) =>
-{
-    if(req.user == undefined)
-    {
+exports.bg_editProduct = async (req, res, next) => {
+    if (req.user == undefined) {
         next();
     }
-    if(req.user.loginRole != 1)
-    {
+    if (req.user.loginRole != 1) {
         next();
     }
     console.log(req.body)
     const result = await productService.editProduct(req.body)
     res.json(result)
-} 
+}
 
-exports.bg_removeProduct = async (req, res, next) =>
-{
-    if(req.user == undefined)
-    {
+exports.bg_removeProduct = async (req, res, next) => {
+    if (req.user == undefined) {
         next();
     }
-    if(req.user.loginRole != 1)
-    {
+    if (req.user.loginRole != 1) {
         next();
     }
     const productId = req.params.id

@@ -33,8 +33,6 @@ exports.changePassword = async (passChange, emailChange) => {
         console.log('111111');
         console.log(user);
         return user;
-
-
     }
     catch (err) {
         console.log(err);

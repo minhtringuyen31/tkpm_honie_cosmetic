@@ -1,10 +1,12 @@
 const orderRepository = require('./orderRepository');
 const cartRepository = require('../cart/cartRepository')
+
 const productService = require('../products/productService')
 const myConstant = require('../../constant/index')
 
 exports.getAllUserOrder = async (_userEmail) => {
     const orders = await orderRepository.getOrdersByEmail(_userEmail);
+    console.log("User order service: " + orders)
     if (orders === null) {
         return [];
     }
@@ -12,45 +14,45 @@ exports.getAllUserOrder = async (_userEmail) => {
 }
 
 
-function convertToPaymentMethodId(payment_method)
-{
+function convertToPaymentMethodId(payment_method) {
     let PMI = myConstant.PAY_BY_CASH;
-    if(payment_method.includes("momo"))
-    {
+    if (payment_method.includes("momo")) {
         PMI = myConstant.PAY_BY_MOMO;
     }
-    else if(payment_method.includes("zalopay"))
-    {
+    else if (payment_method.includes("zalopay")) {
         PMI = myConstant.PAY_BY_ZALOPAY;
     }
     return PMI;
 }
 
 exports.createOrder = async (user_email, user_name, user_phone, shipping_address, total_price, promotion_id, payment_method) => {
-    if(user_email.length == 0 || user_email == null)
-    {
+    if (user_email.length == 0 || user_email == null) {
         return false;
     }
-    if(user_phone.length == 0 || user_phone == null)
-    {
+    if (user_phone.length == 0 || user_phone == null) {
         return false;
     }
-    if(shipping_address.length == 0 || shipping_address == null)
-    {
+    if (shipping_address.length == 0 || shipping_address == null) {
         return false;
     }
-    if(payment_method.length == 0 || payment_method == null)
-    {
+    if (payment_method.length == 0 || payment_method == null) {
         return false;
     }
-    if(promotion_id.length == 0)
-    {
+    if (promotion_id.length == 0) {
         promotion_id = null;
     }
-    
+
     const payment_method_id = convertToPaymentMethodId(payment_method);
     console.log("inside order Service: PASS");
     return await orderRepository.createOrder(user_email, user_name, user_phone, shipping_address, total_price, promotion_id, payment_method_id)
+}
+
+exports.getOrderByStatus = async (user_email, status) => {
+    return await orderRepository.getOrderByStatus(user_email, status)
+}
+
+exports.createReview = async (user_email, product_id, comment, rating) => {
+    return await orderRepository.createReview(user_email, product_id, comment, rating)
 }
 
 exports.getNewestOrder = async (user_email) => {
@@ -83,6 +85,6 @@ exports.getAllProductOrder = async (orderId) => {
     return await orderRepository.getAllProductOrder(orderId)
 }
 
-exports.changeStatus= async (id, status) => {
+exports.changeStatus = async (id, status) => {
     return await orderRepository.changeStatus(id, status)
 }

@@ -53,12 +53,12 @@
             <hr>
             <div class="row p-0">
                 <p class="col-4  text-left ">Total</p>
-                <p class="col-8 text-right ">đ{{total}}</p>
+                <p class="col-8 text-right ">${{total}}</p>
             </div>
             <div class="row ">
                 <p class="col-4  text-left ">Promotion</p>
                 {{#if promotion_id}}
-                <p class="col-8 text-right ">{{promotion_id}}</p>
+                <p class="col-8 text-right ">{{promotion_name}}</p>
                 {{else}}
                 <p class="col-8 text-right ">None</p>
                 {{/if}}

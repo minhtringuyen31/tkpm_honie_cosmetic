@@ -4,7 +4,7 @@ const { ITEM_PER_PAGE } = require('../../constant');
 const async = require('hbs/lib/async');
 
 exports.getAllProduct = async () => {
-    try {       
+    try {
         const poolPromise = db.promise();
         const result = await poolPromise.query('SELECT * FROM PRODUCT');
         // console.log(result[0]);
@@ -22,7 +22,7 @@ exports.getAProduct = async (productID) => {
         console.log("here" + productID);
         const poolPromise = db.promise();
         const result = await poolPromise.query('SELECT * FROM PRODUCT WHERE PRODUCT.PRODUCT_ID = ?', [productID]);
-        // console.log(result[0]);
+        console.log(result[0]);
         return result[0][0];
     }
     catch (e) {
@@ -36,6 +36,19 @@ exports.getProductsByPage = async (page) => {
         const poolPromise = db.promise();
         const result = await poolPromise.query(`SELECT * FROM PRODUCT LIMIT ${ITEM_PER_PAGE} offset ${(page - 1) * ITEM_PER_PAGE}`);
         return result[0];
+    }
+    catch (e) {
+        console.log(e);
+        return [];
+    }
+}
+
+exports.getReview = async (productId) => {
+    try {
+        const poolPromise = db.promise();
+        const query = `SELECT rating.*, users.USER_NAME as user_name FROM rating JOIN users ON rating.user_email = users.USER_EMAIL WHERE rating.product_id = ?`
+        const [result] = await poolPromise.query(query, [productId])
+        return result;
     }
     catch (e) {
         console.log(e);
@@ -208,52 +221,43 @@ exports.search = async (keyword) => {
         console.log(e);
         return [];
     }
-}       
+}
 
-exports.createProductBasically = async (productId, productName, productPrice, productCategory, productBrand, productDescription, productNumber) =>
-{
-    try
-    {
+exports.createProductBasically = async (productId, productName, productPrice, productCategory, productBrand, productDescription, productNumber) => {
+    try {
         const poolPromise = db.promise();
         let query = "INSERT INTO product (PRODUCT_ID, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_CATEGORY, PRODUCT_BRAND, PRODUCT_DESCRIPTION, NUMBER_OF) " +
-        "VALUES(?,?,?,?,?,?,?)"
+            "VALUES(?,?,?,?,?,?,?)"
         const changedRows = await poolPromise.query(query, [productId, productName, productPrice, productCategory, productBrand, productDescription, productNumber]);
         return changedRows;
     }
-    catch(err)
-    {
+    catch (err) {
         console.log(err)
         return 0;
     }
 }
 
-exports.editProduct = async (productId, newProductName, newProductPrice, newProductCategory, newProductBrand, newProductDescription, productNumber) =>
-{
-    try
-    {
+exports.editProduct = async (productId, newProductName, newProductPrice, newProductCategory, newProductBrand, newProductDescription, productNumber) => {
+    try {
         const query = "UPDATE product SET product.PRODUCT_NAME = ?, product.PRODUCT_PRICE = ?, product.PRODUCT_CATEGORY = ?, product.PRODUCT_BRAND = ?, product.PRODUCT_DESCRIPTION = ?, product.NUMBER_OF = ? WHERE product.PRODUCT_ID = ?"
         const poolPromise = db.promise()
-        const changedRows = await poolPromise.query(query,[newProductName, newProductPrice, newProductCategory, newProductBrand, newProductDescription, productNumber, productId]);
+        const changedRows = await poolPromise.query(query, [newProductName, newProductPrice, newProductCategory, newProductBrand, newProductDescription, productNumber, productId]);
         return changedRows
     }
-    catch(err)
-    {
+    catch (err) {
         console.log(err)
         return 0;
     }
 }
 
-exports.removeProduct = async (productId) =>
-{
-    try
-    {
+exports.removeProduct = async (productId) => {
+    try {
         const query = "DELETE FROM product WHERE product.PRODUCT_ID = ?"
         const poolPromise = db.promise()
         const changedRows = await poolPromise.query(query, [productId]);
         return changedRows
     }
-    catch(err)
-    {
+    catch (err) {
         console.log(err)
         return 0;
     }
