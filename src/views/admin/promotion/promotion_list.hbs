@@ -371,10 +371,76 @@
             if (check == false) {
                 return;
             }
-            $("#edit-product-id").removeAttr("disabled")
-            var data = $("#edit-promotion-form").serialize();
+            $("#edit-promotion-id").removeAttr("disabled")
+            //var data = $("#edit-promotion-form").serialize();
+            //console.log(data);
 
-            console.log(data);
+            let inputFile = $("#edit-promotion-image")[0].files[0];
+            let formData = new FormData()
+            let data = $("#edit-promotion-form").serializeArray();
+            for(let i=0; i< data.length ; i++)
+            {
+                formData.append(data[i].name, data[i].value)
+            }
+
+            formData.append("edit_promotion_image", inputFile)
+
+            console.log(formData.entries())
+
+            const JsonData = Object.fromEntries(formData.entries())
+            console.log(JsonData)
+
+            console.log(JsonData);
+            /*$.post('product/new', data, function (result) {
+               console.log(result);
+               if (result != 0) {
+                  alert("Create new product successfully")
+               }
+               else {
+                  alert("Create new product failed")
+               }
+            })*/
+            $.ajax({
+                url:'/promotion/edit',
+                method:'POST',
+                data: formData,
+                contentType: false,
+                processData:false,
+                success: function (result) 
+                {
+                    console.log(result);
+                    if (result != 0) {
+                        alert("Edit promotion successfully")
+
+                    }
+                    else {
+                        alert("Edit promotion failed")
+                    }
+                }
+            })
+
+         /*
+         else 
+         {
+            $.ajax({
+               url:'/product/bg_edit',
+               method:'POST',
+               data: formData,
+               contentType: false,
+               processData:false,
+               success: function (result) 
+               {
+                  console.log(result);
+                  if (result != 0) {
+                     alert("Update product successfully")
+
+                  }
+                  else {
+                     alert("Update product failed")
+                  }
+               }
+            })
+         }
 
             $.post('promotion/edit', data, function (result) {
                 console.log(result);
@@ -386,7 +452,7 @@
                 }
             })
 
-
+        */
         }
     )
 

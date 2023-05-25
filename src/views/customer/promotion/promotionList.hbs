@@ -103,8 +103,8 @@
       </div>
       <div class="my-3 box">
         <div>
-        <button onclick="openModal('${promotion.id}')" class="btn btn-danger btn-width ">See Detail</button>
-        <a href="/cart/checkout?promotion_id=${promotion.id}" class="btn btn-danger btn-width my-3 ">Add </a>
+        <button onclick="openModal('${promotion.id}')" class="my-3 btn-width ">See Detail</button>
+        <button class=" my-3 btn-width "><a href="/cart/checkout?promotion_id=${promotion.id}" class="a-btn">Add </a></button>
       </div>
       </div>
       
@@ -118,18 +118,18 @@
       console.error('Error fetching promotions:', error);
     });
 
-    function DateFormat(date){
-      date= new Date(date);
-      const formattedDate = date.toLocaleString('en-US', {
-  year: 'numeric',
-  month: '2-digit',
-  day: '2-digit',
-  hour: '2-digit',
-  minute: '2-digit',
-  second: '2-digit'
-});
+  function DateFormat(date) {
+    date = new Date(date);
+    const formattedDate = date.toLocaleString('en-US', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    });
     return formattedDate;
-    }
+  }
 
 
   function openModal(promotionId) {

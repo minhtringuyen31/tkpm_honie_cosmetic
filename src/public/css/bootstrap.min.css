@@ -13,16 +13,19 @@
     border-radius: 10px;
     overflow: hidden;
 }
-.a-btn{
+
+.a-btn {
     color: white;
     text-decoration: none;
-    
+
 }
-.a-btn:hover{
+
+.a-btn:hover {
     color: wheat;
     text-decoration: none;
 
 }
+
 .slides {
     width: 500%;
     height: 500px;
@@ -134,7 +137,7 @@
     background-color: #71cdc1;
     padding: 30px;
 
-    color:  #227C70;
+    color: #227C70;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
 
@@ -184,7 +187,8 @@
 }
 
 .btn-width {
-    width: 100px;
+    width: 120px;
+    border-radius: 5px;
 
 }
 
@@ -196,7 +200,7 @@
 }
 
 .text_highlight {
-    color:  #227C70;
+    color: #227C70;
 }
 
 .promotion {
@@ -285,7 +289,7 @@
     line-height: 24px;
     text-align: center;
 
-    color:  #227C70;
+    color: #227C70;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 

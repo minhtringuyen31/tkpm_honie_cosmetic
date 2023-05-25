@@ -41,7 +41,7 @@
                     <h5 class="card-text">{{PRODUCT_NAME}}</h5>
                     <p class="card-text text-right px-2">x{{quantity}}</p>
                     <p class="card-text text-right px-2">${{price}}</p>
-                    <button value={{product_id}}  onclick="reviewClick(this.value)"
+                    <button value={{product_id}} onclick="reviewClick(this.value)"
                         class="review_btn float-right ml-auto review-button">Review</button>
                 </div>
             </div>
@@ -67,6 +67,7 @@
     </div>
 </section>
 <script src="/js/order.js"></script>
+
 <script>
     // Assuming you have multiple review buttons
     const reviewButtons = document.querySelectorAll(".review-button");

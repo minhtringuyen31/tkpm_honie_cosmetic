@@ -114,7 +114,7 @@ exports.createNewProduct = async (req, res, next) => {
     console.log(req.body);
 
     var result = await productService.createNewProduct(req.body)
-    res.json(result)
+    res.redirect('/product')
 }
 
 exports.background_filterByCategory = async (req, res, next) => {

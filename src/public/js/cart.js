@@ -4,12 +4,11 @@ function removeProduct(productId) {
         method: 'post',
         data: { productId },
         dataType: 'json',
-        success: function(data)
-        {
+        success: function (data) {
             $.get(location.href, function (data) {
                 $("#cart-item").empty().append($(data).find("#cart-item").children());
             });
-        
+
             $.get(location.href, function (data) {
                 $("#pre-checkout").empty().append($(data).find("#pre-checkout").children());
             });
@@ -29,11 +28,11 @@ function incrQuantity(productId) {
         data: { productId },
         dataType: 'json',
         success: function (data) {
-            alert("Edit successfully!!");
+            // alert("Edit successfully!!");
             $.get(location.href, function (data) {
                 $("#cart-item").empty().append($(data).find("#cart-item").children());
             });
-        
+
             $.get(location.href, function (data) {
                 $("#pre-checkout").empty().append($(data).find("#pre-checkout").children());
             });
@@ -52,11 +51,11 @@ function descQuantity(productId) {
         data: { productId },
         dataType: 'json',
         success: function (data) {
-            alert("Edit successfully!!");
+            // alert("Edit successfully!!");
             $.get(location.href, function (data) {
                 $("#cart-item").empty().append($(data).find("#cart-item").children());
             });
-        
+
             $.get(location.href, function (data) {
                 $("#pre-checkout").empty().append($(data).find("#pre-checkout").children());
             });
