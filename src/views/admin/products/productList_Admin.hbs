@@ -672,28 +672,51 @@
 <script>
    function getIndexOfCategoryOption(option) {
       let result = 1
-      if ("Block Lipstick".includes(option) > 0) {
+      if ("Block Lipstick".includes(option)) {
          result = 2
       }
-      else if ("Mascara".indexOf(option) > 0 || "MASCARA".includes(option)) {
+      else if ("Mascara".includes(option) || "MASCARA".includes(option)) {
          result = 3
       }
-      else if ("Perfume".indexOf(option) > 0 || "PERFUME".includes(option)) {
+      else if ("Perfume".includes(option) || "PERFUME".includes(option)) {
          result = 4
       }
-      else if ("Powder".indexOf(option) > 0 || "POWDER".includes(option)) {
+      else if ("Powder".includes(option) || "POWDER".includes(option)) {
          result = 5
       }
-      else if ("Primer".indexOf(option) > 0) {
+      else if ("Primer".includes(option) || "PRIMER".includes(option)) {
          result = 6
       }
-      else if ("Serum".indexOf(option) > 0) {
+      else if ("Serum".includes(option) || "SERUM".includes(option)) {
          result = 7
       }
-      else if ("Skincare".indexOf(option) > 0) {
+      else if ("Skincare".includes(option) || "skincare".includes(option)) {
          result = 8
       }
       return result
+   }
+
+   function getIndexOfBrandOption(option)
+   {
+
+      let result = 1
+      if("Avon".includes(option) || "avon".includes(option) || "AVON".includes(option))
+      {
+         result = 2
+      }
+      else if("MAC".includes(option) > 0 || "Mac".includes(option) || "mac".includes(option))
+      {
+         result = 3
+      }
+      else if("Clinique".includes(option) || "clinique".includes(option) || "CLINIQUE".includes(option))
+      {
+         result = 4
+      }
+      else if("ILIA".includes(option) || "ilia".includes(option) || "Ilia".includes(option))
+      {
+         result = 5
+      }
+      return result;
    }
 
 
@@ -706,12 +729,20 @@
          oldProductCategory = result.PRODUCT_CATEGORY
 
          let product_category_index = getIndexOfCategoryOption(result.PRODUCT_CATEGORY)
-         console.log(product_category_index)
+         let product_brand_index = getIndexOfBrandOption(result.PRODUCT_BRAND)
+         console.log("category index: " + product_category_index)
+         console.log("brand index: " + product_brand_index)
          console.log(result)
          document.getElementById("edit-product-name").setAttribute("value", result.PRODUCT_NAME)
-         $("edit-product-category").val(result.PRODUCT_CATEGORY)
+         $("#edit-product-category").prop("selectedIndex", product_category_index - 1)
+         let selectedCategory =  $("#edit-product-category").children("option:selected").val()
+         $("select[id='edit-product-category'] + .btn .filter-option-inner-inner").text(selectedCategory)
+         
          document.getElementById("edit-product-id").setAttribute("value", result.PRODUCT_ID)
-         //$("edit-product-brand").val()
+         $("#edit-product-brand").prop("selectedIndex", product_brand_index - 1)
+         let selectedBrand = $("#edit-product-brand").children("option:selected").val()
+         $("select[id='edit-product-brand'] + .btn .filter-option-inner-inner").text(selectedBrand)
+         
          document.getElementById("edit-product-description").textContent = result.PRODUCT_DESCRIPTION
          document.getElementById("edit-product-price").setAttribute("value", result.PRODUCT_PRICE)
       });
