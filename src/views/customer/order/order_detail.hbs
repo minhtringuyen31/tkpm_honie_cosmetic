@@ -31,6 +31,10 @@
                     <p class="col-4 text-left ">Address</p>
                     <p class="col-8 text-right ">{{order.shipping_address}}</p>
                 </div>
+                <div class="row">
+                    <p class="col-4 text-left ">Status</p>
+                    <p id="order-status" class="col-8 text-right ">{{order.status}}</p>
+                </div>
             </div>
             <h5 class="card-title">Order ID: {{order.id}}</h5>
             {{#each products}}
@@ -71,11 +75,34 @@
 <script>
     // Assuming you have multiple review buttons
     const reviewButtons = document.querySelectorAll(".review-button");
-    reviewButtons.forEach(button => {
-        if (order.status == 3) {
+    let order_status = $("#order-status").text()
+    if(order_status == "3")
+    {
+        reviewButtons.forEach(button => {
             button.style.display = "block";
-        } else {
+        });
+    }
+    else
+    {
+        reviewButtons.forEach(button =>
+        {
             button.style.display = "none";
-        }
-    });
+        });
+    }
+
+    let status_to_display = "Pending" // status == "1"
+    if(order_status == "2")
+    {
+        status_to_display = "Confirmed"
+    }
+    else if(order_status == "3")
+    {
+        status_to_display = "Delivered"
+    }
+    else if(order_status == "0")
+    {
+        status_to_display = "Canceled"
+    }
+
+    $("#order-status").text(status_to_display)
 </script>

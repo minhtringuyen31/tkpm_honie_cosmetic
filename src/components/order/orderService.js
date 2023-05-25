@@ -35,7 +35,7 @@ exports.createOrder = async (user_email, user_name, user_phone, shipping_address
     if (shipping_address.length == 0 || shipping_address == null) {
         return false;
     }
-    if (payment_method.length == 0 || payment_method == null) {
+    if (payment_method == undefined) {
         return false;
     }
     if (promotion_id.length == 0) {

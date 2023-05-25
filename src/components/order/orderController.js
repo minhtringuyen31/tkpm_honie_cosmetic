@@ -25,7 +25,7 @@ exports.create = async (req, res) => {
 
         const result = await orderService.createOrder(user_email, user_name, user_phone, shipping_address, total_price, promotion_id, payment_method);
         if (result == true) {
-            res.status(200).redirect('/order')
+            res.redirect('/order')
         }
         else if (result == false) {
             res.json(result);

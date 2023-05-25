@@ -11,6 +11,6 @@ module.exports = {
     SKINCARE_START_ID_KEY: "SK",
 
     PAY_BY_CASH: 2,
-    PAY_BY_MOMO: 4,
-    PAY_BY_ZALOPAY: 3
+    PAY_BY_MOMO: 3,
+    PAY_BY_ZALOPAY: 1
 }
