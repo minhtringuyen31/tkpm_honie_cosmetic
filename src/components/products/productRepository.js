@@ -208,19 +208,19 @@ exports.filterByCategory = async (option) => {
                 break;
             }
             case 5: {
-                _category = "PRODUCT.PRODUCT_CATEGORY LIKE 'POWDER";
+                _category = "PRODUCT.PRODUCT_CATEGORY LIKE 'POWDER'";
                 break;
             }
             case 6: {
-                _category = "PRODUCT.PRODUCT_CATEGORY LIKE 'PRIMER";
+                _category = "PRODUCT.PRODUCT_CATEGORY LIKE 'PRIMER'";
                 break;
             }
             case 7: {
-                _category = "PRODUCT.PRODUCT_CATEGORY LIKE 'SERUM";
+                _category = "PRODUCT.PRODUCT_CATEGORY LIKE 'SERUM'";
                 break;
             }
             case 8: {
-                _category = "PRODUCT.PRODUCT_CATEGORY LIKE 'SKINCARE";
+                _category = "PRODUCT.PRODUCT_CATEGORY LIKE 'SKINCARE'";
                 break;
             }
         }

@@ -120,7 +120,7 @@ function getImagePathByProductId(product_id)
     {
         let start = productImg_path.indexOf('product');
         start = productImg_path.indexOf('\\', start);
-        productImg_path = productImg_path.substring(start);
+        productImg_path = productImg_path.substring(start+1);
 
         while(productImg_path.includes('\\'))
         {
