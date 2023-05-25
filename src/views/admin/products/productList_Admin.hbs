@@ -380,11 +380,21 @@
 
          let start_key = getStartIdKey(current_category)
          let autoId = ""
-         if (size < 10) {
-            autoId = autoId.concat(start_key).concat("0").concat((size + 1).toString())
+         let max_number = 0
+         for(let i=0; i< size; i++)
+         {
+            let splitedId = parseInt(result[i].PRODUCT_ID.substring(2), 10)
+            if(splitedId > max_number)
+            {
+               max_number = splitedId
+            }
+         }
+
+         if (max_number < 10) {
+            autoId = autoId.concat(start_key).concat("0").concat((max_number + 1).toString())
          }
          else {
-            autoId = autoId.concat(start_key).concat((size + 1).toString());
+            autoId = autoId.concat(start_key).concat((max_number + 1).toString());
          }
          console.log("autoID: " + autoId);
 
@@ -623,7 +633,7 @@
                   console.log(result);
                   if (result != 0) {
                      alert("Create new product successfully")
-
+                     loadProductPage(1)
                   }
                   else {
                      alert("Create new product failed")
@@ -644,7 +654,7 @@
                   console.log(result);
                   if (result != 0) {
                      alert("Update product successfully")
-
+                     loadProductPage(1)
                   }
                   else {
                      alert("Update product failed")
@@ -719,9 +729,10 @@
          console.log(result)
          if (result != 0) {
             alert("Remove " + productId + " feature successfully!")
+            loadProductPage(1)
          }
          else {
-            alert("Remove " + productId + " feature failed!")
+            alert("Remove " + productId + " feature failed!")  
          }
       })
 

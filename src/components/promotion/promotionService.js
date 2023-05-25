@@ -133,7 +133,7 @@ function getImagePathByPromotionId(promotion_id)
     {
         let start = promotionImg_path.indexOf('promotion');
         start = promotionImg_path.indexOf('\\', start);
-        promotionImg_path = promotionImg_path.substring(start);
+        promotionImg_path = promotionImg_path.substring(start+1);
 
         while(promotionImg_path.includes('\\'))
         {
