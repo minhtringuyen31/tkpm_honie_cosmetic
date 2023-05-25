@@ -223,12 +223,12 @@ exports.search = async (keyword) => {
     }
 }
 
-exports.createProductBasically = async (productId, productName, productPrice, productCategory, productBrand, productDescription, productNumber) => {
+exports.createProduct = async (productId, productName, productPrice, productCategory, productBrand, productDescription, productNumber, productImage) => {
     try {
         const poolPromise = db.promise();
-        let query = "INSERT INTO product (PRODUCT_ID, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_CATEGORY, PRODUCT_BRAND, PRODUCT_DESCRIPTION, NUMBER_OF) " +
-            "VALUES(?,?,?,?,?,?,?)"
-        const changedRows = await poolPromise.query(query, [productId, productName, productPrice, productCategory, productBrand, productDescription, productNumber]);
+        let query = "INSERT INTO product (PRODUCT_ID, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_CATEGORY, PRODUCT_BRAND, PRODUCT_DESCRIPTION, NUMBER_OF, PRODUCT_IMAGE) " +
+            "VALUES(?,?,?,?,?,?,?, ?)"
+        const changedRows = await poolPromise.query(query, [productId, productName, productPrice, productCategory, productBrand, productDescription, productNumber, productImage]);
         return changedRows;
     }
     catch (err) {
@@ -237,11 +237,11 @@ exports.createProductBasically = async (productId, productName, productPrice, pr
     }
 }
 
-exports.editProduct = async (productId, newProductName, newProductPrice, newProductCategory, newProductBrand, newProductDescription, productNumber) => {
+exports.editProduct = async (productId, newProductName, newProductPrice, newProductCategory, newProductBrand, newProductDescription, productNumber, productImage) => {
     try {
-        const query = "UPDATE product SET product.PRODUCT_NAME = ?, product.PRODUCT_PRICE = ?, product.PRODUCT_CATEGORY = ?, product.PRODUCT_BRAND = ?, product.PRODUCT_DESCRIPTION = ?, product.NUMBER_OF = ? WHERE product.PRODUCT_ID = ?"
+        const query = "UPDATE product SET product.PRODUCT_NAME = ?, product.PRODUCT_PRICE = ?, product.PRODUCT_CATEGORY = ?, product.PRODUCT_BRAND = ?, product.PRODUCT_DESCRIPTION = ?, product.NUMBER_OF = ?, product.PRODUCT_IMAGE = ? WHERE product.PRODUCT_ID = ?"
         const poolPromise = db.promise()
-        const changedRows = await poolPromise.query(query, [newProductName, newProductPrice, newProductCategory, newProductBrand, newProductDescription, productNumber, productId]);
+        const changedRows = await poolPromise.query(query, [newProductName, newProductPrice, newProductCategory, newProductBrand, newProductDescription, productNumber, productImage, productId]);
         return changedRows
     }
     catch (err) {

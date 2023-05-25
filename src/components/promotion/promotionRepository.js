@@ -107,3 +107,20 @@ exports.getAPromotion = async (promotionId) => {
         return false;
     }
 }
+
+
+// exports.numberOfPromotions = async () =>
+// {
+//     try
+//     {
+//         const poolPromise = db.promise();
+//         const [result] = await poolPromise.query("SELECT count(*) FROM promotion")
+//         console.log(result)
+//         return 0
+//     }
+//     catch(err)
+//     {
+//         console.log(err)
+//         return -1
+//     }
+// }

@@ -10,26 +10,20 @@ const productStorageSettingInfor = multer.diskStorage( //multer disk storage set
 {
     destination: function(req, file, cb)
     {
-        cb(null, path.join(__dirname, '../public/img/product'));
+        cb(null, path.join(__dirname, '../../public/img/product/'));
     },
     filename: function(req, file, cb)
     {
-        // const datetimestamp = Date.now();
-        // if(file.fieldname === "product_img")
-        // {
-        //     cb(null, req.body.product_id.toString(10) + '_productImg' + '.' + file.originalname.split('.')[file.originalname.split('.').length-1]);
-        // }
-        // else if(file.fieldname === 'momo-qr')
-        // {
-        //     cb(null, req.user.id.toString(10) + '_momoQr' + '.' + file.originalname.split('.')[file.originalname.split('.').length-1]);
-        // }
         console.log("file: " +file)
+        console.log(req.body)
         if(file.length == 0)
         {
             console.log("file is empty")
             return;
         }
-        cb(null, req.body.product_id.toString() + '_productImg' + '.' + file.originalname.split('.')[file.originalname.split('.').length - 1]);
+        console.log("req.product_id: " + req.body.product_id.toString())
+        cb(null, req.body.product_id.toString() + '.' + file.originalname.split('.')[file.originalname.split('.').length - 1]);
+        console.log("created file")
     }
 }
 );
@@ -84,22 +78,26 @@ const uploadProductImage = multer({
     fileFilter: function(req, file, callback)
     {
         const fileExtension = path.extname(file.originalname);
+        console.log("extention: " + fileExtension)
         if((fileExtension !== '.png' ) && (fileExtension !== '.svg') && (fileExtension !== '.jpg') && (fileExtension !== '.jpeg'))
         {
+            console.log("invalid extension")
             return callback(new Error('Only images allowed'));
         }
-        callback(null, true); 
+        console.log("after IF")
+        callback(null, true);
+        console.log("after callback")
     },
     limits: {
-        fileSize: 1024 * 1024
+        fileSize: 1024 * 1024*2
     }
-}).single('product_image');
+});
 
 
 router.get('/', productController.getAll);
 router.get('/list', productController.getProductByPage);
 router.get('/:id', productController.getDetail);
-router.post('/new', uploadProductImage, productController.createNewProduct)
+router.post('/new', uploadProductImage.single('product_image'), productController.createNewProduct)
 
 router.get('/filterByPrice/:option', productController.filterByPrice);
 router.get('/filterByBrand/:option', productController.filterByBrand);
@@ -109,7 +107,7 @@ router.get('/search/:key', productController.search);
 //background API/////////////////////////////////////
 router.get('/bg_filterByCategory/:option', productController.background_filterByCategory);
 router.get('/bg_detail/:id', productController.background_getDetail)
-router.post('/bg_edit', productController.bg_editProduct)
+router.post('/bg_edit',uploadProductImage.single("product_image"), productController.bg_editProduct)
 router.get('/bg_remove/:id', productController.bg_removeProduct)
 
 module.exports = router;

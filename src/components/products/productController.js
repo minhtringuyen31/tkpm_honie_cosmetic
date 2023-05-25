@@ -128,19 +128,18 @@ exports.search = async (req, res) => {
 
 exports.createNewProduct = async (req, res, next) => {
     console.log("create product")
-    // // console.log(req)
-    // if (req.user == undefined) {
-    //     next();
-    // }
-    // if (req.user.loginRole != 1) {
-    //     next();
-    // }
+    // console.log(req)
+    if (req.user == undefined) {
+        next();
+    }
+    if (req.user.loginRole != 1) {
+        next();
+    }
 
-    // console.log(req.body);
+    console.log(req.body);
 
-    // var result = await productService.createNewProduct(req.body)
-    result = {}
-    res.json(result)
+    var result = await productService.createNewProduct(req.body)
+    res.redirect('/product')
 }
 
 exports.background_filterByCategory = async (req, res, next) => {
