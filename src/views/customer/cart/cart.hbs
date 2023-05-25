@@ -32,10 +32,9 @@
                                 <th></th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="cart-item">
                             {{#each detail}}
                             <tr>
-
                                 <td class="product__cart__item">
                                     <div class="product__cart__item__pic">
                                         <img src="/img/product/{{PRODUCT_IMAGE}}" alt="" width="50" height="75">
@@ -44,19 +43,34 @@
                                         <h6>{{PRODUCT_NAME}}</h6>
                                         <h5>{{PRODUCT_PRICE}}</h5>
                                     </div>
-                                </td>
-
-
+                                </td>                             
+                                
                                 <td class="quantity__item">
                                     <div class="quantity">
-                                        <div class="pro-qty-2">
+                                        {{!-- <div class="pro-qty-2">
                                             <input type="text" value="{{QUANTITY}}">
+                                        </div> --}}
+                                        <div class="pro-qty row">
+                                            <button class="product-btn col-1" value="{{PRODUCT_ID}}"
+                                                onclick="descQuantity(this.value)">
+                                                <span class="dec qtybtn">-</span>
+                                            </button>
+                                            <input class="col-3" type="text" value="{{QUANTITY}}" disabled>
+                                            <button class="product-btn col-1" value="{{PRODUCT_ID}}"
+                                                onclick="incrQuantity(this.value)">
+                                                <span class="inc qtybtn">+</span>
+                                            </button>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="cart__price">{{total}}</td>
-                                <td class="cart__close"><a href="/cart/remove/{{PRODUCT_ID}}"><i
-                                            class="fa fa-close"></i></a></td>
+                                <td class="cart__close">
+                                    {{!-- <a href="/cart/remove/{{PRODUCT_ID}}"><i
+                                            class="fa fa-close"></i></a> --}}
+                                    <button class="product-btn" onclick="removeProduct(this.value)" value="{{PRODUCT_ID}}">
+                                        <span class="fa fa-close"></span>
+                                    </button>
+                                </td>
 
                             </tr>
                             {{/each}}
@@ -72,7 +86,7 @@
                 </div> --}}
             </div>
             <div class="col-lg-4">
-                <div class="cart__total">
+                <div class="cart__total" id="pre-checkout">
                     <h6>Cart total</h6>
                     <ul>
                         <li>Total <span>{{total}}</span></li>
@@ -83,3 +97,4 @@
         </div>
     </div>
 </section>
+<script src="/js/cart.js"></script>

@@ -1,3 +1,4 @@
+const async = require('hbs/lib/async');
 const productService = require('../products/productService');
 const cartRepository = require('./cartRepository');
 
@@ -38,4 +39,21 @@ exports.removeFromCart = async (_userEmail, _idProduct) => {
 
 exports.addOrder = async (newestOrder, products) => {
     await cartRepository.addNewOrder(newestOrder);
+}
+
+exports.increaseProductQuantity = async (user_email, product_id) =>
+{
+    return await cartRepository.incrQuantity(user_email, product_id);
+}
+
+exports.descreaseProductQuantity = async (user_email, product_id) =>
+{
+    const quantity = await cartRepository.checkExistProduct(user_email, product_id);
+    if (quantity === 1 || quantity === null) {
+        return await this.removeFromCart(user_email, product_id)
+    }
+    else
+    {
+        return await cartRepository.descQuantity(user_email, product_id);
+    }
 }
