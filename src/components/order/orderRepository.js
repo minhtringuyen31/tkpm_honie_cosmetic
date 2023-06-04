@@ -6,7 +6,7 @@ const connection = require('../connect_DB');
 exports.getOrdersByEmail = async (userEmail) => {
     try {
         const poolPromise = connection.promise();
-        const query = `SELECT orders.*, promotion.name AS promotion_name, payment_method.name AS payment_method_name FROM orders JOIN promotion ON orders.promotion_id = promotion.id JOIN payment_method ON orders.payment_method_id = payment_method.id  WHERE orders.user_email = ?`
+        const query = `SELECT orders.*, promotion.name AS promotion_name, payment_method.name AS payment_method_name FROM orders LEFT JOIN promotion ON orders.promotion_id = promotion.id JOIN payment_method ON orders.payment_method_id = payment_method.id  WHERE orders.user_email = ? ORDER BY orders.id DESC`
         const [res] = await poolPromise.query(query, [userEmail]);
         return res;
     }
@@ -42,7 +42,7 @@ exports.getOrderByStatus = async (user_email, status) => {
     try {
         const poolPromise = connection.promise();
         const value = [user_email, status]
-        const query = `SELECT orders.*, promotion.name AS promotion_name, payment_method.name AS payment_method_name FROM orders JOIN promotion ON orders.promotion_id = promotion.id JOIN payment_method ON orders.payment_method_id = payment_method.id  WHERE orders.user_email = ? AND orders.status = ?`
+        const query = `SELECT orders.*, promotion.name AS promotion_name, payment_method.name AS payment_method_name FROM orders LEFT JOIN promotion ON orders.promotion_id = promotion.id JOIN payment_method ON orders.payment_method_id = payment_method.id  WHERE orders.user_email = ? AND orders.status = ?`
         const [res] = await poolPromise.query(query, value);
 
         return res;
@@ -97,7 +97,7 @@ exports.ddProductOrder = async (orderId, productId, quantity, price) => {
 exports.getAllOrder = async () => {
     try {
         const poolPromise = connection.promise();
-        const query = `SELECT * FROM orders`
+        const query = `SELECT * FROM orders ORDER BY orders.id DESC`
         const [res] = await poolPromise.query(query);
         return res;
     }
@@ -110,7 +110,7 @@ exports.getAllOrder = async () => {
 exports.getOneOrder = async (orderId) => {
     try {
         const poolPromise = connection.promise();
-        const query = `SELECT orders.*, promotion.name AS promotion_nane, payment_method.name AS payment_method_name  FROM orders JOIN promotion ON orders.promotion_id = promotion.id JOIN payment_method ON orders.payment_method_id = payment_method.id WHERE orders.id = ?`
+        const query = `SELECT orders.*, promotion.name AS promotion_nane, payment_method.name AS payment_method_name  FROM orders LEFT JOIN promotion ON orders.promotion_id = promotion.id JOIN payment_method ON orders.payment_method_id = payment_method.id WHERE orders.id = ?`
         const [res] = await poolPromise.query(query, [orderId]);
         return res[0];
     }

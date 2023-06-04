@@ -3,8 +3,10 @@ const orderService = require('./orderService');
 const productService = require('../products/productService')
 
 exports.getAllUserOrder = async (req, res) => {
+    console.log(req.user.loginEmail);
     const orders = await orderService.getAllUserOrder(req.user.loginEmail);
-    console.log(orders);
+    console.log("result: " + orders);
+    console.log("fwfafafdf")
     res.render('customer/order/order', { order: orders });
 }
 
@@ -24,12 +26,7 @@ exports.create = async (req, res) => {
         const { user_name, shipping_address, user_phone, user_email, total_price, promotion_id, payment_method } = req.body
 
         const result = await orderService.createOrder(user_email, user_name, user_phone, shipping_address, total_price, promotion_id, payment_method);
-        if (result == true) {
-            res.redirect('/order')
-        }
-        else if (result == false) {
-            res.json(result);
-        }
+        res.json(result);
     }
 
 }

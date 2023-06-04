@@ -188,13 +188,16 @@
             var data = $("#checkout-form").serialize()
             $.post('/order', data, function (result) {
                 if (result == true) {
-                    return;
                     //alert("Checkout successfully!")
+                    window.location.href = "/order";
+                    return;
+
                 }
                 else if (result == false) {
                     alert("Checkout failed! Please provide all required infomation\nAnd don't forget your payment method too -_^")
                 }
             })
+
         }
     )
 

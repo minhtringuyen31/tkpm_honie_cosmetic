@@ -28,8 +28,7 @@ exports.logout = (req, res) => {
         if (err) {
             return next(err);
         }
-        else
-        {
+        else {
             res.redirect('/index');
         }
     });

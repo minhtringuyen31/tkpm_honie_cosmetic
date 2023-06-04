@@ -30,11 +30,17 @@ exports.cartDetail = async (req, res) => {
 
 
 exports.addToCart = async (req, res) => {
-    const idProduct = req.params.idProduct;
-    console.log("userEmail: " + req.user.loginEmail);
-    console.log("idProduct: " + req.params.idProduct);
-    await cartService.addToCart(req.user.loginEmail, idProduct);
-    res.redirect('/product');
+    if (req.user != undefined) {
+        if (req.user.loginRole == 0) {
+            const idProduct = req.params.idProduct;
+            console.log("userEmail: " + req.user.loginEmail);
+            console.log("idProduct: " + req.params.idProduct);
+            await cartService.addToCart(req.user.loginEmail, idProduct);
+            res.redirect('/product');
+        }
+    } else {
+        res.redirect('/auth/sign')
+    }
 }
 
 exports.removeFromCart = async (req, res) => {
@@ -72,14 +78,12 @@ exports.showCheckout = async (req, res) => {
             totalPrice: total
         }
 
-        if(promotion_id_to_apply != undefined)
-        {
+        if (promotion_id_to_apply != undefined) {
             const selected_promotion = await promotionService.getPromotionByID(promotion_id_to_apply)
             res.render('customer/cart/checkout', { orderInfor: orderInfor, product: products, selected_promotion: selected_promotion });
         }
-        else
-        {
-            res.render('customer/cart/checkout', { orderInfor: orderInfor, product: products }); 
+        else {
+            res.render('customer/cart/checkout', { orderInfor: orderInfor, product: products });
         }
     }
 }
@@ -87,7 +91,7 @@ exports.showCheckout = async (req, res) => {
 
 exports.addOrder = async (req, res) => {
 
-    console.log("add-order:"+ req.body);
+    console.log("add-order:" + req.body);
     const today = new Date();
     const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
@@ -113,26 +117,26 @@ exports.addOrder = async (req, res) => {
     }
 }
 
-exports.incrQuantity= async (req, res)=> {
+exports.incrQuantity = async (req, res) => {
     if (!req.user) {
         res.json(false);
     }
 
-    const {productId}= req.body;
+    const { productId } = req.body;
     if (!productId) res.json(false);
-        
+
     await cartService.increaseProductQuantity(req.user.loginEmail, productId);
     res.json(true)
 }
 
-exports.descQuantity= async (req, res) => {
+exports.descQuantity = async (req, res) => {
     if (!req.user) {
         res.json(false);
     }
 
-    const {productId}= req.body;
+    const { productId } = req.body;
     if (!productId) res.json(false);
-        
+
     await cartService.descreaseProductQuantity(req.user.loginEmail, productId);
     res.json(true)
 }
